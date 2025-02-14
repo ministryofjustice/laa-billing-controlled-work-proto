@@ -1,0 +1,12 @@
+{{ mojSubNavigation({
+  label: 'Sub navigation',
+  items: [{
+    text: 'Submitted',
+    href: 'claim-submitted',
+    active: + activeSubNav[0] | default('true')
+  }, {
+    text: 'In progress',
+    href: 'claim-drafts',
+    active: + activeSubNav[1]
+  }]
+}) }}

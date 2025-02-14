@@ -1,0 +1,15 @@
+{{ mojPrimaryNavigation({
+  label: 'Primary navigation',
+  items: [
+    {
+      text: 'Your claims',
+      href: '/' + version + '/claim-submitted',
+      active: + activePrimeNav[0] | default('true')
+    },
+    {
+      text: 'Search',
+      href: '/' + version + '/claim-search',
+       active: + activePrimeNav[1]
+    }
+  ]
+}) }}
