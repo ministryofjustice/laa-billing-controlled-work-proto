@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 {% set version = "wip" %}
-{% set activePrimeNav = [false, true] %}
+{% set activePrimeNav = [false, false, true] %}
 
 
 {% block header %}
@@ -32,7 +32,7 @@
       <div class="govuk-form-group govuk-!-width-two-thirds" role="search">
         <h2 class="govuk-label-wrapper">
           <label class="govuk-label govuk-label--s" for="filterSearch">
-            Enter any combination of client, UFN or LAA reference
+            Enter any combination of submission number, or schedule/ submission reference
           </label>
         </h2>
         <input class="govuk-input" id="filterSearch" name="filterSearch" type="search" onkeyup="tablefilterSearch()" aria-description="Search will filter the table of users">
@@ -40,7 +40,7 @@
 
       {% call govukFieldset({
         legend: {
-          text: "First submission date",
+          text: "Submission period",
           classes: "govuk-fieldset__legend--s",
           isPageHeading: false
         }
@@ -74,58 +74,18 @@
         </div>
       {% endcall %}
 
-      {% call govukFieldset({
-        legend: {
-          text: "Last updated date",
-          classes: "govuk-fieldset__legend--s",
-          isPageHeading: false
-        }
-        }) %}
-
-        <p>
-          Enter a start date, end date or both, for example, 17/5/2024
-        </p>
-
-        <div id="date-filters" class="govuk-date-input">
-          <div class="govuk-date-input__item">
-            <div class="moj-datepicker" data-module="moj-date-picker">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="last-date-from">
-                  Last updated from
-                </label>
-                <input class="govuk-input moj-js-datepicker-input " id="last-date-from" name="last-date-from" type="text" autocomplete="off">
-              </div>
-            </div>
-          </div>
-          <div class="govuk-date-input__item">
-            <div class="moj-datepicker" data-module="moj-date-picker">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="last-date-to">
-                  Last updated to
-                </label>
-                <input class="govuk-input moj-js-datepicker-input " id="last-date-to" name="last-date-to" type="text"  autocomplete="off">
-              </div>
-            </div>
-          </div>
-        </div>
-
-      {% endcall %}
-
       <div id="filters" class="govuk-date-input">
         <div class="govuk-date-input__item">
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--s" for="sort">
-              Application status
+              Claim status
             </label>
             <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
               <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
-              <option value="In progress" onclick="filterSelection('in-progress')">Submitted</option>
-              <option value="Sent back" onclick="filterSelection('update')">Update needed</option>
-              <option value="In progress" onclick="filterSelection('re-sub')">Re-submitted</option>
-              <option value="Granted" onclick="filterSelection('granted')">Granted</option>
-              <option value="Part granted" onclick="filterSelection('part')">Part granted</option>
-              <option value="Rejected" onclick="filterSelection('rejected')">Rejected</option>
-              <option value="Cancelled" onclick="filterSelection('cancelled')">Expired</option>
+              <option value="In progress" onclick="filterSelection('in-progress')">In progress</option>
+              <option value="Submitted" onclick="filterSelection('submitted')">Submitted</option>
+              <option value="Escape" onclick="filterSelection('escape')">Escape</option>
+              <option value="Audit" onclick="filterSelection('audit')">Audit</option>
             </select>
           </div>
         </div>
@@ -137,8 +97,22 @@
             </label>
             <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
               <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
-              <option value="Justice" onclick="filterSelection('C1B1C1')">C1B1C1</option>
-              <option value="Wolf" onclick="filterSelection('A1B1C1')">A1B1C1</option>
+              <option value="C1B1C1" onclick="filterSelection('C1B1C1')">C1B1C1</option>
+              <option value="A1B1C1" onclick="filterSelection('A1B1C1')">A1B1C1</option>
+              <option value="2M407Z" onclick="filterSelection('2M407Z')">2M407Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="sort">
+              Submission type
+            </label>
+            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
+              <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
+              <option value="crime" onclick="filterSelection('crime')">Crime lower</option>
+              <option value="help" onclick="filterSelection('help')">Legal help</option>
             </select>
           </div>
         </div>
@@ -149,7 +123,7 @@
           Search
         </button>
 
-        <a class="govuk-link" href="crm-assess-search">Clear all</a>
+        <a class="govuk-link" href="claim-search">Clear all</a>
       </div>
             
     </div>
@@ -158,78 +132,59 @@
       <h2 class="govuk-heading-m">
         22 search results
       </h2>
-      <table class="govuk-table generic-filter" id="table-header" data-module="moj-sortable-table">
+      <table class="govuk-table" data-module="moj-sortable-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header" aria-sort="none">UFN</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Submission</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
-            <th scope="col" class="govuk-table__header" aria-sort="descending">Last updated</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Date</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule/ submission ref</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
           </tr>
         </thead>
-        <tbody class="govuk-table__body">                
-          <tr class="govuk-table__row hideTR all granted A1B1C1 Justice">
-            <td class="govuk-table__cell"><a href="application-details?question1-org=complete&ufn=100323/342&laa-ref=LAA-1z5f7w&app-task=Granted" class="govuk-link--no-visited-state" data-sort-value="100323342">100323/342</a></td>
-            <td class="govuk-table__cell">Roger Catapult</td>
-            <td class="govuk-table__cell" data-sort-value="A1B1C1">A1B1C1</td>
-            <td class="govuk-table__cell" data-sort-value="230901">1 Sept 2023</td>
-            <td class="govuk-table__cell">LAA-1z5f7w</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Granted</strong></td>
+        <tbody class="govuk-table__body">    
+          <tr class="govuk-table__row hideTR all paid A1B1C1 crime">
+            <td class="govuk-table__cell">
+              <a href="claim-details" class="govuk-link--no-visited-state" >254674</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell">1W341Y/CIVIL</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
           </tr>
-          
-          <tr class="govuk-table__row hideTR all expired C1B1C1 Justice">
-            <td class="govuk-table__cell"><a href="application-details?ufn=311222/003&laa-ref=LAA-9p4f0e&app-task=Expired" class="govuk-link--no-visited-state" data-sort-value="311222003">311222/003</a></td>
-            <td class="govuk-table__cell">Jamie Innes</td>
+          <tr class="govuk-table__row hideTR all submitted C1B1C1 crime">
+            <td class="govuk-table__cell">
+            <a href="claim-details" class="govuk-link--no-visited-state">834562</a>
+            </td>
             <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
-            <td class="govuk-table__cell" data-sort-value="230821">21 Aug 2023</td>
-            <td class="govuk-table__cell">LAA-9p4f0e</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Expired</strong></td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell" data-sort-value="260309"><span id="date"></span></td>
+            <td class="govuk-table__cell">CRM/2M408A/19.3</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">Submitted</strong></td>
           </tr>
-          
-          <tr class="govuk-table__row hideTR all update A1B1C1 Wolf">
-            <td class="govuk-table__cell"><a href="application-details?app-task=Review&first-use=no&app-state=all&ufn=301222/003&laa-ref=LAA-6p4f0r&question-ufn=complete&question1-org=complete&question2-client=complete&question2-case=complete&question3-why-pa=complete&question3-quote=complete&question3-alt-quote=complete" class="govuk-link--no-visited-state" data-sort-value="301222003">301222/003</a></td>
-            <td class="govuk-table__cell">Dami Olu</td>
-            <td class="govuk-table__cell" data-sort-value="A1B1C1">A1B1C1</td>
-            <td class="govuk-table__cell" data-sort-value="240307">7 March 2024</td>
-            <td class="govuk-table__cell">LAA-6p4f0r</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Update needed</strong></td>
+          <tr class="govuk-table__row hideTR all escape A1B1C1 help">
+            <td class="govuk-table__cell">
+              <a href="claim-details" class="govuk-link--no-visited-state">376574</a>
+            </td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
+            <td class="govuk-table__cell">6Y341Y/CIVIL</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Escape</strong></td>
           </tr>
-          <tr class="govuk-table__row hideTR all rejected A1B1C1 Wolf">
-            <td class="govuk-table__cell"><a href="application-details?ufn=311222/003&laa-ref=LAA-9p4f0e&app-task=Rejected" class="govuk-link--no-visited-state" data-sort-value="311222003">311222/003</a></td>
-            <td class="govuk-table__cell">Bobby Brownie</td>
-            <td class="govuk-table__cell" data-sort-value="A1B1C1">A1B1C1</td>
-            <td class="govuk-table__cell" data-sort-value="230821">21 Aug 2023</td>
-            <td class="govuk-table__cell">LAA-9p4f0e</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Rejected</strong></td>
+          <tr class="govuk-table__row hideTR all in-progress 2M407Z crime">
+            <td class="govuk-table__cell">
+              <a href="claim-details" class="govuk-link--no-visited-state">4765685</a>
+            </td>
+            <td class="govuk-table__cell" >2M407Z</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
+            <td class="govuk-table__cell">CRM/2M407Z/18.3</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--grey">In progress</strong></td>
           </tr>
-          <tr class="govuk-table__row hideTR all part C1B1C1 Hussein">
-            <td class="govuk-table__cell"><a href="application-details?question1-org=complete&ufn=202323/342&laa-ref=LAA-1z5f76&app-task=Part granted" class="govuk-link--no-visited-state" data-sort-value="202323342">202323/342</a></td>
-            <td class="govuk-table__cell">Marlie Mytoe</td>
-            <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
-            <td class="govuk-table__cell" data-sort-value="230901">1 Sept 2023</td>
-            <td class="govuk-table__cell">LAA-1z5f76</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">Part granted</strong></td>
-          </tr>
-          <tr class="govuk-table__row hideTR all re-sub C1B1C1 Hussein">
-            <td class="govuk-table__cell"><a href="application-details?question1-org=complete&ufn=202323/342&laa-ref=LAA-1z5f76&app-task=Part granted" class="govuk-link--no-visited-state" data-sort-value="202324534">202324/534</a></td>
-            <td class="govuk-table__cell">Ishia Melta</td>
-            <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
-            <td class="govuk-table__cell" data-sort-value="240301">1 March 2024</td>
-            <td class="govuk-table__cell">LAA-3z5h76</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Re-submitted</strong></td>
-          </tr>
-           <tr class="govuk-table__row hideTR all submitted A1B1C1 Wolf">
-            <td class="govuk-table__cell"><a href="application-details?ufn=310524/021&laa-ref=LAA-4t3f6&app-task=Rejected" class="govuk-link--no-visited-state" data-sort-value="31052024">310524/021</a></td>
-            <td class="govuk-table__cell">Bobby Brownie</td>
-            <td class="govuk-table__cell" data-sort-value="A1B1C1">A1B1C1</td>
-            <td class="govuk-table__cell" data-sort-value="240531">31 May 2024</td>
-            <td class="govuk-table__cell">LAA-4t3f6</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Submitted</strong></td>
-          </tr>
-        </body>
-      </table>    
+        </table>
 
       {% include "includes/pagination-search.html"%} 
 
@@ -330,7 +285,13 @@
       this.className += " active";
     });
   }
-</script>
+
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString('en-GB', {
+    month: 'short', year: 'numeric'
+  }).replace(/ /g, ' ');
+  document.getElementById("date").innerHTML = formattedDate;
+</script>  
 
 {% endblock %}
 
