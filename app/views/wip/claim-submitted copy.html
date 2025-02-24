@@ -31,18 +31,17 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <div class="govuk-button-group">
-          {{ govukButton({
-            text: "Import claims",
-            href: "import/claim-import"
-          }) }}
+      {{ govukButton({
+        text: "Import submission",
+        href: "import/submission-import"
+      }) }}
 
-          {{ govukButton({
-            text: "Make a new claim",
-            href: "claim/task-list",
-            classes: "govuk-button--secondary"
-          }) }}
-
-        </div>
+      {{ govukButton({
+        text: "Create a new submission",
+        href: "submission/submission-type",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
    
 
     {% include version + "/includes/nav-sub-provider.njk" %}
