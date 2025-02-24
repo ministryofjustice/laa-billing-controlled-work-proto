@@ -2,13 +2,18 @@
   label: 'Primary navigation',
   items: [
     {
-      text: 'Your claims',
+      text: 'Your submissions',
       href: '/' + version + '/claim-submitted',
       active: + activePrimeNav[0] | default('true')
     },
     {
       text: 'Matter starts',
       href: '/' + version + '/matter-starts',
+       active: + activePrimeNav[1]
+    },
+    {
+      text: 'Reporting',
+      href: '/' + version + '/reporting',
        active: + activePrimeNav[1]
     },
     {

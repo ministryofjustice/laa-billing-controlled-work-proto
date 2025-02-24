@@ -1,0 +1,114 @@
+{% extends "layouts/main.html" %}
+{% set version = "wip" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  What you are claiming for – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" action="/{{version}}/submission/submission-overview" method="post">
+
+        <h1 class="govuk-heading-xl">Create a submission</h1>
+
+        {{ govukRadios({
+          name: "submissionType",
+          fieldset: {
+            legend: {
+              text: "What is the submission type?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Lower crime",
+              text: "Lower crime",
+              checked: checked("submissionType", "Lower crime")
+            },
+            {
+              value: " 	Legal help",
+              text: " 	Legal help",
+              checked: checked("submissionType", "Legal help")
+            },
+            {
+              value: "Supplemental claim",
+              text: "Supplemental claim",
+              checked: checked("submissionType", "Supplemental claim")
+            }
+          ]
+        }) }}  
+
+        {{ govukInput({
+          label: {
+            text: "Schedule or submission reference",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "For example 310223/001???"
+          },
+          classes: "govuk-input--width-10",
+          id: "scheduleRef",
+          name: "scheduleRef",
+          value: data['scheduleRef']
+        }) }}
+
+
+        {{ govukRadios({
+          name: "firmAC",
+          fieldset: {
+            legend: {
+              text: "Which firm office account number is this submission for?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "Your sign in details give you access to these firm office account numbers. To get access to a different firm office account number contact your firm's LAA account administrator."
+          },
+          items: [
+            {
+              value: "A1B2C3",
+              text: "A1B2C3",
+              checked: checked("firmAC", "A1B2C3")
+            },
+            {
+              value: "B1B2C3",
+              text: "B1B2C3",
+              checked: checked("firmAC", "B1B2C3")
+            }
+          ]
+        }) }}
+
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Save and continue"
+          }) }}
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

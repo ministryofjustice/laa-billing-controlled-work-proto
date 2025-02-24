@@ -9,7 +9,7 @@
 
 
 {% block pageTitle %}
-  In progress applications – {{ serviceName }} - GOV.UK
+  In progress submissions – {{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -23,7 +23,7 @@
   <div class="govuk-grid-column-full">
    
     <h1 class="govuk-heading-xl">
-      Your claims
+      Your submissions
     </h1>
   </div>
 </div>
@@ -31,18 +31,17 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <div class="govuk-button-group">
-          {{ govukButton({
-            text: "Import claims",
-            href: "import/claim-import"
-          }) }}
+      {{ govukButton({
+        text: "Import submission",
+        href: "import/submission-import"
+      }) }}
 
-          {{ govukButton({
-            text: "Make a new claim",
-            href: "claim/task-list",
-            classes: "govuk-button--secondary"
-          }) }}
-
-        </div>
+      {{ govukButton({
+        text: "Create a new submission",
+        href: "submission/submission-type",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
    
 
     {% include version + "/includes/nav-sub-provider.njk" %}
@@ -55,34 +54,34 @@
       <table class="govuk-table" data-module="moj-sortable-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header" aria-sort="none">Submission</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
-            <th scope="col" class="govuk-table__header" aria-sort="descending">Date</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule/ submission ref</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule/ submission ref</th>            
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Last updated</th>
             <th scope="col" class="govuk-table__header">Action</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">    
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state" >254674</a>
+              <a href="submission/submission-overview?subStatus=In progress" class="govuk-link--no-visited-state" >254674</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">CRM/7M408A/3.3</td>
             <td class="govuk-table__cell" data-sort-value="2502">Feb 2025</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Incomplete</strong></td>
             <td class="govuk-table__cell"><a href="" 
             class="govuk-link--no-visited-state">Delete <span class="govuk-visually-hidden">claim 254674</span></a></td>
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-            <a href="claim-details" class="govuk-link--no-visited-state">834562</a>
+            <a href="submission/submission-overview?subStatus=In progress" class="govuk-link--no-visited-state">834562</a>
             </td>
-            <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
+            <td class="govuk-table__cell">C1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="2601"><span id="date"></span></td>
             <td class="govuk-table__cell">CRM/2M408A/19.3</td>
+            <td class="govuk-table__cell" data-sort-value="2601"><span id="date"></span></td>
             <td class="govuk-table__cell"><a href="" 
             class="govuk-link--no-visited-state">Delete <span class="govuk-visually-hidden">claim 834562</span></a></td>
           </tr>

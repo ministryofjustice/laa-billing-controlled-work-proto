@@ -1,0 +1,94 @@
+{% if data['subStatus'] == "In progress" or data['subStatus'] == null %}
+ <strong class="govuk-tag govuk-tag--purple">In progress</strong><br><br>
+{% elseif data['subStatus'] == "Submitted" %}
+  <strong class="govuk-tag govuk-tag--purple">Submitted</strong><br><br>
+  {% elseif data['subStatus'] == "Paid" %}
+    <strong class="govuk-tag govuk-tag--green">Paid</strong><br><br>
+    {% elseif data['subStatus'] == "Audit" %}
+      <strong class="govuk-tag govuk-tag--red">Audit</strong><br><br>
+      {% elseif data['subStatus'] == "Escape" %}
+        <strong class="govuk-tag govuk-tag--yellow">Escape</strong><br><br>
+{% endif %}
+<h1 class="govuk-heading-xl">{{data['laa-ref'] or "123456"}}</h1>
+
+ <dl class="govuk-summary-list">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Office
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{data['office'] or "C1B1C1"}}
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Submission type
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{data['subType'] or "Lower crime"}}
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Schedule/ submission reference
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{data['schedule'] or "CRM/2M408A/19.3"}}
+    </dd>
+  </div>
+  {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Paid" or data ['subStatus'] == "Escape" or data['subStatus'] == "Audit" %}
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Period
+      </dt>
+      <dd class="govuk-summary-list__value">
+        January 2025
+      </dd>
+    </div>
+    {% else %}
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Last updated
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <span id="date"></span>
+      </dd>
+    </div>
+  {% endif %}
+</dl>
+
+
+
+
+
+
+
+
+  
+
+<div class="govuk-button-group">
+
+  {% if data['cwAppStatus'] == "In progress" %}
+    {{ govukButton({
+      text: "Remove from list",
+      href: "application-details-unassign",
+      classes: "govuk-button--secondary"
+    }) }}
+    {% else %}
+    {% if data['cwAppStatus'] == "New" or data ['cwAppStatus'] == "Referred" or data['cwAppStatus'] == "Returned" %}
+      {{ govukButton({
+        text: "Add to my list",
+        href: "application-details-assign",
+        classes: "govuk-button--secondary"
+      }) }}
+    {% endif %}
+  {% endif %}
+</div>
+
+<script>
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric'
+  }).replace(/ /g, ' ');
+  document.getElementById("date").innerHTML = formattedDate;
+</script>  

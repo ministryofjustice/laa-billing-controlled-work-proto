@@ -9,24 +9,29 @@
 
 
 {% block pageTitle %}
-  Submitted submissions – {{ serviceName }} - GOV.UK
+  Submission 123456 – {{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
   {% include "includes/banner.html"%}
   {% include version + "/includes/nav-prime-provider.njk" %}
+
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
 {% endblock %}
 
 {% block content %}
 
 <div class="govuk-grid-row"> 
-  <div class="govuk-grid-column-full">
-   
-    <h1 class="govuk-heading-xl">
-      Your submissions
-    </h1>
+  <div class="govuk-grid-column-two-thirds">
+   <!--Status of claim-->
+  {% include version + "/includes/sub-info.njk" %}
   </div>
 </div>
+
+
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -48,14 +53,14 @@
     {% include version + "/includes/nav-sub-provider.njk" %}
 
 
-    <h2 class="govuk-heading-m">Submitted</h2>
-    {% if data['app-state'] == "empty"  %}
-      <p>You do not have any claims that have been submitted.</p>
+    <h2 class="govuk-heading-m">Claims</h2>
+    {% if data['submission-state'] == "empty"  %}
+      <p>You have not added any claims</p>
       {% else %}
       <table class="govuk-table" data-module="moj-sortable-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Submission</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Schedule/ submission ref</th>
@@ -66,7 +71,7 @@
         <tbody class="govuk-table__body">    
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state" >254674</a>
+              <a href="claim-details" class="govuk-link--no-visited-state" >254674</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -76,7 +81,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-            <a href="submission/submission-overview?subStatus=Submitted" class="govuk-link--no-visited-state">834562</a>
+            <a href="claim-details" class="govuk-link--no-visited-state">834562</a>
             </td>
             <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -86,7 +91,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">356789</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">356789</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -96,7 +101,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">345678</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">345678</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -106,7 +111,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">458343</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">458343</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -116,7 +121,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">456845</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">456845</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -126,7 +131,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">746783</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">746783</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -136,7 +141,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">457634</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">457634</a>
             </td>
             <td class="govuk-table__cell">2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -146,7 +151,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">976534</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">976534</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -156,7 +161,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">123456</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">123456</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -166,7 +171,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">230323</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">230323</a>
             </td>
             <td class="govuk-table__cell">A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -176,7 +181,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">364568</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">364568</a>
             </td>
             <td class="govuk-table__cell">A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -186,7 +191,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">926546</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">926546</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -196,7 +201,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">374563</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">374563</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -206,7 +211,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">374586</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">374586</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -216,7 +221,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">495674</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">495674</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -226,7 +231,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Paid" class="govuk-link--no-visited-state">475673</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">475673</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -236,7 +241,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Escape" class="govuk-link--no-visited-state">376574</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">376574</a>
             </td>
             <td class="govuk-table__cell">A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -246,7 +251,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=Audit" class="govuk-link--no-visited-state">4765685</a>
+              <a href="claim-details" class="govuk-link--no-visited-state">4765685</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
