@@ -26,18 +26,19 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">Import claim</h1>
-      <p>To upload your monthly claims, export your claim as an XML file/ or some other instructions to go here.</p>
 
-      <form class="form" action="question-claim?question-claim=inProgress&question-org=inProgress&question-client=inProgress&question-case-details=&question-hearing=&question-case-disposal=&question-just=&question-claim=&question-work=&question-letters=&question-disburse=&question-payment=&question-other=&question-upload=&question-check=&question-equal=&ufnNSM=100323/222&laa-ref=LAA-5a7d2c&claimType=Non-standard magistrates' court payment&date-rep-day=19&date-rep-month=04&date-rep-year=2023&firmAC=A1B2C3&stageProvider=No&addDef=import" method="post">
-  
+      <form class="form" action="../submission/submission-type?isImport=yes&submissionType=Lower crime&scheduleRef=ABC123&firmAC=B1B2C3" method="post">
+
         {{ govukFileUpload({
-          id: "quote1Upload",
-          name: "quote1Upload",
-          isPageHeading: false,
+          id: "file-upload-1",
+          name: "file-upload-1",
+          isPageHeading: true,
           label: {
-            text: "Import claim",
-            classes: 'govuk-label--s'
+            text: "Import submission",
+            classes: "govuk-label--xl"
+          },
+          hint: {
+            text: "To import a submission, use the Controlled Work spreadsheet or your case management system to create an XML or CVS file."
           }
         }) }}
 
@@ -76,46 +77,13 @@
 
         <div class="govuk-button-group">
           {{ govukButton({
-            text: "Save and continue"
+            text: "Continue"
           }) }}
-         
         </div>
 
       </form>
 
     </div>
   </div>
-
-{% endblock %}
-
-{% block pageScripts %}
-    <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
-
-    <script>
-      let selectElements = $('.autocomplete-select')
-      let placeholder = ''
-
-
-      selectElements.each(function (index) {
-        let selectElement = $(this)
-        if (selectElement.length) {
-          if (selectElement.attr('autocomplete-placeholder')) {
-              placeholder = selectElement.attr('autocomplete-placeholder')
-            }
-          
-          accessibleAutocomplete.enhanceSelectElement({
-            defaultValue: '',
-            placeholder: placeholder,
-            minLength: 1,
-            showNoOptionsFound: false,
-            showAllValues: true,
-            autoselect: false,
-            selectElement: selectElement[0],
-          })
-        }
-
-      })
-    
-    </script>
 
 {% endblock %}

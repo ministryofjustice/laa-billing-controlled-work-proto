@@ -28,6 +28,30 @@
       <form class="form" action="/{{version}}/submission/submission-overview" method="post">
 
         <h1 class="govuk-heading-xl">Create a submission</h1>
+                {%- from "moj/components/alert/macro.njk" import mojAlert -%}
+
+
+        {% if data['isImport'] == "yes" and data['importStatus'] == "success" %}
+          {{ mojAlert({
+            variant: "success",
+            title: "Submission imported",
+            showTitleAsHeading: true,
+            dismissible: false,
+            html: '<p class="govuk-body">You successfully imported 23 claims with no issues.</p>         <p>Always review the claims before final sumbission.</p>'
+          }) }}
+
+          {% elseif data['isImport'] == "yes" and data['importStatus'] == "error" %}
+
+          {{ mojAlert({
+            variant: "warning",
+            title: "Review your submission",
+            showTitleAsHeading: true,
+            dismissible: false,
+            html: '<p class="govuk-body">You imported 23 claims with missing or incorrect information.</p>
+                    <p>Continue to view and resolve issues before final submission.</p>'
+          }) }}
+
+        {% endif %}
 
         {{ govukRadios({
           name: "submissionType",
@@ -50,25 +74,26 @@
               checked: checked("submissionType", "Legal help")
             },
             {
-              value: "Supplemental claim",
-              text: "Supplemental claim",
-              checked: checked("submissionType", "Supplemental claim")
+              value: "Mediation",
+              text: "Mediation",
+              checked: checked("submissionType", "Mediation")
             }
           ]
         }) }}  
 
         {{ govukInput({
+          classes: "govuk-input--width-10",
+          id: "scheduleRef",
+          name: "scheduleRef",
+          value: data['scheduleRef'],
+          
           label: {
             text: "Schedule or submission reference",
             classes: "govuk-label--s"
           },
           hint: {
             text: "For example 310223/001???"
-          },
-          classes: "govuk-input--width-10",
-          id: "scheduleRef",
-          name: "scheduleRef",
-          value: data['scheduleRef']
+          }
         }) }}
 
 

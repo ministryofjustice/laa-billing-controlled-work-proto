@@ -33,12 +33,12 @@
     <div class="govuk-button-group">
       {{ govukButton({
         text: "Import submission",
-        href: "import/submission-import"
+        href: "import/submission-import?isImport=yes&importStatus=error"
       }) }}
 
       {{ govukButton({
         text: "Create a new submission",
-        href: "submission/submission-type",
+        href: "submission/submission-type?isImport=no",
         classes: "govuk-button--secondary"
       }) }}
     </div>

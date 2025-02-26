@@ -25,38 +25,98 @@
 {% block content %}
 
 <div class="govuk-grid-row"> 
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-full">
    <!--Status of claim-->
   {% include version + "/includes/sub-info.njk" %}
-  </div>
-</div>
 
 
+    <h2 class="govuk-heading-l">Claims</h2>
+    {% if data['importStatus'] == "error" %}
+      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    <div class="govuk-button-group">
-      {{ govukButton({
-        text: "Import submission",
-        href: "import/claim-import"
+      {{ mojAlert({
+        variant: "warning",
+        title: "Some information is mising or incorrect",
+        showTitleAsHeading: true,
+        titleTag: "h3",
+        dismissible: false,
+        html: '<p class="govuk-body">2 claims have missing or incorrect information and need to be updated: <a href="">claim 1</a>, <a href="">claim 2</a></p>'
       }) }}
 
-      {{ govukButton({
-        text: "Make a new submission",
-        href: "submission/submission-type",
-        classes: "govuk-button--secondary"
-      }) }}
+    {% endif %}
 
-    </div>
-   
-
-    {% include version + "/includes/nav-sub-provider.njk" %}
-
-
-    <h2 class="govuk-heading-m">Claims</h2>
+     <table class="govuk-table" data-module="moj-sortable-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header" aria-sort="none" id="claimTitle">Claim</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none" >Client</th>            
+            <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
+            <th scope="col" class="govuk-table__header" aria-sort="ascending">Last updated</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" id="claim1">
+            1
+            </td>
+            <td class="govuk-table__cell" ><a href="" id="clientName1" aria-labelledby="claimTitle claim1 clientName1">Celine McBars</a></td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete claimTitle claim1 clientName1" id="delete" class="govuk-link" href="">Delete</a>
+                </li>
+                <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="update claimTitle claim1 clientName1" id="update" class="govuk-link" href="">Update</a>
+                </li>
+              </ul>
+            </td>
+          </tr>    
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" id="claim2">
+             2
+            </td>
+            <td class="govuk-table__cell"><a href="" id="clientName2" aria-labelledby="claimTitle claim2 clientName2">Henry Gubbins</a></td>
+            <td class="govuk-table__cell" >A1B1C1</td>            
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell" data-sort-value="2502">Feb 2025</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete claimTitle claim2 clientName2" id="delete" class="govuk-link" href="">Delete</a>
+                </li>
+                <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="update claimTitle claim2 clientName2" id="update" class="govuk-link" href="">Update</a>
+                </li>
+              </ul></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" id="claim3">
+            3
+            </td>
+            <td class="govuk-table__cell" ><a href="" id="clientName3" aria-labelledby="claimTitle claim3 clientName3">Rory Gruff</a></td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell" data-sort-value="2503">Mar 2025</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete claimTitle claim3 clientName3" id="delete" class="govuk-link" href="">Delete</a>
+                </li>
+                <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="duplicate claimTitle claim3 clientName3" id="duplicate" class="govuk-link" href="">Duplicate</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </body>
+      </table>
     
   </div>
-
 </div>
 
 <script>
