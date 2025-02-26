@@ -29,8 +29,8 @@
    <!--Status of claim-->
   {% include version + "/includes/sub-info.njk" %}
 
-
     <h2 class="govuk-heading-l">Claims</h2>
+
     {% if data['importStatus'] == "error" %}
       {%- from "moj/components/alert/macro.njk" import mojAlert -%}
 
@@ -44,6 +44,12 @@
       }) }}
 
     {% endif %}
+
+        {{ govukButton({
+      text: "Add claim",
+      href: "application-details-assign",
+      classes: "govuk-button--secondary"
+    }) }}
 
      <table class="govuk-table" data-module="moj-sortable-table">
         <thead class="govuk-table__head">
