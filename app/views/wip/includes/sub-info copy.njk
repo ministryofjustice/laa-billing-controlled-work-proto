@@ -1,0 +1,72 @@
+<div class="govuk-grid-column-two-thirds">
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        Submission details
+      </h2>
+      <ul class="govuk-summary-card__actions">
+        <li class="govuk-summary-card__action">
+          <a class="govuk-link" href="submission-start?isImport=No">Change<span class="govuk-visually-hidden"> submission details</span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Status
+          </dt>
+          <dd class="govuk-summary-list__value">
+            
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Claim amount
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if data['subStatus'] == "In progress" %}
+              <p>£{{data['actualdistTotalCost'] or ('1362')}}.00 requested</p>
+
+              {% elseif data['subStatus'] == "Submitted" %}
+              <p>£{{data['actualdistTotalCost'] or ('1362')}}.00 claimed</p>
+              
+              {% elseif data['subStatus'] == "Paid" %}
+              <p>£{{data['actualdistTotalCost'] or ('1362')}}.00 paid</p>
+
+              {% elseif data['subStatus'] == "Paid" %}
+              <p>£{{data['actualdistTotalCost'] or ('1362')}}.00 part paid</p>
+                   
+            {% endif %} 
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Office
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['office'] or "C1B1C1"}}
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Submission type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['subType'] or "Lower crime"}}
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+<div class="govuk-grid-column-one-third">
+  <aside class="app-related-items" role="complementary">
+    <h2 class="govuk-heading-s" id="subsection-title">Email the LAA case team</h2>
+    <ul class="govuk-list">
+      <li>
+        <a class="govuk-link govuk-body-s govuk-link--no-visited-state" href="mailto:control@justice.gov.uk">control@justice.gov.uk</a>
+      </li> 
+    </ul>    
+  </aside>
+</div> 

@@ -33,12 +33,12 @@
     <div class="govuk-button-group">
       {{ govukButton({
         text: "Import submission",
-        href: "import/submission-import?isImport=yes&importStatus=error"
+        href: "submission/submission-import?subStatus=In progress&isImport=yes&importStatus=error"
       }) }}
 
       {{ govukButton({
         text: "Create a new submission",
-        href: "submission/submission-type?isImport=no",
+        href: "submission/submission-start?subStatus=In progress&isImport=no",
         classes: "govuk-button--secondary"
       }) }}
     </div>
@@ -65,7 +65,7 @@
         <tbody class="govuk-table__body">    
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-overview?subStatus=In progress" class="govuk-link--no-visited-state" >254674</a>
+              <a href="submission/submission-details?subStatus=In progress" class="govuk-link--no-visited-state" >254674</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -76,7 +76,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-            <a href="submission/submission-overview?subStatus=In progress" class="govuk-link--no-visited-state">834562</a>
+            <a href="submission/submission-details?subStatus=In progress" class="govuk-link--no-visited-state">834562</a>
             </td>
             <td class="govuk-table__cell">C1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>

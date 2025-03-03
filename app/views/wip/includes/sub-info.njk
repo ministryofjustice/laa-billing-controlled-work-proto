@@ -1,75 +1,64 @@
-{% if data['subStatus'] == "In progress" or data['subStatus'] == null %}
- <strong class="govuk-tag govuk-tag--purple">In progress</strong><br><br>
-{% elseif data['subStatus'] == "Submitted" %}
-  <strong class="govuk-tag govuk-tag--purple">Submitted</strong><br><br>
-  {% elseif data['subStatus'] == "Paid" %}
-    <strong class="govuk-tag govuk-tag--green">Paid</strong><br><br>
-    {% elseif data['subStatus'] == "Audit" %}
-      <strong class="govuk-tag govuk-tag--red">Audit</strong><br><br>
-      {% elseif data['subStatus'] == "Escape" %}
-        <strong class="govuk-tag govuk-tag--yellow">Escape</strong><br><br>
-{% endif %}
-<h1 class="govuk-heading-xl">{{data['laa-ref'] or "123456"}}</h1>
-
-<div class="govuk-summary-card">
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">
-      Submission details
-    </h2>
-    <ul class="govuk-summary-card__actions">
-      <li class="govuk-summary-card__action">
-        <a class="govuk-link" href="submission-type?isImport=No">Change<span class="govuk-visually-hidden"> submission details</span></a>
-      </li>
-    </ul>
-  </div>
-  <div class="govuk-summary-card__content">
-    <dl class="govuk-summary-list">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Office
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{data['office'] or "C1B1C1"}}
-        </dd>
+      {% if data['subStatus'] == "In progress" %}
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Submission details
+          </h2>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+              <a class="govuk-link" href="submission-start?isImport=No">Change<span class="govuk-visually-hidden"> submission details</span></a>
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['office'] or "C1B1C1"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Submission type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['subType'] or "Lower crime"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                March 2025
+              </dd>
+            </div>
+          </dl>
+        </div>
       </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Submission type
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{data['subType'] or "Lower crime"}}
-        </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Schedule/ submission reference
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{data['schedule'] or "CRM/2M408A/19.3"}}
-        </dd>
-      </div>
-    </dl>
-  </div>
-</div>
 
-<dl class="govuk-summary-list govuk-summary-list--no-border">
-  {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Paid" or data ['subStatus'] == "Escape" or data['subStatus'] == "Audit" %}
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        Period
-      </dt>
-      <dd class="govuk-summary-list__value">
-        January 2025
-      </dd>
-    </div>
-    {% else %}
-  {% endif %}
-</dl>
+      {% elseif data['subStatus'] == "Submitted" %}
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
+      <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
+      <h2 class="govuk-heading-m">Date: <span class="govuk-!-font-weight-regular">March 2025</h2>
+      
+      {% elseif data['subStatus'] == "Paid" %}
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m"><span class="">Paid:</span> <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
+      <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
+      <h2 class="govuk-heading-m">Date: <span class="govuk-!-font-weight-regular">March 2025</h2>
 
-<script>
-  const date = new Date();
-  const formattedDate = date.toLocaleDateString('en-GB', {
-    day: '2-digit', month: 'short', year: 'numeric'
-  }).replace(/ /g, ' ');
-  document.getElementById("date").innerHTML = formattedDate;
-</script>  
+      {% elseif data['subStatus'] == "Part paid" %}
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m">Paid: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1010')}}.00</span></h2>
+      <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
+      <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
+      <h2 class="govuk-heading-m">Date: <span class="govuk-!-font-weight-regular">March 2025</h2>
+            
+    {% endif %} 
