@@ -5,7 +5,8 @@
 
 // Add extra styles here
 
-//Pag
+//Page
+
 
 .moj-header {
   padding-top: 10px;
@@ -59,4 +60,20 @@
     display: inline-block;
     margin-right: 20px;
   }
-  
+
+//Account menu taken from to be depreciated Gov nav
+@media (min-width: 40.0625em) {
+
+
+  .switch-service-navigation_item {
+    margin-left: auto;
+    font-size: 1rem;
+    padding-top: 23px;
+  }
+}
+
+
+.flex-grow2_item {
+  flex-grow: 2 ;
+}
+
