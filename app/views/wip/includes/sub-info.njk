@@ -41,24 +41,25 @@
         </div>
       </div>
 
-      {% elseif data['subStatus'] == "Submitted" %}
+      {% elseif data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
       <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
       <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
       <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
-      <h2 class="govuk-heading-m">Date: <span class="govuk-!-font-weight-regular">March 2025</h2>
+      <h2 class="govuk-heading-m">Submitted: <span class="govuk-!-font-weight-regular">18 March 2025</h2>
+      <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
       
       {% elseif data['subStatus'] == "Paid" %}
       <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
       <h2 class="govuk-heading-m"><span class="">Paid:</span> <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
       <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
       <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
-      <h2 class="govuk-heading-m">Date: <span class="govuk-!-font-weight-regular">March 2025</h2>
+      <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
 
       {% elseif data['subStatus'] == "Part paid" %}
       <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
       <h2 class="govuk-heading-m">Paid: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1010')}}.00</span></h2>
       <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
       <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
-      <h2 class="govuk-heading-m">Date: <span class="govuk-!-font-weight-regular">March 2025</h2>
+      <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
             
     {% endif %} 

@@ -38,7 +38,7 @@
 
       {{ govukButton({
         text: "Create a new submission",
-        href: "submission/submission-start?subStatus=In progress&isImport=no",
+        href: "submission/submission-start?subStatus=In progress&isImport=no&subPeriod-month=&subPeriod-year=&submissionType=&scheduleRef=&firmAC=",
         classes: "govuk-button--secondary"
       }) }}
     </div>
@@ -57,15 +57,15 @@
             <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule/ submission ref</th>
-            <th scope="col" class="govuk-table__header" aria-sort="descending">Date</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule</th>
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Period</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">    
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state" >254674</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-254674</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -75,7 +75,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-            <a href="submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state">834562</a>
+            <a href="submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state">LAA-834562</a>
             </td>
             <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -85,7 +85,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">356789</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-356789</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -95,7 +95,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">345678</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-345678</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -105,37 +105,37 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">458343</a>
+              <a href="submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state">LAA-458343</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
             <td class="govuk-table__cell">5T231Y/CIVIL</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">456845</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-456845</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
             <td class="govuk-table__cell">9HG341Y/CIVIL</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">746783</a>
+              <a href="submission/submission-details?subStatus=Resubmitted" class="govuk-link--no-visited-state">LAA-746783</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
             <td class="govuk-table__cell">2M402U/CIVIL</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            <td class="govuk-table__cell" data-sort-value="2503">Mar 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--purple">Resubmitted</strong></td>
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">457634</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-457634</a>
             </td>
             <td class="govuk-table__cell">2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -145,7 +145,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">976534</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-976534</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -155,7 +155,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">123456</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-123456</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -165,7 +165,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">230323</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-230323</a>
             </td>
             <td class="govuk-table__cell">A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -175,7 +175,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">364568</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-364568</a>
             </td>
             <td class="govuk-table__cell">A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -185,7 +185,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">926546</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-926546</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -195,7 +195,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">374563</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-374563</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -205,7 +205,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">374586</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-374586</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
@@ -215,7 +215,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">495674</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-495674</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -225,7 +225,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">475673</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-475673</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -235,23 +235,23 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state">376574</a>
+              <a href="submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state">LAA-376574</a>
             </td>
             <td class="govuk-table__cell">A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
             <td class="govuk-table__cell">6Y341Y/CIVIL</td>
-             <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag ">Part paid</strong></td>
+             <td class="govuk-table__cell" data-sort-value="2502">Feb 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Audit" class="govuk-link--no-visited-state">4765685</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-476565</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
             <td class="govuk-table__cell">CRM/2M407Z/18.3</td>
-            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Audit</strong></td>
+            <td class="govuk-table__cell" data-sort-value="2502">Feb 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
           </tr>
         </body>
       </table>

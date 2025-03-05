@@ -84,8 +84,9 @@
               <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
               <option value="In progress" onclick="filterSelection('in-progress')">In progress</option>
               <option value="Submitted" onclick="filterSelection('submitted')">Submitted</option>
-              <option value="Escape" onclick="filterSelection('escape')">Escape</option>
-              <option value="Audit" onclick="filterSelection('audit')">Audit</option>
+              <option value="Submitted" onclick="filterSelection('resubmitted')">Resubmitted</option>
+              <option value="Escape" onclick="filterSelection('paid')">Paid</option>
+              <option value="Escape" onclick="filterSelection('part-paid')">Part paid</option>
             </select>
           </div>
         </div>
@@ -135,54 +136,64 @@
       <table class="govuk-table" data-module="moj-sortable-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header" aria-sort="none">Submission</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
-            <th scope="col" class="govuk-table__header" aria-sort="descending">Date</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule/ submission ref</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule</th>
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Period</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">    
           <tr class="govuk-table__row hideTR all paid A1B1C1 crime">
             <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state" >254674</a>
+              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-345678</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">4W341Y/CIVIL</td>
             <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">1W341Y/CIVIL</td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
           </tr>
           <tr class="govuk-table__row hideTR all submitted C1B1C1 crime">
             <td class="govuk-table__cell">
-            <a href="claim-details" class="govuk-link--no-visited-state">834562</a>
+            <a href="submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state">LAA-746783</a>
             </td>
             <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="260309"><span id="date"></span></td>
             <td class="govuk-table__cell">CRM/2M408A/19.3</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag">Submitted</strong></td>
+            <td class="govuk-table__cell" data-sort-value="2502">Feb 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--purple">Submitted</strong></td>
           </tr>
-          <tr class="govuk-table__row hideTR all escape A1B1C1 help">
+          <tr class="govuk-table__row hideTR all part-paid A1B1C1 help">
             <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">376574</a>
+              <a href="submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state">LAA-458343</a>
             </td>
-            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">5T231Y/CIVIL</td>
             <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
-            <td class="govuk-table__cell">6Y341Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Escape</strong></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
           </tr>
           <tr class="govuk-table__row hideTR all in-progress 2M407Z crime">
             <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">4765685</a>
+              <a href="submission/submission-details?subStatus=In progress" class="govuk-link--no-visited-state">LAA-4765685</a>
             </td>
             <td class="govuk-table__cell" >2M407Z</td>
             <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
             <td class="govuk-table__cell">CRM/2M407Z/18.3</td>
+            <td class="govuk-table__cell" data-sort-value="2601"><span id="date"></span></td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--grey">In progress</strong></td>
+          </tr>
+          <tr class="govuk-table__row hideTR all resubmitted 2M407Z crime">
+            <td class="govuk-table__cell">
+              <a href="submission/submission-details?subStatus=Resubmitted" class="govuk-link--no-visited-state">LAA-476565</a>
+            </td>
+            <td class="govuk-table__cell" >2M407Z</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">CRM/2M407Z/18.3</td>
+            <td class="govuk-table__cell" data-sort-value="2411">Nov 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--purple">Resubmitted</strong></td>
           </tr>
         </table>
 

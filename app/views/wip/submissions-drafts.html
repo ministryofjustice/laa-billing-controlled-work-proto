@@ -38,7 +38,7 @@
 
       {{ govukButton({
         text: "Create a new submission",
-        href: "submission/submission-start?subStatus=In progress&isImport=no",
+        href: "submission/submission-start?subStatus=In progress&isImport=no&subPeriod-month=&subPeriod-year=&submissionType=&scheduleRef=&firmAC=",
         classes: "govuk-button--secondary"
       }) }}
     </div>
@@ -57,15 +57,15 @@
             <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule/ submission ref</th>            
-            <th scope="col" class="govuk-table__header" aria-sort="descending">Last updated</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule</th>            
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Period</th>
             <th scope="col" class="govuk-table__header">Action</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">    
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=In progress" class="govuk-link--no-visited-state" >254674</a>
+              <a href="submission/submission-details?subStatus=In progress" class="govuk-link--no-visited-state" >LAA-254674</a>
             </td>
             <td class="govuk-table__cell" >A1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
@@ -76,7 +76,7 @@
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-            <a href="submission/submission-details?subStatus=In progress" class="govuk-link--no-visited-state">834562</a>
+            <a href="submission/submission-details?subStatus=In progress" class="govuk-link--no-visited-state">LAA-834562</a>
             </td>
             <td class="govuk-table__cell">C1B1C1</td>
             <td class="govuk-table__cell">Crime lower</td>
