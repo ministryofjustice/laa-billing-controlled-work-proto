@@ -1,3 +1,14 @@
+<h1 class="govuk-heading-xl">LAA header test</h1>
+<h2 class="govuk-heading-l">Version 1</h2>
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+    Gov new header but with MOJ account details added in
+  </li>
+    <li>
+    Gov new primary nav with 'change service' link
+  </li>
+</ul>
+  
 <header class="govuk-header govuk-header--full-width-border" data-module="govuk-header">
   <div class="govuk-header__container govuk-width-container">
     <div class="govuk-header__logo">
@@ -62,16 +73,22 @@
   ]
 }) }}
 
-<br><br>
-<br>
-<br>
-<br>
+
 <br>
 <br>
 <br>
 <br>
 <br>
 
+<h2 class="govuk-heading-l">Version 2</h2>
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+    Gov new header but with MOJ account details added in
+  </li>
+    <li>
+    Gov new primary nav with long service name and 'change service' link
+  </li>
+</ul>
 
 <header class="govuk-header govuk-header--full-width-border" data-module="govuk-header">
   <div class="govuk-header__container govuk-width-container">
@@ -137,17 +154,21 @@
   ]
 }) }}
 
-<br><br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <br>
 <br>
 
-
+<h2 class="govuk-heading-l">Version 3</h2>
+<ul class="govuk-list govuk-list--bullet">
+  <li class="">
+    Gov new header but with MOJ account details added in and 'change service' link
+  </li>
+    <li>
+    Gov new primary nav with long service name
+  </li>
+</ul>
 <header class="govuk-header govuk-header--full-width-border" data-module="govuk-header">
   <div class="govuk-header__container govuk-width-container">
     <div class="govuk-header__logo">
@@ -209,17 +230,32 @@
   ]
 }) }}
 
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <br>
 <br>
 <br>
 <br>
 <br>
 
+
+
+<h2 class="govuk-heading-l">Version 4</h2>
+<p>Something involving the One account header??</p>
+<br>
+<br>
+<br>
+<br>
+
+<h2 class="govuk-heading-l">Version 5</h2>
+<p>Should this really be used for all CW sites?</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+    MOJ header with long service name, account details
+  </li>
+    <li>
+      MOJ header with long service name, account details with 'change service' link
+  </li>
+</ul>
 {{ mojHeader({
   organisationLabel: {
     text: "LAA",
@@ -241,33 +277,46 @@
     ]
   }
 }) }}
-
-{{ mojPrimaryNavigation({
-  label: "Primary navigation",
-  items: [
+<br>
+<br>
+{{ mojHeader({
+  organisationLabel: {
+    text: "LAA",
+    href: "#"
+  },
+  serviceLabel: {
+    text: "Assess a non-standard magistrates' court payment",
+    href: "#"
+  },
+  navigation: {
+    label: "Account navigation",
+    items: [
     {
-      text: 'Your applications',
-      href: '/' + version + '/submissions-submitted',
-      active: + activePrimeNav[0] | default('true')
-    },
-    {
-      text: 'Open applications',
-      href: '/' + version + '/matter-starts',
-      active: + activePrimeNav[1]
-    },
-    {
-      text: 'Closed applications',
-      href: '/' + version + '/reporting',
-      active: + activePrimeNav[1]
-    },
-    {
-      text: 'Search',
-      href: '/' + version + '/submissions-search',
-      active: + activePrimeNav[2]
+      text: "Account name"
+    }, {
+      text: "Sign out",
+      href: "#"
     }
-  ]
+    , {
+      text: "Change service",
+      href: "#"
+    }
+    ]
+  }
 }) }}
 
+
+
+
+
+<h2 class="govuk-heading-l">Version 6</h2>
+<p>MOJ primary nav to go with the MOJ header</p>
+<ul class="govuk-list govuk-list--bullet">
+   <li>MOJ primary nav - standard
+  </li>
+  <li>MOJ primary nav with 'Change service' link
+  </li>
+</ul>
 
 
 

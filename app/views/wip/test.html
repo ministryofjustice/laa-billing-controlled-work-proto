@@ -13,6 +13,59 @@
 {% endblock %}
 
 {% block beforeContent %}
+
+<div class="moj-primary-navigation">
+  <div class="moj-primary-navigation__container">
+    <div class="moj-primary-navigation__nav switch-service-navigation">
+      <nav class="moj-primary-navigation " aria-label="Primary navigation">
+        <ul class="moj-primary-navigation__list">
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" aria-current="page" href="#1">Your applications</a>
+          </li>
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" href="#2">Open applications</a>
+          </li>
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" href="#2">Closed applications</a>
+          </li>
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" href="#3">Search</a>
+          </li>
+          <li class="moj-primary-navigation__item switch-service-navigation_item2">
+            <a class="" href="#3">Change service</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<div class="moj-primary-navigation">
+  <div class="moj-primary-navigation__container">
+    <div class="moj-primary-navigation__nav">
+      <nav class="moj-primary-navigation" aria-label="Primary navigation">
+        <ul class="moj-primary-navigation__list">
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" aria-current="page" href="#1">Your applications</a>
+          </li>
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" href="#2">Open applications</a>
+          </li>
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" href="#2">Closed applications</a>
+          </li>
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" href="#3">Search</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
   {% include "includes/banner.html"%}
 {% endblock %}
 
@@ -22,271 +75,13 @@
   <div class="govuk-grid-column-full">
    
     <h1 class="govuk-heading-xl">
-      Your submissions
+      Your content
     </h1>
   </div>
 </div>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    <div class="govuk-button-group">
-      {{ govukButton({
-        text: "Import submission",
-        href: "import/submission-import?isImport=yes"
-      }) }}
-
-      {{ govukButton({
-        text: "Create a new submission",
-        href: "submission/submission-start?isImport=no",
-        classes: "govuk-button--secondary"
-      }) }}
-    </div>
-   
-
-    {% include version + "/includes/nav-sub-provider.njk" %}
 
 
-    <h2 class="govuk-heading-m">Submitted</h2>
-    {% if data['app-state'] == "empty"  %}
-      <p>You do not have any claims that have been submitted.</p>
-      {% else %}
-      <table class="govuk-table" data-module="moj-sortable-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Office name</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
-            <th scope="col" class="govuk-table__header" aria-sort="descending">Date</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule/ submission ref</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
 
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">    
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state" >254674</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">1W341Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-            <a href="claim-details" class="govuk-link--no-visited-state">834562</a>
-            </td>
-            <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles Birmingham</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="260309"><span id="date"></span></td>
-            <td class="govuk-table__cell">CRM/2M408A/19.3</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag">Submitted</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">356789</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">2M408A/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">345678</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">4W341Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">458343</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">5T231Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">456845</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">9HG341Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">746783</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">2M402U/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">457634</a>
-            </td>
-            <td class="govuk-table__cell">2M407Z</td>
-            <td class="govuk-table__cell">Legal Eagles Cardiff</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">CRM/2M345GH/7.4</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">976534</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">2L555Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">123456</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2407">Jul 2024</td>
-            <td class="govuk-table__cell">2L556Z/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">230323</a>
-            </td>
-            <td class="govuk-table__cell">A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
-            <td class="govuk-table__cell">2M406Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">364568</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2302">Feb 2023</td>
-            <td class="govuk-table__cell">2P545Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">926546</a>
-            </td>
-            <td class="govuk-table__cell" >2M407Z</td>
-            <td class="govuk-table__cell">Legal Eagles Cardiff</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="2409">Sep 2024</td>
-            <td class="govuk-table__cell">CRM/2U347Z/1.6</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">374563</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2410">Oct 2024</td>
-            <td class="govuk-table__cell">2P816T/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">374586</a>
-            </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2412">Dec 2024</td>
-            <td class="govuk-table__cell">2R816T/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">495674</a>
-            </td>
-            <td class="govuk-table__cell" >2M407Z</td>
-            <td class="govuk-table__cell">Legal Eagles Cardiff</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="2403">Mar 2024</td>
-            <td class="govuk-table__cell">CRM/6M405T/1</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">475673</a>
-            </td>
-            <td class="govuk-table__cell" >2M407Z</td>
-            <td class="govuk-table__cell">Legal Eagles Cardiff</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="2406">Jun 2024</td>
-            <td class="govuk-table__cell">CRM/2M3R4347Z/11.3</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">376574</a>
-            </td>
-            <td class="govuk-table__cell">A1B1C1</td>
-            <td class="govuk-table__cell">Legal Eagles London</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
-            <td class="govuk-table__cell">6Y341Y/CIVIL</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Escape</strong></td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="claim-details" class="govuk-link--no-visited-state">4765685</a>
-            </td>
-            <td class="govuk-table__cell" >2M407Z</td>
-            <td class="govuk-table__cell">Legal Eagles Cardiff</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
-            <td class="govuk-table__cell">CRM/2M407Z/18.3</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Audit</strong></td>
-          </tr>
-        </body>
-      </table>
-      {% include "includes/pagination.html"%}
-    {% endif %}
-  </div>
-
-</div>
-
-<script>
-  const date = new Date();
-  const formattedDate = date.toLocaleDateString('en-GB', {
-    month: 'short', year: 'numeric'
-  }).replace(/ /g, ' ');
-  document.getElementById("date").innerHTML = formattedDate;
-</script>  
 
 {% endblock %}
