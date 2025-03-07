@@ -1,0 +1,20 @@
+<!--Submission nav-->
+{{ mojSubNavigation({
+  label: 'Sub navigation',
+  items: [{
+    text: 'Claims',
+    href: 'submission-details#nav',
+      active: + activeSubNav[0] | default('true')
+  }, 
+  {
+    text: 'Matter starts',
+    href: 'submission-matter-types#nav',
+    active: + activeSubNav[1]
+  },
+  {
+    text: 'Submission history',
+    href: 'submission-history#nav',
+    active: + activeSubNav[2]
+  }
+  ]
+}) }}

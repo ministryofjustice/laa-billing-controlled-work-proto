@@ -1,0 +1,34 @@
+ {% if data['subStatus'] == "In progress" %}
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+  <div class="govuk-button-group">
+
+    {{ govukButton({
+      text: "Submit submission",
+      href: "decision-confirm-assess"
+    }) }}
+
+    {{ govukButton({
+      text: "Save and come back later",
+      classes: "govuk-button--secondary",
+      href: "../submission-drafts"
+    }) }}
+
+  </div>
+  {% elseif data['subStatus'] == "Submitted" %}
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+  <div class="govuk-button-group">
+
+    {{ govukButton({
+      text: "Resubmit submission",
+      href: "decision-confirm-assess"
+    }) }}
+
+    {{ govukButton({
+      text: "Save and come back later",
+      classes: "govuk-button--secondary",
+      href: "../submission-drafts"
+    }) }}
+
+  </div>
+
+{% endif %}

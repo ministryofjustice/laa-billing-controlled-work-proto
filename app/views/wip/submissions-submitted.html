@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 {% set version = "wip" %}
 {% set activePrimeNav = [true, false] %}
-{% set activeSubNav = [true, false, false] %}
+{% set activeSecondNav = [true, false] %}
 
 {% block header %}
   {% include version + "/includes/header-provider.njk" %}
@@ -44,7 +44,7 @@
     </div>
    
 
-    {% include version + "/includes/nav-sub-provider.njk" %}
+    {% include version + "/includes/nav-second-provider.njk" %}
 
 
     <h2 class="govuk-heading-m">Submitted</h2>

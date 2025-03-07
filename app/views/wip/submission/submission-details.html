@@ -9,7 +9,7 @@
 
 
 {% block pageTitle %}
-  Submission 123456 – {{ serviceName }} - GOV.UK
+  Submission details - claims – {{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -24,91 +24,18 @@
 
 {% block content %}
 
-<div class="govuk-grid-row"> 
-  <div class="govuk-grid-column-full">
-    {% if data['subStatus'] == "In progress" %}
-      <p><strong class="govuk-tag govuk-tag--grey">In progress</strong></p>
 
-      {% elseif data['subStatus'] == "Submitted" %}
-      <p><strong class="govuk-tag govuk-tag--purple">Submitted</strong></p>
+{% include version + "/includes/sub-info.njk" %}
 
-      {% elseif data['subStatus'] == "Resubmitted" %}
-      <p><strong class="govuk-tag govuk-tag--purple">Resubmitted</strong></p>
-      
-      {% elseif data['subStatus'] == "Paid" %}
-      <p><strong class="govuk-tag govuk-tag--green">Paid</strong></p>
-
-      {% elseif data['subStatus'] == "Part paid" %}
-      <p><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></p>
-                    
-    {% endif %} 
-
-    <div class="moj-page-header-actions">
-      <div class="moj-page-header-actions__title">
-        <h1 class="govuk-heading-xl">{{data['laa-ref'] or "LAA-5a7d3c"}}</h1>
-      </div>
-      <div class="moj-page-header-actions__actions">
-        <div class="moj-button-group">
-          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-            Export
-          </button>
-          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-            Another button
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <h1 class="govuk-heading-xl">{{data['laa-ref'] or "LAA-5a7d3c"}}</h1>
-  </div>
-</div>
-
-<div class="govuk-grid-row"> 
-  <div class="govuk-grid-column-two-thirds">
-    {% include version + "/includes/sub-info.njk" %}
-  </div>
-  <div class="govuk-grid-column-one-third">
-    <aside class="app-related-items" role="complementary">
-      <h2 class="govuk-heading-s" id="subsection-title">Email the LAA case team</h2>
-      <ul class="govuk-list">
-        <li>
-          <a class="govuk-link govuk-body-s govuk-link--no-visited-state" href="mailto:control@justice.gov.uk">control@justice.gov.uk</a>
-        </li> 
-      </ul>    
-    </aside>
-  </div> 
-  </div>
   
-   <!--Status of claim-->
 <div class="govuk-grid-row"> 
   <div class="govuk-grid-column-full">
-
-    <!--2nd nav-->
-    {{ mojSubNavigation({
-      label: 'Sub navigation',
-      items: [{
-        text: 'Claims',
-        href: 'claim-details#nav',
-        active: true
-      }, 
-      {
-        text: 'Matter types',
-        href: 'matter-types#nav',
-        active: false
-      },
-      {
-        text: 'Claim history',
-        href: 'claim-details-history#nav',
-        active: false
-      }
-      ]
-    }) }}
-
-    <h2 class="govuk-heading-l" id="nav">Claims</h2>
+    {% include version + "/includes/nav-sub-submission.njk" %}
+     <h2 class="govuk-heading-l" id="nav">Claims</h2>
+  
 
     {% if data['importStatus'] == "error" %}
       {%- from "moj/components/alert/macro.njk" import mojAlert -%}
-
       {{ mojAlert({
         variant: "warning",
         title: "Some information is mising or incorrect",
@@ -118,142 +45,159 @@
         html: '<p class="govuk-body">2 claims have missing or incorrect information and need to be updated: <a href="">claim 1</a>, <a href="">claim 2</a></p>'
       }) }}
 
+      {% elseif data['subStatus'] == "Paid" %}
+      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
+      {{ mojAlert({
+        variant: "information",
+        title: "Claims amended",
+        showTitleAsHeading: false,
+        headingTag: "h3",
+        dismissible: false,
+        html: '<p class="govuk-body">1 claim was amended: <a href="claim-details?claimStatus=Paid">claim 2</a></p>'
+      }) }}
+
+      {% elseif data['subStatus'] == "Resubmitted" %}
+      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
+      {{ mojAlert({
+        variant: "information",
+        title: "Claims amended",
+        showTitleAsHeading: false,
+        headingTag: "h3",
+        dismissible: false,
+        html: '<p class="govuk-body">1 claim was amended : <a href="claim-details?claimStatus=Pending">claim 1</a></p>'
+      }) }}
+
+      {% elseif data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" %}
+      {{ govukButton({
+        text: "Add claim",
+        href: "application-details-assign",
+        classes: "govuk-button--secondary"
+      }) }}
     {% endif %}
 
-        {{ govukButton({
-      text: "Add claim",
-      href: "application-details-assign",
-      classes: "govuk-button--secondary"
-    }) }}
+    
+    <table class="govuk-table" data-module="moj-sortable-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" aria-sort="ascending" id="claimTitle">No.</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>   
+          <th scope="col" class="govuk-table__header" aria-sort="none">Matter type</th>         
+          <th scope="col" class="govuk-table__header" aria-sort="none">Stage</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Outcome</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Concluded</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Costs</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Fee type</th>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <th scope="col" class="govuk-table__header">Action</th>
+            {% else %}
+            <th scope="col" class="govuk-table__header" aria-sort="none">Payment</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">1</td>
+          <td class="govuk-table__cell" ><a href="" id="clientName1" aria-labelledby="claimTitle claim1 clientName1">McBars</a></td>
+          <td class="govuk-table__cell">7 - Immigration</td>
+          <td class="govuk-table__cell">Invoice</td>
+          <td class="govuk-table__cell">CN02</td>
+          <td class="govuk-table__cell" data-sort-value="2501">1 Jan 2025</td>
+          <td class="govuk-table__cell">£56.00</td>
+          <td class="govuk-table__cell">Fixed</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "Resubmitted" %}
+                   <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="versions1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">View versions</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>    
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim2">2</td>
+          <td class="govuk-table__cell"><a href="" id="clientName2" aria-labelledby="claimTitle claim2 clientName2">Gubbins</a></td>
+          <td class="govuk-table__cell">3 - Family</td>
+          <td class="govuk-table__cell">Invoice</td>            
+          <td class="govuk-table__cell">CN06</td>
+          <td class="govuk-table__cell" data-sort-value="2502">21 Feb 2025</td>
+          <td class="govuk-table__cell">£234.56</td>
+          <td class="govuk-table__cell">Escape</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell"></td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Pending</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£134.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim3">3</td>
+          <td class="govuk-table__cell" ><a href="" id="clientName3" aria-labelledby="claimTitle claim3 clientName3">Gruffalo</a></td>
+          <td class="govuk-table__cell">7 - Immigration</td>
+          <td class="govuk-table__cell">Invoice</td>
+          <td class="govuk-table__cell">CN03</td>
+          <td class="govuk-table__cell" data-sort-value="2503">1 Mar 2025</td>
+          <td class="govuk-table__cell">£456.01</td>
+          <td class="govuk-table__cell">Rate</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend3 claimTitle claim2 clientName2" id="amend3" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete3 claimTitle claim3 clientName3" id="delete3" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+      </body>
+    </table>
 
-    
-      <table class="govuk-table" data-module="moj-sortable-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header" aria-sort="ascending" id="claimTitle">Claim</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>   
-            <th scope="col" class="govuk-table__header" aria-sort="none">Matter type</th>         
-            <th scope="col" class="govuk-table__header" aria-sort="none">Stage</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Outcome</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Concluded</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Costs</th>
-            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
-              <th scope="col" class="govuk-table__header">Action</th>
-              {% else %}
-              <th scope="col" class="govuk-table__header" aria-sort="none">Payment</th>
-              <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
-            {% endif %}
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell" id="claim1">
-            1
-            </td>
-            <td class="govuk-table__cell" ><a href="" id="clientName1" aria-labelledby="claimTitle claim1 clientName1">McBars</a></td>
-            <td class="govuk-table__cell">7 - Immigration</td>
-            <td class="govuk-table__cell">Invoice</td>
-            <td class="govuk-table__cell">CN02</td>
-            <td class="govuk-table__cell" data-sort-value="2501">1 Jan 2025</td>
-            <td class="govuk-table__cell">£56.00</td>
-            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
-              <td class="govuk-table__cell">
-                <ul class="govuk-summary-list__actions-list">
-                  {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                      <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
-                    </li>
-                    {% elseif data['subStatus'] == "In progress" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                      <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
-                    </li>
-                    <li class="govuk-summary-list__actions-list-item">
-                      <a aria-labelledby="update1 claimTitle claim1 clientName1" id="update1" class="govuk-link" href="">Update</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              </td>
-              {% elseif data['subStatus'] == "Part paid" %}
-                <td class="govuk-table__cell">£56.00</td>
-                <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-              {% elseif data['subStatus'] == "Paid" %}
-                <td class="govuk-table__cell">£56.00</td>
-                <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-            {% endif %}
-          </tr>    
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell" id="claim2">
-              2
-            </td>
-            <td class="govuk-table__cell"><a href="" id="clientName2" aria-labelledby="claimTitle claim2 clientName2">Gubbins</a></td>
-            <td class="govuk-table__cell">3 - Family</td>
-            <td class="govuk-table__cell">Invoice</td>            
-            <td class="govuk-table__cell">CN06</td>
-            <td class="govuk-table__cell" data-sort-value="2502">21 Feb 2025</td>
-            <td class="govuk-table__cell">£234.56</td>
-            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
-              <td class="govuk-table__cell">
-                <ul class="govuk-summary-list__actions-list">
-                  {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                      <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
-                    </li>
-                    {% elseif data['subStatus'] == "In progress" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                    <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
-                    </li>
-                    <li class="govuk-summary-list__actions-list-item">
-                    <a aria-labelledby="update2 claimTitle claim2 clientName2" id="update2" class="govuk-link" href="">Update</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              </td>
-              {% elseif data['subStatus'] == "Part paid" %}
-                <td class="govuk-table__cell"></td>
-                <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Pending</strong></td>
-              {% elseif data['subStatus'] == "Paid" %}
-                <td class="govuk-table__cell">£134.56</td>
-                <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-            {% endif %}
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell" id="claim3">
-            3
-            </td>
-            <td class="govuk-table__cell" ><a href="" id="clientName3" aria-labelledby="claimTitle claim3 clientName3">Gruffalo</a></td>
-            <td class="govuk-table__cell">7 - Immigration</td>
-            <td class="govuk-table__cell">Invoice</td>
-            <td class="govuk-table__cell">CN03</td>
-            <td class="govuk-table__cell" data-sort-value="2503">1 Mar 2025</td>
-            <td class="govuk-table__cell">£456.01</td>
-            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
-              <td class="govuk-table__cell">
-                <ul class="govuk-summary-list__actions-list">
-                  {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                      <a aria-labelledby="amend3 claimTitle claim2 clientName2" id="amend3" class="govuk-link" href="">Amend</a>
-                    </li>
-                    {% elseif data['subStatus'] == "In progress" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                    <a aria-labelledby="delete3 claimTitle claim3 clientName3" id="delete3" class="govuk-link" href="">Delete</a>
-                    </li>
-                    <li class="govuk-summary-list__actions-list-item">
-                    <a aria-labelledby="update3 claimTitle claim3 clientName3" id="update3" class="govuk-link" href="">Duplicate</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              </td>
-              {% elseif data['subStatus'] == "Part paid" %}
-                <td class="govuk-table__cell"></td>
-                <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Pending</strong></td>
-              {% elseif data['subStatus'] == "Paid" %}
-                <td class="govuk-table__cell">£0.00</td>
-                <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Rejected</strong></td>
-            {% endif %}
-          </tr>
-        </body>
-      </table>
-    
+    {% include "/includes/pagination-small.njk" %}
+    {% include version + "/includes/submission-buttons.njk" %}
   </div>
 </div>
 

@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+{% set version = "wip" %}
+{% set activePrimeNav = [true, false] %}
+{% set activeSubNav = [false, true, false] %}
+
+{% block header %}
+  {% include version + "/includes/header-provider.njk" %}
+{% endblock %}
+
+
+{% block pageTitle %}
+  Submission details - matter types – {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+{% include version + "/includes/sub-info.njk" %}
+
+  
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">
+    {% include version + "/includes/nav-sub-submission.njk" %}
+     <h2 class="govuk-heading-l" id="nav">Matter starts</h2>
+  </div>
+  
+
+  <div class="govuk-grid-column-two-thirds"> 
+    <table class="govuk-table" data-module="moj-sortable-table">
+      <caption class="govuk-table__caption govuk-table__caption--s">Matter starts for March 2025</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" id="matterType">Category</th>
+          <th scope="col" class="govuk-table__header">Number of cases</th>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <th scope="col" class="govuk-table__header">Action</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">Immigration</td>
+          <td class="govuk-table__cell">1</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">Change</td>
+          {% endif %}
+        </tr>  
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">Family</td>
+          <td class="govuk-table__cell">1</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">Change</td>
+          {% endif %}
+        </tr>    
+      </body>
+    </table>
+  </div>
+  <div class="govuk-grid-column-full">
+    {% include version + "/includes/submission-buttons.njk" %}
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,4 +1,46 @@
-      {% if data['subStatus'] == "In progress" %}
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">
+    {% if data['subStatus'] == "In progress" %}
+      <p><strong class="govuk-tag govuk-tag--grey">In progress</strong></p>
+
+      {% elseif data['subStatus'] == "Submitted" %}
+      <p><strong class="govuk-tag govuk-tag--purple">Submitted</strong></p>
+
+      {% elseif data['subStatus'] == "Resubmitted" %}
+      <p><strong class="govuk-tag govuk-tag--purple">Resubmitted</strong></p>
+      
+      {% elseif data['subStatus'] == "Paid" %}
+      <p><strong class="govuk-tag govuk-tag--green">Paid</strong></p>
+
+      {% elseif data['subStatus'] == "Part paid" %}
+      <p><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></p>
+                    
+    {% endif %} 
+
+    <div class="moj-page-header-actions">
+      <div class="moj-page-header-actions__title">
+        <h1 class="govuk-heading-xl">{{data['laa-ref'] or "LAA-5a7d3c"}}</h1>
+      </div>
+      <div class="moj-page-header-actions__actions">
+        <div class="moj-button-group">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Export
+          </button>
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            CLR information
+          </button>
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Costs breakdown
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">
+    {% if data['subStatus'] == "In progress" %}
       <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
       <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
@@ -31,7 +73,7 @@
             </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Date
+                Period
               </dt>
               <dd class="govuk-summary-list__value">
                 March 2025
@@ -45,7 +87,11 @@
       <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
       <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
       <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
-      <h2 class="govuk-heading-m">Submitted: <span class="govuk-!-font-weight-regular">18 March 2025</h2>
+      {% if data['subStatus'] == "Resubmitted" %}
+        <h2 class="govuk-heading-m">Last updated: <span class="govuk-!-font-weight-regular">20 March 2025</h2>
+        {% else %}
+        <h2 class="govuk-heading-m">Submitted: <span class="govuk-!-font-weight-regular">18 March 2025</h2>
+      {% endif %}
       <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
       
       {% elseif data['subStatus'] == "Paid" %}
@@ -53,6 +99,7 @@
       <h2 class="govuk-heading-m"><span class="">Paid:</span> <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
       <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
       <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
+      <h2 class="govuk-heading-m">Last updated: <span class="govuk-!-font-weight-regular">22 March 2025</h2>
       <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
 
       {% elseif data['subStatus'] == "Part paid" %}
@@ -63,3 +110,5 @@
       <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
             
     {% endif %} 
+  </div>
+</div>
