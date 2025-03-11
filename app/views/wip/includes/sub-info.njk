@@ -35,6 +35,39 @@
         </div>
       </div>
     </div>
+    {% if data['importStatus'] == "error" and data['subStatus'] == "In progress" %}
+      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
+      {{ mojAlert({
+        variant: "warning",
+        title: "Some information is missing or incorrect",
+        showTitleAsHeading: true,
+        headingTag: "h3",
+        dismissible: false,
+        html: '<p class="govuk-body">2 claims have missing or incorrect information and need to be updated: <a href="">claim 1</a>, <a href="">claim 2</a></p>'
+      }) }}
+
+      {% elseif data['subStatus'] == "Paid" %}
+      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
+      {{ mojAlert({
+        variant: "information",
+        title: "Claims amended",
+        showTitleAsHeading: false,
+        headingTag: "h3",
+        dismissible: true,
+        html: '<p class="govuk-body">1 claim was amended: <a href="claim-details?claimStatus=Paid">claim 2</a></p>'
+      }) }}
+
+      {% elseif data['subStatus'] == "Resubmitted" %}
+      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
+      {{ mojAlert({
+        variant: "information",
+        title: "Claims amended",
+        showTitleAsHeading: false,
+        headingTag: "h3",
+        dismissible: true,
+        html: '<p class="govuk-body">1 claim was amended : <a href="claim-details?claimStatus=Pending">claim 1</a></p>'
+      }) }}
+    {% endif %}
   </div>
 </div>
 

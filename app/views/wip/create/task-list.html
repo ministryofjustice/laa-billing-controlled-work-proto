@@ -15,23 +15,43 @@
 {% block beforeContent %}
   {% include "includes/banner.html"%}
   {% include version + "/includes/nav-prime-provider.njk" %}
+    {{ govukBackLink({
+    text: "Back to submission",
+    href: "javascript:window.history.back()"
+  }) }}
 {% endblock %}
 
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
       <h1 class="govuk-heading-xl">
         Your claim progress
       </h1>
+      {% if data['importStatus'] == "error" and data['subStatus'] == "In progress" %}
+        {{ mojAlert({
+          variant: "error",
+          title: "Some information is missing or incorrect",
+          showTitleAsHeading: true,
+          headingTag: "h3",
+          dismissible: false,
+          html: '<p>You must carefully review all sections of this claim. This claim has the following types of errors:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>Incompatible combinations of [thing]</li>
+            <li>Incompatible combinations of [another thing]</li>
+            <li>Minor problems with field formatting</li>
+            <li>Some other high level type of error</li>
+          </ul>
+          '
+        }) }}
+      {% endif %}
     </div>
   </div>
-
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       
-      <p class="govuk-body govuk-!-margin-bottom-7">If you leave this page before submitting, you can return later to complete the application.</p>
+      <p class="govuk-body govuk-!-margin-bottom-7">If you leave this page before you have finished, you can return later to complete the claim.</p>
 
       <!--Section 0 - UFN-->
 

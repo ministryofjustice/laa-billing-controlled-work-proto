@@ -32,51 +32,16 @@
   <div class="govuk-grid-column-full">
     {% include version + "/includes/nav-sub-submission.njk" %}
      <h2 class="govuk-heading-l" id="nav">Claims</h2>
-  
-
-    {% if data['importStatus'] == "error" %}
-      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
-      {{ mojAlert({
-        variant: "warning",
-        title: "Some information is mising or incorrect",
-        showTitleAsHeading: true,
-        headingTag: "h3",
-        dismissible: false,
-        html: '<p class="govuk-body">2 claims have missing or incorrect information and need to be updated: <a href="">claim 1</a>, <a href="">claim 2</a></p>'
-      }) }}
-
-      {% elseif data['subStatus'] == "Paid" %}
-      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
-      {{ mojAlert({
-        variant: "information",
-        title: "Claims amended",
-        showTitleAsHeading: false,
-        headingTag: "h3",
-        dismissible: false,
-        html: '<p class="govuk-body">1 claim was amended: <a href="claim-details?claimStatus=Paid">claim 2</a></p>'
-      }) }}
-
-      {% elseif data['subStatus'] == "Resubmitted" %}
-      {%- from "moj/components/alert/macro.njk" import mojAlert -%}
-      {{ mojAlert({
-        variant: "information",
-        title: "Claims amended",
-        showTitleAsHeading: false,
-        headingTag: "h3",
-        dismissible: false,
-        html: '<p class="govuk-body">1 claim was amended : <a href="claim-details?claimStatus=Pending">claim 1</a></p>'
-      }) }}
-
-      {% elseif data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" %}
-      {{ govukButton({
-        text: "Add claim",
-        href: "application-details-assign",
-        classes: "govuk-button--secondary"
-      }) }}
-    {% endif %}
-
-    
+      {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" %}
+        {{ govukButton({
+          text: "Add claim",
+          href: "application-details-assign",
+          classes: "govuk-button--secondary"
+        }) }}
+      {% endif %}
+      
     <table class="govuk-table" data-module="moj-sortable-table">
+      <caption class="govuk-table__caption govuk-visually-hidden">Claims for the period March 2025</caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header" aria-sort="ascending" id="claimTitle">No.</th>
@@ -98,7 +63,13 @@
       <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" id="claim1">1</td>
-          <td class="govuk-table__cell" ><a href="" id="clientName1" aria-labelledby="claimTitle claim1 clientName1">McBars</a></td>
+          <td class="govuk-table__cell">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="../create/task-list" id="clientName1" aria-labelledby="claimTitle claim1 clientName1">McBars</a>
+              {% else %}
+              <a href="" id="clientName1" aria-labelledby="claimTitle claim1 clientName1">McBars</a>
+            {% endif %}
+          </td>
           <td class="govuk-table__cell">7 - Immigration</td>
           <td class="govuk-table__cell">Invoice</td>
           <td class="govuk-table__cell">CN02</td>
@@ -133,7 +104,13 @@
         </tr>    
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" id="claim2">2</td>
-          <td class="govuk-table__cell"><a href="" id="clientName2" aria-labelledby="claimTitle claim2 clientName2">Gubbins</a></td>
+          <td class="govuk-table__cell">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="../create/task-list" id="clientName2" aria-labelledby="claimTitle claim2 clientName2">Gubbins</a>
+              {% else %}
+              <a href="" id="clientName2" aria-labelledby="claimTitle claim2 clientName2">Gubbins</a>
+            {% endif %}
+          </td>
           <td class="govuk-table__cell">3 - Family</td>
           <td class="govuk-table__cell">Invoice</td>            
           <td class="govuk-table__cell">CN06</td>
@@ -164,7 +141,13 @@
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" id="claim3">3</td>
-          <td class="govuk-table__cell" ><a href="" id="clientName3" aria-labelledby="claimTitle claim3 clientName3">Gruffalo</a></td>
+          <td class="govuk-table__cell">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="../create/task-list" id="clientName3" aria-labelledby="claimTitle claim3 clientName3">Gruffalo</a>
+              {% else %}
+              <a href="" id="clientName3" aria-labelledby="claimTitle claim3 clientName3">Gruffalo</a>
+            {% endif %}
+          </td>
           <td class="govuk-table__cell">7 - Immigration</td>
           <td class="govuk-table__cell">Invoice</td>
           <td class="govuk-table__cell">CN03</td>
