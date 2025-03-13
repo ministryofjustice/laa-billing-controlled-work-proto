@@ -1,0 +1,24 @@
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--s" for="lawCategory">
+     Category of Law
+    </label>
+    <div id="lawCategory-hint" class="govuk-hint">
+      Select a category of law from the suggestions that appear when you start to enter it, for example, Family
+    </div>
+    <select class="govuk-select autocomplete-select" id="lawCategory" name="lawCategory" aria-describedby="lawCategory-hint">
+      <option></option>
+      <option value="Claims Against Public Authorities" {{ "selected" if data["lawCategory"] == "Claims Against Public Authorities" }}>Claims Against Public Authorities</option>
+      <option value="Clinical Negligence" {{ "selected" if data["lawCategory"] == "Clinical Negligence" }}>Clinical Negligence</option>
+      <option value="Community Care" {{ "selected" if data["lawCategory"] == "Community Care" }}>Community Care</option>
+      <option value="Debt" {{ "selected" if data["lawCategory"] == "Debt" }}>Debt</option>
+      <option value="Discrimination" {{ "selected" if data["lawCategory"] == "Discrimination" }}>Discrimination</option>     
+      <option value="Education" {{ "selected" if data["lawCategory"] == "Education" }}>Education</option>
+      <option value="Family" {{ "selected" if data["lawCategory"] == "Family" }}>Family</option>
+      <option value="Housing" {{ "selected" if data["lawCategory"] == "Housing" }}>Housing</option>
+      <option value="Immigration & Asylum" {{ "selected" if data["lawCategory"] == "Immigration & Asylum" }}>Immigration & Asylum</option>
+      <option value="Mental Health" {{ "selected" if data["lawCategory"] == "Mental Health" }}>Mental Health</option>
+      <option value="Miscellaneous" {{ "selected" if data["lawCategory"] == "Miscellaneous" }}>Miscellaneous</option>
+      <option value="Public Law" {{ "selected" if data["lawCategory"] == "Public Law" }}>Public Law</option>
+      <option value="Welfare Benefits" {{ "selected" if data["lawCategory"] == "Welfare Benefits" }}>Welfare Benefits</option>
+    </select>
+  </div>

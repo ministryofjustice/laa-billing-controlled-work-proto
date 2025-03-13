@@ -4,5 +4,6 @@
 //
 
 window.GOVUKPrototypeKit.documentReady(() => {
-  // Add JavaScript here
+  <script type="text/javascript" src="assets/js/accessible-autocomplete.min.js"></script>
+
 })

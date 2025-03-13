@@ -1,0 +1,244 @@
+{% extends "layouts/main.html" %}
+{% set version = "wip" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Claim type – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="/{{version}}/create/claim-matter-type" method="post">
+
+      <h1 class="govuk-heading-xl">Claim type</h1>
+      <p>To set up your claim we need some initial information.</p>
+
+      {% if data['isImport'] == "yes" %}
+
+        {{ mojAlert({
+          variant: "info",
+          title: "Submission imported",
+          showTitleAsHeading: true,
+          dismissible: false,
+          html: '<p class="govuk-body">You imported 23 claims. Review all claims before final submission.</p>'
+        }) }}
+
+      {% endif%}
+
+        {{ govukInput({
+        label: {
+          text: "What is the unique file number (UFN)?",
+          classes: "govuk-label--s",
+          isPageHeading: false
+        },
+        hint: {
+          text: "For example 310223/001"
+        },
+        classes: "govuk-input--width-10",
+        id: "ufnNSM",
+        name: "ufnNSM",
+        value: data['ufnNSM']
+      }) }}
+
+      {{ mojDatePicker({
+        id: "caseStart",
+        name: "caseStart",
+        label: {
+          text: "Case start"
+        },
+        hint: {
+          text: "For example, 17/5/2024."
+        }
+      }) }}
+
+      {% set immigrationHtml %}
+        {{ govukRadios({
+          name: "claimTypeImmigration",
+          fieldset: {
+            legend: {
+              text: "Claim type",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Stage claim",
+              text: "Stage claim"
+            },
+            {
+              value: "Completed matter claim",
+              text: "Completed matter claim"
+            }
+          ]
+        }) }}
+      {% endset %}
+
+      {% set mentalHtml %}
+        {{ govukRadios({
+          name: "claimTypeMental",
+          fieldset: {
+            legend: {
+              text: "Claim type",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Stage disbursement claim",
+              text: "Stage disbursement claim"
+            },
+            {
+              value: "Completed matter claim",
+              text: "Completed matter claim"
+            }
+          ]
+        }) }}
+      {% endset %}
+
+
+      {{ govukRadios({
+        name: "lawCategory",
+        fieldset: {
+          legend: {
+            text: "Category of Law",
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        hint: {
+          text: "Select one option"
+        },
+        items: [
+          {
+            value: "Claims Against Public Authorities",
+            text: "Claims Against Public Authorities"
+            
+          },
+          {
+            value: "Clinical Negligence",
+            text: "Clinical Negligence"
+          },
+          {
+            value: "Community Care",
+            text: "Community Care"
+          },
+          {
+            value: "Debt",
+            text: "Debt"
+          },
+          {
+            value: "Discrimination",
+            text: "Discrimination"
+          },
+          {
+            value: "Education",
+            text: "Education"
+          },
+          {
+            value: "Family",
+            text: "Family",
+            conditional: {
+              html: textHtml
+            }
+          },
+          {
+            value: "Housing",
+            text: "Housing"
+          },
+          {
+            value: "Immigration & Asylum (IMMOT/ IMMAS)",
+            text: "Immigration & Asylum",
+            conditional: {
+              html: immigrationHtml
+            }
+          },
+          {
+            value: "Mental Health",
+            text: "Mental Health",
+            conditional: {
+              html: mentalHtml
+            }
+          },
+          {
+            value: "Miscellaneous",
+            text: "Miscellaneous",
+            conditional: {
+              html: textHtml
+            }
+          },
+          {
+            value: "Public Law",
+            text: "Public Law"
+          },
+          {
+            value: "Welfare Benefits",
+            text: "Welfare Benefits",
+            conditional: {
+              html: textHtml
+            }
+          }
+        ]
+      }) }}     
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+    <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
+
+    <script>
+      let selectElements = $('.autocomplete-select')
+      let placeholder = ''
+
+
+      selectElements.each(function (index) {
+        let selectElement = $(this)
+        if (selectElement.length) {
+          if (selectElement.attr('autocomplete-placeholder')) {
+              placeholder = selectElement.attr('autocomplete-placeholder')
+            }
+          
+          accessibleAutocomplete.enhanceSelectElement({
+            defaultValue: '',
+            placeholder: placeholder,
+            minLength: 1,
+            showNoOptionsFound: false,
+            showAllValues: true,
+            autoselect: false,
+            selectElement: selectElement[0],
+          })
+        }
+
+      })
+    
+    </script>
+
+{% endblock %}
