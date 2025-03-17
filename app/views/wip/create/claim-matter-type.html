@@ -25,7 +25,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form class="form" action="/{{version}}/create/submission-matter-starts-edit" method="post">
+    <form class="form" action="/{{version}}/create/task-list?question-claimType=complete" method="post">
 
       {% include "/includes/list-matter-types.njk" %}
 
@@ -62,8 +62,8 @@
             defaultValue: '',
             placeholder: placeholder,
             minLength: 1,
-            showNoOptionsFound: false,
-            showAllValues: true,
+            showNoOptionsFound: true,
+            showAllValues: false,
             autoselect: false,
             selectElement: selectElement[0],
           })

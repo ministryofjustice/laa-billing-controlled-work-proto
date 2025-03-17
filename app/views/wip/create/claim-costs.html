@@ -1,0 +1,238 @@
+{% extends "layouts/main.html" %}
+{% set version = "wip" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Your costs – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Claim costs</h1>
+    <form class="form" action="/{{version}}/create/task-list?question-costs=complete" method="post">
+
+      {{ govukRadios({
+        name: "vatRegistered",
+        fieldset: {
+          legend: {
+            text: "Is your firm VAT registered?",
+            classes: "govuk-fieldset__legend--s",
+            isPageHeading: false            
+            }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes",
+            checked: checked("vatRegistered", "Yes")
+          },
+          {
+            value: "No",
+            text: "No",
+            checked: checked("vatRegistered", "No")
+          }
+        ]
+      }) }}
+  
+      <h2 class="govuk-heading-l">Profit costs</h2>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" role="group" >
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            Advice time
+          </legend>
+          <div id="adviceNoHours-hint" class="govuk-hint">
+            For example, 1 hour and 30 minutes
+          </div>
+          <div class="govuk-date-input" id="adviceNoHours">
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="adviceNoHours-hours">
+                  Hours
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-hours" name="adviceNoHours-hours" type="text" inputmode="numeric" value="{{data['adviceNoHours-hours'] or "1"}}">
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="adviceNoHours-mins">
+                  Minutes
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-mins" name="adviceNoHours-mins" type="text" inputmode="numeric" value="{{data['adviceNoHours-mins'] or "00"}}">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      {{ govukInput({
+        id: "adviceCost",
+        name: "adviceCost",
+        label: {
+          text: "Counsel costs",
+          classes: "govuk-label--s",
+          isPageHeading: false
+        },
+        prefix: {
+          text: "£"
+        },
+        classes: "govuk-input--width-5",
+        spellcheck: false,
+        hint: {
+          text: "Excluding VAT"
+        }
+      }) }}
+
+      <h2 class="govuk-heading-l">Disbursements</h2>
+
+      {{ govukInput({
+        id: "disbursementCost",
+        name: "disbursementCost",
+        label: {
+          text: "Disbursement costs",
+          classes: "govuk-label--s",
+          isPageHeading: false
+        },
+        prefix: {
+          text: "£"
+        },
+        classes: "govuk-input--width-5",
+        spellcheck: false,
+        hint: {
+          text: "Excluding VAT"
+        }
+      }) }}
+
+      {{ govukInput({
+        id: "disbursementVATCost",
+        name: "disbursementVATCost",
+        label: {
+          text: "VAT on disbursements",
+          classes: "govuk-label--s",
+          isPageHeading: false
+        },
+        prefix: {
+          text: "£"
+        },
+        classes: "govuk-input--width-5",
+        spellcheck: false
+      }) }}
+      
+      
+      {% if data['claimTypeImmigration'] == "Stage Disbursement Claim" %}
+      {% else %}
+        <h2 class="govuk-heading-l">Travel and waiting</h2>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" >
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Travel time
+            </legend>
+            <div id="travelNoHours-hint" class="govuk-hint">
+              For example, 1 hour and 30 minutes
+            </div>
+            <div class="govuk-date-input" id="travelNoHours">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="travelNoHours-hours">
+                    Hours
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="travelNoHours-hours" name="travelNoHours-hours" type="text" inputmode="numeric" value="{{data['travelNoHours-hours'] or "1"}}">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="travelNoHours-mins">
+                    Minutes
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="travelNoHours-mins" name="travelNoHours-mins" type="text" inputmode="numeric" value="{{data['travelNoHours-mins'] or "00"}}">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" >
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Waiting time
+            </legend>
+            <div id="waitingNoHours-hint" class="govuk-hint">
+              For example, 1 hour and 30 minutes
+            </div>
+            <div class="govuk-date-input" id="waitingNoHours">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="waitingNoHours-hours">
+                    Hours
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="waitingNoHours-hours" name="waitingNoHours-hours" type="text" inputmode="numeric" value="{{data['waitingNoHours-hours'] or "1"}}">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="waitingNoHours-mins">
+                    Minutes
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="waitingNoHours-mins" name="waitingNoHours-mins" type="text" inputmode="numeric" value="{{data['waitingNoHours-mins'] or "00"}}">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        {{ govukInput({
+          id: "travelwaitingCost",
+          name: "travelwaitingCost",
+          label: {
+            text: "Travel and waiting costs",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false,
+          hint: {
+            text: "Excluding VAT"
+          }
+        }) }}
+
+      {% endif %}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+        {{ govukButton({
+          text: "Save and come back later",
+          classes: "govuk-button--secondary",
+          href: "task-list"
+        }) }}
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+

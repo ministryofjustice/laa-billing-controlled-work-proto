@@ -51,17 +51,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       
-      <p class="govuk-body govuk-!-margin-bottom-7">If you leave this page before you have finished, you can return later to complete the claim.</p>
-
-      <!--Section 0 - UFN-->
-
       <h2 class="govuk-heading-m govuk-!-margin-top-5">
-        Claim type
+        Claim details
       </h2>
       <ul class="govuk-task-list">
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
           <div class="govuk-task-list__name-and-hint">
-            <a href="?question-claimType=complete&changeClaim=no" class="govuk-link govuk-task-list__link"  aria-describedby="key-status">
+            <a href="claim-start?question-claimType=complete" class="govuk-link govuk-task-list__link"  aria-describedby="key-status">
               What you are claiming for
             </a>
           </div>
@@ -69,13 +65,44 @@
             Completed
           </div>
         </li>
+        <!--Costs -->
+        <li class="govuk-task-list__item govuk-task-list__item--with-link">
+          {% if data['question-claimType'] !== "complete" %}
+            <div class="govuk-task-list__name-and-hint">
+                Your costs
+            </div>
+            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="costs-status">
+                Cannot start yet
+            </div>
+            {% elseif data['question-costs'] == "" or data['question-costs'] == Nil or data['question-costs'] == "notStarted" %}
+            <div class="govuk-task-list__name-and-hint">
+              <a href="claim-costs?question-costs=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="costs-status">
+                Your costs
+              </a>
+            </div>
+            <div class="govuk-task-list__status" id="costs-status">
+              <strong class="govuk-tag govuk-tag--blue">
+                Incomplete
+              </strong>
+            </div>
+            {% elseif data['question-costs'] == "complete" %}
+            <div class="govuk-task-list__name-and-hint">
+              <a class="govuk-link govuk-task-list__link" href="claim-costs" aria-describedby="costs-status">
+                Your costs
+              </a>
+            </div>
+            <div class="govuk-task-list__status" id="costs-status">
+                Completed
+            </div>
+          {% endif %}
+        </li>
 
-      <!--Section 2 - client dets-->
+      <!--Section 2 -->
       <h2 class="govuk-heading-m govuk-!-margin-top-5">
-        About the client
+        About the case
       </h2>
       <ul class="govuk-task-list">
-        <!--Section 2 - Client details-->
+        <!--Client details-->
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
           {% if data['question-claimType'] !== "complete" %}
             <div class="govuk-task-list__name-and-hint">
@@ -84,33 +111,21 @@
             <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="client-status">
               Cannot start yet
             </div>
-            {% elseif data['question-claimType'] == "" or data['question-claimType'] == "notStarted" %}
+            {% elseif data['question-client'] == nil or data['question-client'] == "" or data['question-client'] == "notStarted" %}
             <div class="govuk-task-list__name-and-hint">
-              <a href="add-defendant1-details?question-client=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="client-status">
+              <a href="claim-client" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="client-status">
                 Client details
               </a>
             </div>
             <div class="govuk-task-list__status" id="client-status">
               <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
+                Incomplete
               </strong>
             </div>
-            {% elseif data['question-client'] == "inProgress" and data['question-org'] == "complete" %}
-             <!-- -->
-              <div class="govuk-task-list__name-and-hint">
-                <a href="review-all-defendants" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="client-status">
-                  Client details
-                </a>
-              </div>
-              <div class="govuk-task-list__status" id="client-status">
-                <strong class="govuk-tag govuk-tag--blue">
-                  In progress
-                </strong>
-              </div>
             {% else %}
             <!--For all other states AND show visited link status-->
             <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="review-all-defendants" aria-describedby="client-status">
+              <a class="govuk-link govuk-task-list__link" href="claim-client" aria-describedby="client-status">
                 Client details
               </a>
             </div>
@@ -118,25 +133,18 @@
               Completed
             </div>
           {% endif %}
-        </li>
-      </ul>
+        </li> 
 
-      <!--Section 2 - case dets-->
-      <h2 class="govuk-heading-m govuk-!-margin-top-5">
-        About the case
-      </h2>
-      <ul class="govuk-task-list">            
-        <!--Section 2 - Details of case-->
+        <!--Details of case-->
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-client'] !== "complete" %}
+          {% if data['question-claimType'] !== "complete" %}
             <div class="govuk-task-list__name-and-hint">
               Case details
             </div>
             <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="case-status">
               Cannot start yet
             </div>
-            {% elseif data['question-case-details'] == "" or data['question-case-details'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
+            {% elseif data['question-case'] == "" or data['question-case'] == Nil or data['question-case'] == "notStarted" %}
             <div class="govuk-task-list__name-and-hint">
               <a href="question-case-details?question-case-details=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="case-status">
                 Case details
@@ -144,10 +152,10 @@
             </div>
             <div class="govuk-task-list__status" id="case-status">
               <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
+                Incomplete
               </strong>
             </div>
-            {% else %}
+            {% elseif data['question-case'] == "complete" %}
             <!--For all other states AND show visited link status-->
             <div class="govuk-task-list__name-and-hint">
               <a class="govuk-link govuk-task-list__link" href="question-case-details" aria-describedby="case-status">
@@ -161,17 +169,17 @@
           {% endif %}
         </li>
 
-          <!--Section 2 - Details of hearing-->
+        <!--Details of hearing-->
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-case-details'] !== "complete" %}
+          {% if data['question-claimType'] !== "complete" %}
             <div class="govuk-task-list__name-and-hint">
                 Hearing details
             </div>
             <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="case-status">
                 Cannot start yet
             </div>
-            {% elseif data['question-hearing'] == "" or data['question-hearing'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
+            {% elseif data['question-hearing'] == "" or data['question-hearing'] == Nil or data['question-hearing'] == "notStarted" %}
+            <!--If question-case-details has not been started show the status Incomplete AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
             <div class="govuk-task-list__name-and-hint">
               <a href="question-hearing?question-hearing=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="hearing-status">
                 Hearing details
@@ -179,7 +187,7 @@
             </div>
             <div class="govuk-task-list__status" id="hearing-status">
               <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
+                Incomplete
               </strong>
             </div>
             {% else %}
@@ -196,462 +204,40 @@
           {% endif %}
         </li>
 
-        <!--Section 2 - Case disposal-->
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-hearing'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Case disposal
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="disposal-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-case-disposal'] == "" or data['question-case-disposal'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="question-case-category?question-case-disposal=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="disposal-status">
-                Case disposal
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="disposal-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="question-case-category" aria-describedby="disposal-status">
-                Case disposal
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="disposal-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-      </ul>
-
-      <!--Section 3 - About the claim-->
-      <h2 class="govuk-heading-m govuk-!-margin-top-5">
-        About the claim
-      </h2>
-      <ul class="govuk-task-list">     
-        <!--Section 3 - claim-->
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-case-disposal'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Claim justification
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="disposal-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-just'] == "" or data['question-just'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="question-why-nsm?question-just=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="just-status">
-                Claim justification
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="just-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="question-why-nsm" aria-describedby="just-status">
-                Claim justification
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="just-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-just'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Claim details
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="claim-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-claim'] == "" or data['question-claim'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="question-claim?question-claim=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="claim-status">
-                Claim details
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="claim-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="question-claim" aria-describedby="claim-status">
-                Claim details
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="just-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-        {% if data[''] =="" %}
-          <li class="govuk-task-list__item govuk-task-list__item--with-link">
-            {% if data['question-claim'] !== "complete" %}
-              <div class="govuk-task-list__name-and-hint">
-                  Work items
-              </div>
-              <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="work-status">
-                  Cannot start yet
-              </div>
-              {% elseif data['question-work'] == "" or data['question-work'] == "notStarted" %}
-              <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-              <div class="govuk-task-list__name-and-hint">
-                <a href="add-work-item2?question-work=notStarted&add2=1" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="work-status">
-                    Work items
-                </a>
-              </div>
-              <div class="govuk-task-list__status" id="work-status">
-                <strong class="govuk-tag govuk-tag--blue">
-                  Not yet started
-                </strong>
-              </div>
-              {% else %}
-              <!--For all other states AND show visited link status-->
-              <div class="govuk-task-list__name-and-hint">
-                <a class="govuk-link govuk-task-list__link" href="review-all-work-items2" aria-describedby="work-status">
-                    Work items
-                </a>
-              </div>
-              <!--If question-casa is complete, show the status Completed-->
-              <div class="govuk-task-list__status" id="work-status">
-                  Completed
-              </div>
-            {% endif %}
-          </li>
-          {% else %}
-          <li class="govuk-task-list__item govuk-task-list__item--with-link">
-            {% if data['question-claim'] !== "complete" %}
-              <div class="govuk-task-list__name-and-hint">
-                  Work items
-              </div>
-              <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="work-status">
-                  Cannot start yet
-              </div>
-              {% elseif data['question-work'] == "" or data['question-work'] == "notStarted" %}
-              <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-              <div class="govuk-task-list__name-and-hint">
-                <a href="add-work-item2?question-work=notStarted&add2=1" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="work-status">
-                    Work items
-                </a>
-              </div>
-              <div class="govuk-task-list__status" id="work-status">
-                <strong class="govuk-tag govuk-tag--blue">
-                  Not yet started
-                </strong>
-              </div>
-              {% else %}
-              <!--For all other states AND show visited link status-->
-              <div class="govuk-task-list__name-and-hint">
-                <a class="govuk-link govuk-task-list__link" href="review-all-work-items2?add2=6" aria-describedby="work-status">
-                    Work items
-                </a>
-              </div>
-              <!--If question-casa is complete, show the status Completed-->
-              <div class="govuk-task-list__status" id="work-status">
-                  Completed
-              </div>
-            {% endif %}
-          </li>
-        {% endif %}
-
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-work'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Letters and calls
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="letters-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-letters'] == "" or data['question-letters'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="add-letters?question-letters=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="letters-status">
-                  Letters and calls
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="letters-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="add-letters" aria-describedby="letters-status">
-                  Letters and calls
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="letters-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-letters'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Disbursement costs
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="disburse-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-disburse'] == "" or data['question-disburse'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="add-disburse?question-disburse=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="disburse-status">
-                  Disbursement costs
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="disburse-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="review-all-disbursements2?addD2=5" aria-describedby="disburse-status">
-                  Disbursement costs
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="disburse-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-disburse'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Check your payment claim
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="payment-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-payment'] == "" or data['question-payment'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="check-payment-claim?question-payment=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="payment-status">
-                  Check your payment claim
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="payment-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="check-payment-claim" aria-describedby="payment-status">
-                  Check your payment claim
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="payment-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-payment'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Other relevant information
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="other-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-other'] == "" or data['question-other'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="question-other?question-other=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="other-status">
-                  Other relevant information
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="other-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="question-other" aria-describedby="other-status">
-                  Other relevant information
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="other-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-      </ul>
-
-      <!--Question 4 Supporting info-->
-      <h2 class="govuk-heading-m govuk-!-margin-top-5">
-        Supporting evidence
-      </h2>
-      <ul class="govuk-task-list">
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-other'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Upload supporting evidence
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="upload-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-upload'] == "" or data['question-upload'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="question-v?question-upload=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="upload-status">
-                  Upload supporting evidence
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="upload-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="question-upload" aria-describedby="upload-status">
-                  Upload supporting evidence
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="upload-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-      </ul>
-
-      <!--Question 4Review and confirm-->
-      <h2 class="govuk-heading-m govuk-!-margin-top-5">
-        Review and confirm
-      </h2>
-      <ul class="govuk-task-list">
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-upload'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-              Check your answers
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="check-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-check'] == "" or data['question-check'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="check-answers?question-check=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="check-status">
-                Check your answers
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="check-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="check-answers" aria-describedby="check-status">
-                Check your answers
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="check-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-check'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-              Confirm declaration and submit claim
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="equal-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-v'] == "" or data['question-equal'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Not yet started AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="question-equal?question-equal=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="equal-status">
-                Confirm declaration and submit claim
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="equal-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Not yet started
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="question-check" aria-describedby="equal-status">
-                Confirm declaration and submit claim
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="equal-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
       </ul>
 
 
       {{ govukButton({
-        text: "Back to your claims",
-        classes: "govuk-button--secondary",
+        text: "Save and continue",
         href: "../crm-claims-reviewed"
       }) }}
     </div>
 
     <div class="govuk-grid-column-one-third">
       <aside class="app-related-items" role="complementary">
-        <h2 class="govuk-heading-s" id="subsection-title">Claim reference</h2>
+        <h2 class="govuk-heading-s" id="subsection-title">Claim details</h2>
         <ul class="govuk-list govuk-!-font-size-16">
           <li>
             <span class="govuk-!-font-weight-bold">Unique file number</span>   
             <br>{{data['ufnNSM'] or "100323/234"}}
           </li>
-          <li>
-            <span class="govuk-!-font-weight-bold">LAA reference</span>   
-            <br>{{data['laa-ref'] or "LAA-5a7d3c"}}
+          <li>                
+            <span class="govuk-!-font-weight-bold">Case start</span>   
+            <br>{{data['caseStart'] or "12 June 2024" }} 
           </li>
+          <li>
+            <span class="govuk-!-font-weight-bold">Law Category</span>   
+            <br>{{data['lawCategory'] or "Immigration & Asylum"}}
+          </li>
+          {% if data['lawCategory'] == "Immigration & Asylum" %}
+          {% endif %}
           <li>                
             <span class="govuk-!-font-weight-bold">Claim type</span>   
-            <br>{{data['claimType'] or "Non-standard magistrates’ court payment" }} 
+            <br>{{data['claimTypeImmigration'] or "Completed matter claim"}}
           </li>
-          <li>
-            <span class="govuk-!-font-weight-bold">Stage reached</span>   
-            <br>{{data['stage'] or "PROG"}}
+          <li>                
+            <span class="govuk-!-font-weight-bold">Matter type</span>   
+            <br>{{data['matterType'] or "IALB:IOUT" }} 
           </li>
         </ul>
       </aside>
