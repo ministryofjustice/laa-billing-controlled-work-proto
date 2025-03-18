@@ -1,0 +1,155 @@
+{% extends "layouts/main.html" %}
+{% set version = "wip" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Client details – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Case details</h1>
+    
+     <form class="form" action="claim-client-equality" method="post">
+
+      {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+        <---FAMcxvxcvxc--->
+        {{ mojDatePicker({
+          id: "caseEnd",
+          name: "caseEnd",
+          value: data['caseEnd'],
+          label: {
+            text: "Date case concluded",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "For example, 17/5/2024."
+          }
+        }) }}
+      {% endif %}
+
+      {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+
+        {% if data['claimTypeImmigration'] == "Stage claim" or data['claimTypeImmigration'] == "Stage Disbursement Claim" or data['lawCategory'] == "All"  %}
+         <---IMM - Stage or Disbursement--->
+          {{ mojDatePicker({
+            id: "caseClaimed",
+            name: "caseClaimed",
+            value: data['caseClaimed'],
+            label: {
+              text: "Date case claimed",
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "For example, 17/5/2024."
+            }
+          }) }}
+
+        {% endif %}
+
+        {% if data['claimTypeImmigration'] == "Completed matter claim" or data['lawCategory'] == "All" %}
+          <---IMM - Completed--->
+          {{ mojDatePicker({
+            id: "caseEnd",
+            name: "caseEnd",
+            value: data['caseEnd'],
+            label: {
+              text: "Date case concluded",
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "For example, 17/5/2024."
+            }
+          }) }}
+
+        {% endif %}
+
+        {% if data['claimTypeImmigration'] == "Completed matter claim" or data['claimTypeImmigration'] == "Stage claim" or data['lawCategory'] == "All" %}
+          <---IMM - Completed or Stage not Disbursement--->
+          {{ govukRadios({
+            name: "legacyFee",
+            fieldset: {
+              legend: {
+                text: "Was this a legacy case?",
+                classes: "govuk-fieldset__legend--s",
+                isPageHeading: false            
+                }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: checked("legacyFee", "Yes")
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: checked("legacyFee", "No")
+              }
+            ]
+          }) }}
+
+        <---IMM - Completed or Stage not Disbursement--->
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="aitLocation">
+            Location of Asylum and Immigration Tribunal centre
+          </label>
+          <select class="govuk-select" id="aitLocation" name="aitLocation">
+            <option></option>
+            <option value="01 - Birmingham" {{"selected" if data["aitLocation"] == "01 - Birmingham"}}>01 - Birmingham</option>
+            <option value="02 - Bradford" {{"selected" if data["aitLocation"] == "02 - Bradford"}}>02 - Bradford</option>
+            <option value="03 - Harmondsworth" {{"selected" if data["aitLocation"] == "03 - Harmondsworth"}}>03 - Harmondsworth</option>
+            <option value="04 - London  -  Field House" {{"selected" if data["aitLocation"] == "04 - London  -  Field House"}}>04 - London  -  Field House</option>
+            <option value="05 - London  -  Hatton Cross (York House)" {{"selected" if data["aitLocation"] == "05 - London  -  Hatton Cross (York House)"}}>05 - London  -  Hatton Cross (York House)</option>
+            <option value="06 - London  -  Taylor House" {{"selected" if data["aitLocation"] == "06 - London  -  Taylor House"}}>06 - London  -  Taylor House</option>
+            <option value="07 - Manchester (Piccadilly)" {{"selected" if data["aitLocation"] == "07 - Manchester (Piccadilly)"}}>07 - Manchester (Piccadilly)</option>
+            <option value="08 - Newport (Columbus House)" {{"selected" if data["aitLocation"] == "08 - Newport (Columbus House)"}}>08 - Newport (Columbus House)</option>
+            <option value="09 - North Shields (Kings Cort)" {{"selected" if data["aitLocation"] == "09 - North Shields (Kings Cort)"}}>09 - North Shields (Kings Cort)</option>
+            <option value="10 - Nottingham Magistrates Court" {{"selected" if data["aitLocation"] == "10 - Nottingham Magistrates Court"}}>10 - Nottingham Magistrates Court</option>
+            <option value="11 - Stoke (Bennett House)" {{"selected" if data["aitLocation"] == "11 - Stoke (Bennett House)"}}>11 - Stoke (Bennett House)</option>
+            <option value="12 - Surbiton" {{"selected" if data["aitLocation"] == "12 - Surbiton"}}>12 - Surbiton</option><option value="13">13 - Walsall</option>
+            <option value="14 - Yarls Wood" {{"selected" if data["aitLocation"] == "14 - Yarls Wood"}}>14 - Yarls Wood</option>
+            <option value="15 - N/A  -  Application Only" {{"selected" if data["aitLocation"] == "15 - N/A  -  Application Only"}}>15 - N/A  -  Application Only</option>
+            <option value="16 - Other" {{"selected" if data["aitLocation"] == "16 - Other"}}>16 - Other</option>
+          </select>
+        </div>  
+
+        {% endif %}
+
+      {% endif %}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+        {{ govukButton({
+            text: "Save and come back later",
+            classes: "govuk-button--secondary",
+            href: "task-list"
+          }) }}
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

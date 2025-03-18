@@ -41,15 +41,18 @@
         items: [
           {
             value: "Male",
-            text: "Male"
+            text: "Male",
+            checked: checked("clientGender", "Male")
           },
           {
             value: "Female",
-            text: "Female"
+            text: "Female",
+            checked: checked("clientGender", "Female")
           },
           {
             value: "Unknown",
-            text: "Unknown"
+            text: "Unknown",
+            checked: checked("clientGender", "Unknown")
           }
         ]
       }) }}
@@ -60,47 +63,47 @@
         </label>
         <select class="govuk-select" id="clientEthnicity" name="clientEthnicity">
           <option></option>
-          <option value="00-Other">00 - Other</option>
-          <option value="01 - White British">01 - White British</option>
-          <option value="02 - White Irish">02 - White Irish</option>
-          <option value="03 - Black or Black British Africa">03 - Black or Black British African</option>
-          <option value="04 - Black or Black British Caribbean">04 - Black or Black British Caribbean</option>
-          <option value="05 - Black or Black British Other">05 - Black or Black British Other</option>
-          <option value="06 - Asian or Asian British Indian">06 - Asian or Asian British Indian</option>
-          <option value="07 - Asian or Asian British Pakistani">07 - Asian or Asian British Pakistani</option>
-          <option value="08 - Asian or Asian British Bangladeshi">08 - Asian or Asian British Bangladeshi</option>
-          <option value="09 - Chinese">09 - Chinese</option>
-          <option value="10 - Mixed White &amp; Black Caribbean">10 - Mixed White &amp; Black Caribbean</option>
-          <option value="11 - Mixed White &amp; Black African">11 - Mixed White &amp; Black African</option>
-          <option value="12 - Mixed White &amp; Asian">12 - Mixed White &amp; Asian</option>
-          <option value="13 - Mixed Other">13 - Mixed Other</option>
-          <option value="14 - White Other">14 - White Other</option>
-          <option value="15 - Asian or Asian British Other">15 - Asian or Asian British Other</option>
-          <option value="16 - Gypsy/Traveller">16 - Gypsy/Traveller</option>
-          <option value="99 - Unknown">99 - Unknown</option>
+          <option value="Other" {{"selected" if data["clientEthnicity"] == "00 Other"}}>00 - Other</option>
+          <option value="01 - White British" {{"selected" if data["clientEthnicity"] == "01 - White British"}}>01 - White British</option>
+          <option value="02 - White Irish" {{"selected" if data["clientEthnicity"] == "02 - White Irish"}}>02 - White Irish</option>
+          <option value="03 - Black or Black British Africa" {{"selected" if data["clientEthnicity"] == "Other"}}>03 - Black or Black British African</option>
+          <option value="04 - Black or Black British Caribbean" {{"selected" if data["clientEthnicity"] == "04 - Black or Black British Caribbean"}}>04 - Black or Black British Caribbean</option>
+          <option value="05 - Black or Black British Other" {{"selected" if data["clientEthnicity"] == "05 - Black or Black British Other"}}>05 - Black or Black British Other</option>
+          <option value="06 - Asian or Asian British Indian" {{"selected" if data["clientEthnicity"] == "06 - Asian or Asian British Indian"}}>06 - Asian or Asian British Indian</option>
+          <option value="07 - Asian or Asian British Pakistani" {{"selected" if data["clientEthnicity"] == "07 - Asian or Asian British Pakistani"}}>07 - Asian or Asian British Pakistani</option>
+          <option value="08 - Asian or Asian British Bangladeshi" {{"selected" if data["clientEthnicity"] == "08 - Asian or Asian British Bangladeshi"}}>08 - Asian or Asian British Bangladeshi</option>
+          <option value="09 - Chinese" {{"selected" if data["clientEthnicity"] == "09 - Chinese"}}>09 - Chinese</option>
+          <option value="10 - Mixed White &amp; Black Caribbean" {{"selected" if data["clientEthnicity"] == "10 - Mixed White &amp; Black Caribbean"}}>10 - Mixed White &amp; Black Caribbean</option>
+          <option value="11 - Mixed White &amp; Black African" {{"selected" if data["clientEthnicity"] == "11 - Mixed White &amp; Black African"}}>11 - Mixed White &amp; Black African</option>
+          <option value="12 - Mixed White &amp; Asian" {{"selected" if data["clientEthnicity"] == "12 - Mixed White &amp; Asian"}}>12 - Mixed White &amp; Asian</option>
+          <option value="13 - Mixed Other" {{"selected" if data["clientEthnicity"] == "13 - Mixed Other"}}>13 - Mixed Other</option>
+          <option value="14 - White Other" {{"selected" if data["clientEthnicity"] == "14 - White Other"}}>14 - White Other</option>
+          <option value="15 - Asian or Asian British Other" {{"selected" if data["clientEthnicity"] == "15 - Asian or Asian British Other"}}>15 - Asian or Asian British Other</option>
+          <option value="16 - Gypsy/Traveller" {{"selected" if data["clientEthnicity"] == "16 - Gypsy/Traveller"}}>16 - Gypsy/Traveller</option>
+          <option value="99 - Unknown" {{"selected" if data["clientEthnicity"] == "99 - Unknown"}}>99 - Unknown</option>
         </select>
       </div>    
 
       <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--s" for="clientEthnicity">
+        <label class="govuk-label govuk-label--s" for="clientDisability">
           Does the client consider themselves as having a disability?
         </label>
-        <select class="govuk-select" id="clientEthnicity" name="clientEthnicity">
+        <select class="govuk-select" id="clientDisability" name="clientDisability">
           <option></option>
-          <option value="BLI - Blind">BLI - Blind</option>
-          <option value="COG - Cognitive Impairment">COG - Cognitive Impairment</option>
-          <option value="DEA - Deaf">DEA - Deaf</option>
-          <option value="HEA - Hearing Impaired">HEA - Hearing Impaired</option>
-          <option value="ILL - Long-Standing Illness Or Health Condition">ILL - Long-Standing Illness Or Health Condition</option>
-          <option value="LDD - Learning Disability/Difficulty">LDD - Learning Disability/Difficulty</option>
-          <option value="MHC - Mental Health Condition">MHC - Mental Health Condition</option>
-          <option value="MOB - Mobility Impairment">MOB - Mobility Impairment</option>
-          <option value="NCD - Not Considered Disabled<">NCD - Not Considered Disabled</option>
-          <option value="OTH - Other">OTH - Other</option>
-          <option value="PHY - Physical Impairment">PHY - Physical Impairment</option>
-          <option value="SEN - Sensory Impairment">SEN - Sensory Impairment</option>
-          <option value="UKN - Unknown">UKN - Unknown</option>
-          <option value="VIS - Visually Impaired">VIS - Visually Impaired</option>
+          <option value="BLI - Blind" {{"selected" if data["clientDisability"] == "BLI - Blind"}}>BLI - Blind</option>
+          <option value="COG - Cognitive Impairment" {{"selected" if data["clientDisability"] == "COG - Cognitive Impairment"}}>COG - Cognitive Impairment</option>
+          <option value="DEA - Deaf" {{"selected" if data["clientDisability"] == "DEA - Deaf"}}>DEA - Deaf</option>
+          <option value="HEA - Hearing Impaired" {{"selected" if data["clientDisability"] == "HEA - Hearing Impaired"}}>HEA - Hearing Impaired</option>
+          <option value="ILL - Long-Standing Illness Or Health Condition" {{"selected" if data["clientDisability"] == "UnkILL - Long-Standing Illness Or Health Conditionnown"}}>ILL - Long-Standing Illness Or Health Condition</option>
+          <option value="LDD - Learning Disability/Difficulty" {{"selected" if data["clientDisability"] == "LDD - Learning Disability/Difficulty"}}>LDD - Learning Disability/Difficulty</option>
+          <option value="MHC - Mental Health Condition" {{"selected" if data["clientDisability"] == "MHC - Mental Health Condition"}}>MHC - Mental Health Condition</option>
+          <option value="MOB - Mobility Impairment" {{"selected" if data["clientDisability"] == "MOB - Mobility Impairment"}}>MOB - Mobility Impairment</option>
+          <option value="NCD - Not Considered Disabled" {{"selected" if data["clientDisability"] == "NCD - Not Considered Disabled"}}>NCD - Not Considered Disabled</option>
+          <option value="OTH - Other" {{"selected" if data["clientDisability"] == "OTH - Other"}}>OTH - Other</option>
+          <option value="PHY - Physical Impairment" {{"selected" if data["clientDisability"] == "PHY - Physical Impairment"}}>PHY - Physical Impairment</option>
+          <option value="SEN - Sensory Impairment" {{"selected" if data["clientDisability"] == "SEN - Sensory Impairment"}}>SEN - Sensory Impairment</option>
+          <option value="UKN - Unknown" {{"selected" if data["clientDisability"] == "UKN - Unknown"}}>UKN - Unknown</option>
+          <option value="VIS - Visually Impaired" {{"selected" if data["clientDisability"] == "VIS - Visually Impaired"}}>VIS - Visually Impaired</option>
         </select>
       </div>    
 

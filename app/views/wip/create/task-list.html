@@ -146,7 +146,7 @@
             </div>
             {% elseif data['question-case'] == "" or data['question-case'] == Nil or data['question-case'] == "notStarted" %}
             <div class="govuk-task-list__name-and-hint">
-              <a href="question-case-details?question-case-details=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="case-status">
+              <a href="claim-case?question-case=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="case-status">
                 Case details
               </a>
             </div>
@@ -158,7 +158,7 @@
             {% elseif data['question-case'] == "complete" %}
             <!--For all other states AND show visited link status-->
             <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="question-case-details" aria-describedby="case-status">
+              <a class="govuk-link govuk-task-list__link" href="claim-case" aria-describedby="case-status">
                 Case details
               </a>
             </div>
