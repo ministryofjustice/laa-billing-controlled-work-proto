@@ -71,7 +71,7 @@
 <div class="govuk-grid-row"> 
   <div class="govuk-grid-column-two-thirds">
     {% if data['subStatus'] == "In progress" %}
-      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['claimedCost'] or ('1362')}}.00</span></h2>
       <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
           <h2 class="govuk-summary-card__title">
@@ -90,7 +90,7 @@
                 Account
               </dt>
               <dd class="govuk-summary-list__value">
-                {{data['office'] or "C1B1C1"}}
+                {{data['firmAC'] or "C1B1C1"}}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -98,7 +98,7 @@
                 Submission type
               </dt>
               <dd class="govuk-summary-list__value">
-                {{data['subType'] or "Lower crime"}}
+                {{data['submissionType'] or "Lower crime"}}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -106,7 +106,7 @@
                 Period
               </dt>
               <dd class="govuk-summary-list__value">
-                March 2025
+                {{data['subPeriod'] or "March 2025"}}
               </dd>
             </div>
           </dl>
@@ -114,30 +114,23 @@
       </div>
 
       {% elseif data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
-      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
-      <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
-      <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['claimedCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['firmAC'] or "C1B1C1"}}</h2>
+      <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['submissionType'] or "Lower crime"}}</h2>
       {% if data['subStatus'] == "Resubmitted" %}
         <h2 class="govuk-heading-m">Last updated: <span class="govuk-!-font-weight-regular">20 March 2025</h2>
         {% else %}
         <h2 class="govuk-heading-m">Submitted: <span class="govuk-!-font-weight-regular">18 March 2025</h2>
       {% endif %}
-      <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
+      <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">{{data['subPeriod'] or "March 2025"}}</h2>
       
-      {% elseif data['subStatus'] == "Paid" %}
-      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
-      <h2 class="govuk-heading-m"><span class="">Paid:</span> <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
-      <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
-      <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
+      {% elseif data['subStatus'] == "Paid" or data['subStatus'] == "Part paid" %}
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['claimedCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m"><span class="">Paid:</span> <span class="govuk-!-font-weight-regular">£{{data['paidCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['firmAC'] or "C1B1C1"}}</h2>
+      <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['submissionType'] or "Lower crime"}}</h2>
       <h2 class="govuk-heading-m">Last updated: <span class="govuk-!-font-weight-regular">22 March 2025</h2>
-      <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
-
-      {% elseif data['subStatus'] == "Part paid" %}
-      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1362')}}.00</span></h2>
-      <h2 class="govuk-heading-m">Paid: <span class="govuk-!-font-weight-regular">£{{data['actualdistTotalCost'] or ('1010')}}.00</span></h2>
-      <h2 class="govuk-heading-m">Account: <span class="govuk-!-font-weight-regular">{{data['office'] or "C1B1C1"}}</h2>
-      <h2 class="govuk-heading-m">Submission type: <span class="govuk-!-font-weight-regular">{{data['subType'] or "Lower crime"}}</h2>
-      <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">March 2025</h2>
+      <h2 class="govuk-heading-m">Period: <span class="govuk-!-font-weight-regular">{{data['subPeriod'] or "March 2025"}}</h2>
             
     {% endif %} 
   </div>

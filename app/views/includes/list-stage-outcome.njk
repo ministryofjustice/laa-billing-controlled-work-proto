@@ -1,0 +1,127 @@
+{% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+<---FAM --->
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="caseLevels">
+    Case stage or level
+  </label>
+  <select class="govuk-select" id="caseLevels" name="caseLevels">
+    <option selected=""></option>
+    <option value="FPC01">FPC01-Initial Advice</option>
+    <option value="FPC02">FPC02-Negotiation</option>
+    <option value="FPC03">FPC03-Initial Advice, Negotiation</option>
+    <option value="FPL01">FPL01-Priv</option>
+    <option value="FPL02">FPL02-Priv, Child Sttld</option>
+    <option value="FPL03">FPL03-Priv, Fin Sttld</option>
+    <option value="FPL04">FPL04-Priv, Child n/Sttld</option>
+    <option value="FPL05">FPL05-Priv, Fin n/Sttld</option>
+    <option value="FPL06">FPL06-Priv, Child Sttld, Fin Sttld</option>
+    <option value="FPL07">FPL07-Priv, Child Sttld, Fin n/Sttld</option>
+    <option value="FPL08">FPL08-Priv, Child n/Sttld, Fin Sttld</option>
+    <option value="FPL09">FPL09-Priv, Child n/Sttld, Fin n/Sttld</option>
+    <option value="FPL10">FPL10-Div</option>
+    <option value="FPL11">FPL11-Child Sttld</option>
+    <option value="FPL12">FPL12-Fin Sttld</option>
+    <option value="FPL13">FPL13-Child n/Sttld</option>
+    <option value="FPL14">FPL14-Fin n/Sttld</option>
+    <option value="FPL15">FPL15-Child Sttld, Fin Sttld</option>
+    <option value="FPL16">FPL16-Child Sttld, Fin n/Sttld</option>
+    <option value="FPL17">FPL17-Child n/Sttld, Fin Sttld</option>
+    <option value="FPL18">FPL18-Child n/Sttld, Fin n/Sttld</option>
+    <option value="FPL19">FPL19-Mediation</option>
+    <option value="FPL20">FPL20-Mediation 2</option>
+    <option value="FPL21">FPL21-Mediation 3</option>
+  </select>
+</div>
+
+<---FAM --->
+ <div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="stageReached">
+    Claim stage reached
+  </label>
+  <select class="govuk-select" id="stageReached" name="stageReached">
+    <option></option>
+    <option value="FA">FA-First meeting</option>
+    <option value="FB">FB-Further Work</option>
+    <option value="FC">FC-Negotiation with Local Authority in care p</option>
+    <option value="FD">FD-Divorce proceedings - Petitioner only</option>
+    <option value="FE">FE-Fee Stage 3a</option>
+    <option value="FF">FF-Fee stage 3b</option>
+    <option value="FG">FG-Fee stage 3c</option>
+  </select>
+</div>
+
+<---FAM --->
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="clientOutcome">
+    Outcome for client
+  </label>
+  <select class="govuk-select" id="clientOutcome" name="clientOutcome">
+    <option></option>
+      <option value="FA">FA-Decree Absolute/Dissolution obtained</option>
+      <option value="FB">FB-Client and partner reconciled</option>
+      <option value="FC">FC-Advice given - no further action required</option>
+      <option value="FD">FD-Client referred to mediation and matter re</option>
+      <option value="FE">FE-Settlement with benefit for the client</option>
+      <option value="FF">FF-Settlement with no benefit for the client</option>
+      <option value="FG">FG-Client received lump sum/property adjustme</option>
+      <option value="FH">FH-Client received lump sum/property adjustme</option>
+      <option value="FI">FI-Client received periodical payments</option>
+      <option value="FJ">FJ-Liability to pay other side reduced or avo</option>
+      <option value="FS">FS-Client participated in mediation and no se</option>
+      <option value="FT">FT-Client ceased to give instructions</option>
+      <option value="FU">FU-File transferred to another solicitor</option>
+      <option value="FV">FV-Matter stopped on advisor's recommendation</option>
+      <option value="FW">FW-Matter proceeding under other Civil Legal </option>
+      <option value="FX">FX-Matter proceeding under other Civil Legal </option>
+      <option value="FY">FY-Client referred to another contracted supp</option>
+      <option value="FZ">FZ-Client referred to a non-funded service</option>
+  </select>
+</div>
+{% endif %}
+
+{% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+<---IMM --->
+ <div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="stageReached">
+    Claim stage reached
+  </label>
+  <select class="govuk-select" id="stageReached" name="stageReached">
+    <option></option>
+    <option value="IE">IE-LH completed, CLR not applied For (LH)</option>
+    <option value="IF">IF-LH completed, CLR refused (LH)</option>
+    <option value="IG">IG-Not Determined by the AIT (CLR)</option>
+    <option value="IH">IH-Determined After a Substantive AIT Appeal </option>
+    <option value="IK">IK-Final Determination Following an Applicati</option>
+    <option value="IM">IM-LH completed, CLR continuing  - (LH)</option>
+    <option value="IO">IO-Initial AIT Substantive Decision/Unsuccess</option>
+    <option value="IQ">IQ-CLR completed, LH continuing - (CLR)</option>
+    <option value="IR">IR-Initial Home Office Substantive Decision/S</option>
+    <option value="IS">IS-LH completed, CLR Already Completed (LH)</option>
+    <option value="IT">IT-Standby Payment</option>
+  </select>
+</div>
+<---IMM --->
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--s" for="clientOutcome">
+      Outcome for client
+    </label>
+    <select class="govuk-select" id="clientOutcome" name="clientOutcome">
+      <option></option>    
+        <option value="--">--Double Dash</option>
+        <option value="IA">IA-Client Granted Permission to Enter/Remain </option>
+        <option value="IB">IB-Client Granted Humanitarian Protection or </option>
+        <option value="IC">IC-Case Results in Grant of Other Permission </option>
+        <option value="ID">ID-Citizenship gained</option>
+        <option value="IE">IE-Application refused</option>
+        <option value="IF">IF-Matter concluded otherwise</option>
+        <option value="IG">IG-Decision Withdrawn</option>
+        <option value="IH">IH-Matter results in Asylum Grouping being ma</option>
+        <option value="IU">IU-Matter Stopped on Advisors Recommendation</option>
+        <option value="IV">IV-Matter proceeded under other Civil Legal A</option>
+        <option value="IW">IW-Client Referred/Transferred to Another Org</option>
+        <option value="IX">IX-Client advised and taking action themselve</option>
+        <option value="IY">IY-Client advised and third party action or d</option>
+        <option value="IZ">IZ-Outcome not known/client ceased to give in</option>
+    </select>
+  </div>
+{% endif %}

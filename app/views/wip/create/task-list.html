@@ -52,7 +52,7 @@
     <div class="govuk-grid-column-two-thirds">
       
       <h2 class="govuk-heading-m govuk-!-margin-top-5">
-        Claim details
+        About your claim
       </h2>
       <ul class="govuk-task-list">
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -169,48 +169,21 @@
           {% endif %}
         </li>
 
-        <!--Details of hearing-->
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-claimType'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Hearing details
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="case-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-hearing'] == "" or data['question-hearing'] == Nil or data['question-hearing'] == "notStarted" %}
-            <!--If question-case-details has not been started show the status Incomplete AND for the proto I'm removing the visited link status for this link so it looks fresh each time-->
-            <div class="govuk-task-list__name-and-hint">
-              <a href="question-hearing?question-hearing=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="hearing-status">
-                Hearing details
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="hearing-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Incomplete
-              </strong>
-            </div>
-            {% else %}
-            <!--For all other states AND show visited link status-->
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="question-hearing" aria-describedby="hearing-status">
-                Hearing details
-              </a>
-            </div>
-            <!--If question-casa is complete, show the status Completed-->
-            <div class="govuk-task-list__status" id="hearing-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-
       </ul>
 
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue",
+          href: "../crm-claims-reviewed"
+        }) }}
 
-      {{ govukButton({
-        text: "Save and continue",
-        href: "../crm-claims-reviewed"
-      }) }}
+        {{ govukButton({
+            text: "Save and come back later",
+            classes: "govuk-button--secondary",
+            href: "../submission/submission-details"
+          }) }}
+      </div>
+
     </div>
 
     <div class="govuk-grid-column-one-third">
@@ -227,17 +200,17 @@
           </li>
           <li>
             <span class="govuk-!-font-weight-bold">Law Category</span>   
-            <br>{{data['lawCategory'] or "Immigration & Asylum"}}
+            <br>{{data['lawCategory'] or "All for testing"}}
           </li>
           {% if data['lawCategory'] == "Immigration & Asylum" %}
+            <li>                
+              <span class="govuk-!-font-weight-bold">Claim type</span>   
+              <br>{{data['claimTypeImmigration'] or "Completed matter claim"}}
+            </li>
           {% endif %}
           <li>                
-            <span class="govuk-!-font-weight-bold">Claim type</span>   
-            <br>{{data['claimTypeImmigration'] or "Completed matter claim"}}
-          </li>
-          <li>                
             <span class="govuk-!-font-weight-bold">Matter type</span>   
-            <br>{{data['matterType'] or "IALB:IOUT" }} 
+            <br>{{data['matterType'] or "AAAA:AAAA" }} 
           </li>
         </ul>
       </aside>

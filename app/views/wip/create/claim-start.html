@@ -27,7 +27,7 @@
   <div class="govuk-grid-column-two-thirds">
     <form class="form" action="/{{version}}/create/claim-matter-type" method="post">
 
-      <h1 class="govuk-heading-xl">New claim</h1>
+      <h1 class="govuk-heading-xl">Claim details</h1>
       <p>To set up your claim we need some initial information.</p>
 
       {% if data['isImport'] == "yes" %}
@@ -62,7 +62,7 @@
         name: "caseStart",
         value: data['caseStart'],
         label: {
-          text: "Date case started",
+          text: "Date case was opened",
           classes: "govuk-label--s"
         },
         hint: {
@@ -128,7 +128,7 @@
         name: "lawCategory",
         fieldset: {
           legend: {
-            text: "Category of Law",
+            text: "Category of law",
             isPageHeading: false,
             classes: "govuk-fieldset__legend--s"
           }

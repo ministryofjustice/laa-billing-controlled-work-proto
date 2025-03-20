@@ -47,8 +47,7 @@
           <th scope="col" class="govuk-table__header" aria-sort="ascending" id="claimTitle">No.</th>
           <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>   
           <th scope="col" class="govuk-table__header" aria-sort="none">Category</th>         
-          <th scope="col" class="govuk-table__header" aria-sort="none">Stage</th>
-          <th scope="col" class="govuk-table__header" aria-sort="none">Outcome</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Started</th>
           <th scope="col" class="govuk-table__header" aria-sort="none">Concluded</th>
           <th scope="col" class="govuk-table__header" aria-sort="none">Costs</th>
           <th scope="col" class="govuk-table__header" aria-sort="none">Fee type</th>
@@ -71,9 +70,8 @@
             {% endif %}
           </td>
           <td class="govuk-table__cell">Immigration</td>
-          <td class="govuk-table__cell">Invoice</td>
-          <td class="govuk-table__cell">CN02</td>
-          <td class="govuk-table__cell" data-sort-value="2501">1 Jan 2025</td>
+          <td class="govuk-table__cell" data-sort-value="241023">23/10/24</td>
+          <td class="govuk-table__cell" data-sort-value="250101s">01/01/25</td>
           <td class="govuk-table__cell">£56.00</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
@@ -112,17 +110,10 @@
             {% endif %}
           </td>
           <td class="govuk-table__cell">Family</td>
-          <td class="govuk-table__cell">Invoice</td>            
-          <td class="govuk-table__cell">CN06</td>
-          <td class="govuk-table__cell" data-sort-value="2502">21 Feb 2025</td>
+          <td class="govuk-table__cell" data-sort-value="241023">23/10/24</td>
+          <td class="govuk-table__cell" data-sort-value="250221">21/02/25</td>
           <td class="govuk-table__cell">£234.56</td>
-          <td class="govuk-table__cell">
-            {% if data['subStatus'] == "Paid" %}
-              Rate
-              {% else %}
-              Escape
-            {% endif %}
-          </td>
+          <td class="govuk-table__cell">Escape</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
             <td class="govuk-table__cell">
               <ul class="govuk-summary-list__actions-list">
@@ -141,7 +132,7 @@
               <td class="govuk-table__cell"></td>
               <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Pending</strong></td>
             {% elseif data['subStatus'] == "Paid" %}
-              <td class="govuk-table__cell">£134.56</td>
+              <td class="govuk-table__cell">£934.56</td>
               <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
           {% endif %}
         </tr>
@@ -155,9 +146,8 @@
             {% endif %}
           </td>
           <td class="govuk-table__cell">Immigration</td>
-          <td class="govuk-table__cell">Invoice</td>
-          <td class="govuk-table__cell">CN03</td>
-          <td class="govuk-table__cell" data-sort-value="2503">1 Mar 2025</td>
+          <td class="govuk-table__cell" data-sort-value="241112">12/11/24</td>
+          <td class="govuk-table__cell" data-sort-value="250302">02/03/25</td>
           <td class="govuk-table__cell">£456.01</td>
           <td class="govuk-table__cell">Rate</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}

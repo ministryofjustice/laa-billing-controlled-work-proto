@@ -1,0 +1,57 @@
+{% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+
+<---FAM --->
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="clientOutcome">
+    Outcome for client
+  </label>
+  <select class="govuk-select" id="clientOutcome" name="clientOutcome">
+    <option></option>
+      <option value="FA">FA-Decree Absolute/Dissolution obtained</option>
+      <option value="FB">FB-Client and partner reconciled</option>
+      <option value="FC">FC-Advice given - no further action required</option>
+      <option value="FD">FD-Client referred to mediation and matter re</option>
+      <option value="FE">FE-Settlement with benefit for the client</option>
+      <option value="FF">FF-Settlement with no benefit for the client</option>
+      <option value="FG">FG-Client received lump sum/property adjustme</option>
+      <option value="FH">FH-Client received lump sum/property adjustme</option>
+      <option value="FI">FI-Client received periodical payments</option>
+      <option value="FJ">FJ-Liability to pay other side reduced or avo</option>
+      <option value="FS">FS-Client participated in mediation and no se</option>
+      <option value="FT">FT-Client ceased to give instructions</option>
+      <option value="FU">FU-File transferred to another solicitor</option>
+      <option value="FV">FV-Matter stopped on advisor's recommendation</option>
+      <option value="FW">FW-Matter proceeding under other Civil Legal </option>
+      <option value="FX">FX-Matter proceeding under other Civil Legal </option>
+      <option value="FY">FY-Client referred to another contracted supp</option>
+      <option value="FZ">FZ-Client referred to a non-funded service</option>
+  </select>
+</div>
+{% endif %}
+
+{% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+  <---IMM --->
+  <div class="govuk-form-group">
+    <label class="govuk-label govuk-label--s" for="clientOutcome">
+      Outcome for client
+    </label>
+    <select class="govuk-select" id="clientOutcome" name="clientOutcome">
+      <option></option>    
+        <option value="--">--Double Dash</option>
+        <option value="IA">IA-Client Granted Permission to Enter/Remain </option>
+        <option value="IB">IB-Client Granted Humanitarian Protection or </option>
+        <option value="IC">IC-Case Results in Grant of Other Permission </option>
+        <option value="ID">ID-Citizenship gained</option>
+        <option value="IE">IE-Application refused</option>
+        <option value="IF">IF-Matter concluded otherwise</option>
+        <option value="IG">IG-Decision Withdrawn</option>
+        <option value="IH">IH-Matter results in Asylum Grouping being ma</option>
+        <option value="IU">IU-Matter Stopped on Advisors Recommendation</option>
+        <option value="IV">IV-Matter proceeded under other Civil Legal A</option>
+        <option value="IW">IW-Client Referred/Transferred to Another Org</option>
+        <option value="IX">IX-Client advised and taking action themselve</option>
+        <option value="IY">IY-Client advised and third party action or d</option>
+        <option value="IZ">IZ-Outcome not known/client ceased to give in</option>
+    </select>
+  </div>
+{% endif %}

@@ -58,7 +58,7 @@
         }) }}    
       {% endif %}
 
-      {% if data['lawCategory'] == "Immigration & Asylum" and data['claimTypeImmigration'] == "Stage Disbursement Claim" %}
+      {% if data['lawCategory'] == "Immigration & Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
 
         <!--- FOR EVERYONE ELSE --->
         {% else %}
@@ -293,7 +293,7 @@
             isPageHeading: false
           },
           hint: {
-            text: "Required if disbursement costs exceed limits"
+            text: "Required if costs exceed the applicable initial Disbursement Limit"
           },
           classes: "govuk-input--width-10"
         }) }}

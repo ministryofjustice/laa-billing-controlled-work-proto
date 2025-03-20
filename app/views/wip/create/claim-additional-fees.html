@@ -36,7 +36,7 @@
           name: "damagesCost",
           value: data['damagesCost'],
           label: {
-            text: "Recovered costs or damages",
+            text: "Recovered costs or damages (optional)",
             classes: "govuk-label--s",
             isPageHeading: false
           },
@@ -76,7 +76,7 @@
       <!---IMM--->
       {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
 
-       {% if data['claimTypeImmigration'] !== "Stage Disbursement Claim" or data['lawCategory'] == "All" %}
+       {% if data['claimTypeImmigration'] !== "Stage disbursement claim" or data['lawCategory'] == "All" %}
           <---IMM - Stage or Completed not Disbursement - All Matter--->
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--s" for="hmoFee">
@@ -161,7 +161,7 @@
             name: "judicialreviewCost",
             value: data['judicialreviewCost'],
             label: {
-              text: "Judicial Review costs",
+              text: "Judicial Review costs (optional)",
               classes: "govuk-label--s",
               isPageHeading: false
             },
@@ -181,7 +181,7 @@
             name: "formfillingCost",
             value: data['formfillingCost'],
             label: {
-              text: "Form filling costs",
+              text: "Form filling costs (optional)",
               classes: "govuk-label--s",
               isPageHeading: false
             },
