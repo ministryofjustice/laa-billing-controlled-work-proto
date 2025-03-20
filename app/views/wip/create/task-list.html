@@ -56,14 +56,27 @@
       </h2>
       <ul class="govuk-task-list">
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a href="claim-start?question-claimType=complete" class="govuk-link govuk-task-list__link"  aria-describedby="key-status">
-              What you are claiming for
-            </a>
-          </div>
-          <div class="govuk-task-list__status" id="key-status">
-            Completed
-          </div>
+          {% if data['importStatus'] == "error" and data['subStatus'] == "In progress" %}
+            <div class="govuk-task-list__name-and-hint">
+              <a href="claim-start?question-claimType=complete" class="govuk-link govuk-task-list__link"  aria-describedby="key-status">
+                What you are claiming for
+              </a>
+            </div>
+            <div class="govuk-task-list__status" id="key-status">
+              <strong class="govuk-tag govuk-tag--red">
+                There is a problem
+              </strong>
+            </div>
+            {% else %} 
+            <div class="govuk-task-list__name-and-hint">
+              <a href="claim-start?question-claimType=complete" class="govuk-link govuk-task-list__link"  aria-describedby="key-status">
+                What you are claiming for
+              </a>
+            </div>
+            <div class="govuk-task-list__status" id="key-status">
+              Completed
+            </div>
+          {% endif %}
         </li>
         <!--Costs -->
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
