@@ -30,7 +30,7 @@
 
       {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
 
-        <---FAM - specific Matter --->
+        <---FAM --->
         {{ govukInput({
           id: "damagesCost",
           name: "damagesCost",
@@ -47,7 +47,7 @@
           spellcheck: false
         }) }}
 
-        <---FAM - all Matter --->
+        <---FAM --->
         {{ govukRadios({
           name: "londonRate",
           fieldset: {
@@ -74,7 +74,7 @@
 
 
       <!---IMM--->
-      {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 
        {% if data['claimTypeImmigration'] !== "Stage disbursement claim" or data['lawCategory'] == "All" %}
           <---IMM - Stage or Completed not Disbursement - All Matter--->

@@ -35,9 +35,9 @@
           classes: "govuk-label--s"
         },
         classes: "govuk-input--width-20",
-        id: "defendant1-first-name",
-        name: "defendant1-first-name",
-        value: data['defendant1-last-name']
+        id: "client-first-name",
+        name: "client-first-name",
+        value: data['client-last-name']
       }) }}
 
       {{ govukInput({
@@ -46,14 +46,15 @@
           classes: "govuk-label--s"
         },
         classes: "govuk-input--width-20",
-        id: "defendant1-last-name",
-        name: "defendant1-last-name",
-        value: data['defendant1-last-name']
+        id: "client-last-name",
+        name: "client-last-name",
+        value: data['client-last-name']
       }) }}
 
       {{ mojDatePicker({
         id: "clientDOB",
         name: "clientDOB",
+         value: data['clientDOB'],
         label: {
           text: "Date of birth",
           classes: "govuk-label--s"
@@ -72,9 +73,9 @@
         text: "For example A9 9AA or AA99 9AA"
         },
         classes: "govuk-input--width-10",
-        id: "defendant1-MAAT",
-        name: "defendant1-MAAT",
-        value: data['defendant1-MAAT']
+        id: "client-postcode",
+        name: "client-postcode",
+        value: data['client-postcode']
       }) }}  
 
       <---Is this needed?--->
@@ -93,7 +94,7 @@
         value: data['UCN']
       }) }}
 
-      {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
         <---IMM - All - specific Matter--->
         {{ govukInput({
           label: {

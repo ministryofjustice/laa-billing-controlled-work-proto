@@ -30,18 +30,6 @@
       <h1 class="govuk-heading-xl">Claim details</h1>
       <p>To set up your claim we need some initial information.</p>
 
-      {% if data['isImport'] == "yes" %}
-
-        {{ mojAlert({
-          variant: "info",
-          title: "Submission imported",
-          showTitleAsHeading: true,
-          dismissible: false,
-          html: '<p class="govuk-body">You imported 23 claims. Review all claims before final submission.</p>'
-        }) }}
-
-      {% endif%}
-
       <---is this needed?--->
       {{ govukInput({
         label: {
@@ -53,9 +41,9 @@
           text: "For example 310223/001"
         },
         classes: "govuk-input--width-10",
-        id: "ufnNSM",
-        name: "ufnNSM",
-        value: data['ufnNSM']
+        id: "ufn",
+        name: "ufn",
+        value: data['ufn']
       }) }}
 
       {{ mojDatePicker({
@@ -189,9 +177,9 @@
             checked: checked("lawCategory", "Housing")
           },
           {
-            value: "Immigration & Asylum",
-            text: "Immigration & Asylum",
-            checked: checked("lawCategory", "Immigration & Asylum"),
+            value: "Immigration and Asylum",
+            text: "Immigration and Asylum",
+            checked: checked("lawCategory", "Immigration and Asylum"),
             conditional: {
               html: immigrationHtml
             }

@@ -24,21 +24,26 @@
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
       <h1 class="govuk-heading-xl">
-        Claim progress
+        Your claim progress
       </h1>
-      {% if data['importStatus'] == "error" %}
-        {% if data['matterType'] == "" %}
-          {{ mojAlert({
-            variant: "warning",
-            title: "Some information is missing or incorrect",
-            showTitleAsHeading: true,
-            headingTag: "h3",
-            dismissible: false,
-            html: '<p>This claim has one or more errors that must be resolved. Review the highighted sections'
-          }) }}
-        {% endif %}
+      {% if data['importStatus'] == "error" and data['subStatus'] == "In progress" %}
+        {{ mojAlert({
+          variant: "error",
+          title: "Some information is missing or incorrect",
+          showTitleAsHeading: true,
+          headingTag: "h3",
+          dismissible: false,
+          html: '<p>You must carefully review all sections of this claim. This claim has the following types of errors:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>Incompatible combinations of [thing]</li>
+            <li>Incompatible combinations of [another thing]</li>
+            <li>Minor problems with field formatting</li>
+            <li>Some other high level type of error</li>
+          </ul>
+          '
+        }) }}
       {% endif %}
     </div>
   </div>
@@ -46,10 +51,12 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">
+        About your claim
+      </h2>
       <ul class="govuk-task-list">
-        <!---Setting up the claim--->
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-claimType'] == "error" %}
+          {% if data['importStatus'] == "error" and data['subStatus'] == "In progress" %}
             <div class="govuk-task-list__name-and-hint">
               <a href="claim-start?question-claimType=complete" class="govuk-link govuk-task-list__link"  aria-describedby="key-status">
                 What you are claiming for
@@ -71,9 +78,46 @@
             </div>
           {% endif %}
         </li>
+        <!--Costs -->
+        <li class="govuk-task-list__item govuk-task-list__item--with-link">
+          {% if data['question-claimType'] !== "complete" %}
+            <div class="govuk-task-list__name-and-hint">
+                Your costs
+            </div>
+            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="costs-status">
+                Cannot start yet
+            </div>
+            {% elseif data['question-costs'] == "" or data['question-costs'] == Nil or data['question-costs'] == "notStarted" %}
+            <div class="govuk-task-list__name-and-hint">
+              <a href="claim-costs?question-costs=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="costs-status">
+                Your costs
+              </a>
+            </div>
+            <div class="govuk-task-list__status" id="costs-status">
+              <strong class="govuk-tag govuk-tag--blue">
+                Incomplete
+              </strong>
+            </div>
+            {% elseif data['question-costs'] == "complete" %}
+            <div class="govuk-task-list__name-and-hint">
+              <a class="govuk-link govuk-task-list__link" href="claim-costs" aria-describedby="costs-status">
+                Your costs
+              </a>
+            </div>
+            <div class="govuk-task-list__status" id="costs-status">
+                Completed
+            </div>
+          {% endif %}
+        </li>
+
+      <!--Section 2 -->
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">
+        About the case
+      </h2>
+      <ul class="govuk-task-list">
         <!--Client details-->
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-claimType'] == "error" or data['question-claimType'] !== "complete" %}
+          {% if data['question-claimType'] !== "complete" %}
             <div class="govuk-task-list__name-and-hint">
               Client details
             </div>
@@ -103,9 +147,10 @@
             </div>
           {% endif %}
         </li> 
+
         <!--Details of case-->
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-claimType'] == "error" or data['question-claimType'] !== "complete" %}
+          {% if data['question-claimType'] !== "complete" %}
             <div class="govuk-task-list__name-and-hint">
               Case details
             </div>
@@ -136,76 +181,20 @@
             </div>
           {% endif %}
         </li>
-        <!--Costs -->
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-claimType'] == "error" or data['question-claimType'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Costs and additional fees
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="costs-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-costs'] == "" or data['question-costs'] == Nil or data['question-costs'] == "notStarted" %}
-            <div class="govuk-task-list__name-and-hint">
-              <a href="claim-costs?question-costs=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="costs-status">
-                Costs and additional fees
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="costs-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Incomplete
-              </strong>
-            </div>
-            {% elseif data['question-costs'] == "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="claim-costs" aria-describedby="costs-status">
-                Costs and additional fees
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="costs-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
-        <!--Check -->
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          {% if data['question-claimType'] == "error" or data['question-claimType'] !== "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-                Check your answers
-            </div>
-            <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="check-status">
-                Cannot start yet
-            </div>
-            {% elseif data['question-check'] == "" or data['question-check'] == Nil or data['question-check'] == "notStarted" %}
-            <div class="govuk-task-list__name-and-hint">
-              <a href="claim-check?question-check=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="check-status">
-                Check your answers
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="check-status">
-              <strong class="govuk-tag govuk-tag--blue">
-                Incomplete
-              </strong>
-            </div>
-            {% elseif data['question-check'] == "complete" %}
-            <div class="govuk-task-list__name-and-hint">
-              <a class="govuk-link govuk-task-list__link" href="claim-check" aria-describedby="check-status">
-                Check your answers
-              </a>
-            </div>
-            <div class="govuk-task-list__status" id="check-status">
-                Completed
-            </div>
-          {% endif %}
-        </li>
+
       </ul>
 
       <div class="govuk-button-group">
         {{ govukButton({
           text: "Save and continue",
-            href: "../submission/submission-details"
+          href: "../crm-claims-reviewed"
         }) }}
 
+        {{ govukButton({
+            text: "Save and come back later",
+            classes: "govuk-button--secondary",
+            href: "../submission/submission-details"
+          }) }}
       </div>
 
     </div>
@@ -234,7 +223,7 @@
           {% endif %}
           <li>                
             <span class="govuk-!-font-weight-bold">Matter type</span>   
-            <br>{{data['matterType'] or "" }} 
+            <br>{{data['matterType'] or "AAAA:AAAA" }} 
           </li>
         </ul>
       </aside>

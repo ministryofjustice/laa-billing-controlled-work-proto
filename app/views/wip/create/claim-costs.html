@@ -28,7 +28,7 @@
     <h1 class="govuk-heading-xl">Primary claim costs</h1>
     <form class="form" action="/{{version}}/create/claim-additional-fees" method="post">
 
-      {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 
         <---IMM - All - specific Matter--->
         {{ govukRadios({
@@ -58,7 +58,7 @@
         }) }}    
       {% endif %}
 
-      {% if data['lawCategory'] == "Immigration & Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
+      {% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
 
         <!--- FOR EVERYONE ELSE --->
         {% else %}
@@ -215,7 +215,7 @@
           }
         }) }}
 
-        {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+        {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
           
             <---IMM - Stage or Completed not Disbursement - specific Matter--->
             {{ govukInput({
@@ -280,7 +280,7 @@
         spellcheck: false
       }) }}
 
-      {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 
         <---IMM - All - specific Matter--->
         {{ govukInput({

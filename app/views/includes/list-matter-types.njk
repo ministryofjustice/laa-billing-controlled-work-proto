@@ -1,64 +1,144 @@
-  {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
-    <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--xl" for="matterType">
-      <h1 class="govuk-fieldset__heading">Matter type
-      </h1>
-      </label>
-      <div id="matterType-hint" class="govuk-hint">
-        Start typing either the matter type description or code
+  {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+    {%if data['importStatus'] == "error" and data['matterType'] == "" %}
+
+    {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [
+          {
+            text: "Select a valid matter type combination",
+            href: "#"
+          }
+        ]
+      }) }}
+      <div class="govuk-form-group govuk-form-group--error">
+        <label class="govuk-label govuk-label--xl" for="matterType">
+        <h1 class="govuk-fieldset__heading">Matter type
+        </h1>
+        </label>
+        <div id="matterType-hint" class="govuk-hint">
+          Start typing either the matter type description or code
+          <p id="passport-issued-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Select a valid matter type combination
+          </p>
+        </div>
+        <select class="govuk-select autocomplete-select govuk-input--error" id="matterType" name="matterType" aria-describedby="matterType-hint">
+          <option></option>
+          <option value="IACF:IASY" {{ "selected" if data["lawCategory"] == "IACF:IASY -- Asylum - Stage 2e (CLR):First time asylum application" }}>IACF:IASY -- Asylum - Stage 2e (CLR):First time asylum application</option>
+          <option value="IACF:IFRA" {{ "selected" if data["lawCategory"] == "IACF:IFRA -- Asylum - Stage 2e (CLR):Fresh Applications" }}>IACF:IFRA -- Asylum - Stage 2e (CLR):Fresh Applications</option>
+          <option value="IACF:IFST" {{ "selected" if data["lawCategory"] == "IACF:IFST -- Asylum - Stage 2e (CLR):Fast Track Case" }}>IACF:IFST -- Asylum - Stage 2e (CLR):Fast Track Case</option>
+          <option value="IACF:IGOL" {{ "selected" if data["lawCategory"] == "IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain" }}>IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IACF:IGOL" {{ "selected" if data["lawCategory"] == "IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain" }}>IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IACF:IIRC" {{ "selected" if data["lawCategory"] == "IACF:IIRC -- Asylum - Stage 2e (CLR):Immigration Removal centre Work" }}>IACF:IIRC -- Asylum - Stage 2e (CLR):Immigration Removal centre Work</option>
+          <option value="IACF:ILEA" {{ "selected" if data["lawCategory"] == "IACF:ILEA -- Asylum - Stage 2e (CLR):Applications for leave to remain" }}>IACF:ILEA -- Asylum - Stage 2e (CLR):Applications for leave to remain</option>
+          <option value="IACF:IOTH" {{ "selected" if data["lawCategory"] == "IACF:IOTH -- Asylum - Stage 2e (CLR):Other"}}>IACF:IOTH -- Asylum - Stage 2e (CLR):Other</option>
+          <option value="IACF:IOUT" {{ "selected" if data["lawCategory"] == "IACF:IOUT -- Asylum - Stage 2e (CLR):Concession/Policy Outside the Rules Applies" }}>IACF:IOUT -- Asylum - Stage 2e (CLR):Concession/Policy Outside the Rules Applies</option>
+          <option value="IACF:IRVL" {{ "selected" if data["lawCategory"] == "IACF:IRVL -- Asylum - Stage 2e (CLR):Removal/Deportation" }}>IACF:IRVL -- Asylum - Stage 2e (CLR):Removal/Deportation</option>
+          <option value="IALB:IFRA" {{ "selected" if data["matterType"] == "IALB:IFRA -- Asylum - Stage 1 (LH):Fresh Applications" }}>IALB:IFRA -- Asylum - Stage 1 (LH):Fresh Applications</option>
+          <option value="IALB:IGOL" {{ "selected" if data["matterType"] == "IALB:IGOL -- Asylum - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain" }}>IALB:IGOL -- Asylum - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IALB:IIRC" {{ "selected" if data["matterType"] == "IALB:IIRC -- Asylum - Stage 1 (LH):Immigration Removal centre Work" }}>IALB:IIRC -- Asylum - Stage 1 (LH):Immigration Removal centre Work</option>
+          <option value="IALB:IOTH" {{ "selected" if data["matterType"] == "IALB:IOTH -- Asylum - Stage 1 (LH):Other" }}>IALB:IOTH -- Asylum - Stage 1 (LH):Other</option>
+          <option value="IALB:IOUT" {{ "selected" if data["matterType"] == "IALB:IOUT -- Asylum - Stage 1 (LH):Concession/Policy Outside the Rules Applies" }}>IALB:IOUT -- Asylum - Stage 1 (LH):Concession/Policy Outside the Rules Applies</option>
+          <option value="IALB:IRVL" {{ "selected" if data["matterType"] == "IALB:IRVL -- Asylum - Stage 1 (LH):Removal/Deportation" }}>IALB:IRVL -- Asylum - Stage 1 (LH):Removal/Deportation</option>
+          <option value="IALB:IASY" {{ "selected" if data["matterType"] == "IALB:IASY -- Asylum - Stage 1 (LH):First time asylum application" }}>IALB:IASY -- Asylum - Stage 1 (LH):First time asylum application</option>
+          <option value="IALB:ILEA" {{ "selected" if data["matterType"] == "IALB:ILEA -- Asylum - Stage 1 (LH):Applications for leave to remain" }}>IALB:ILEA -- Asylum - Stage 1 (LH):Applications for leave to remain</option>
+          <option value="IALB:IFST" {{ "selected" if data["matterType"] == "IALB:IFST -- Asylum - Stage 1 (LH):Fast Track Case" }}>IALB:IFST -- Asylum - Stage 1 (LH):Fast Track Case</option>
+          <option value="IALB:IFRB" {{ "selected" if data["matterType"] == "IALB:IFRB -- Asylum - Stage 1 (LH):Advice on Merits of a Fresh Application" }}>IALB:IFRB -- Asylum - Stage 1 (LH):Advice on Merits of a Fresh Application</option>
+          <option value="IAXL:IASU" {{ "selected" if data["lawCategory"] == "IAXL:IASU -- Asylum - LH Work Not Subject to the GFS (LH):Information and Representation at ASU" }}>IAXL:IASU -- Asylum - LH Work Not Subject to the GFS (LH):Information and Representation at ASU</option>
+          <option value="IAXL:IBAI" {{ "selected" if data["lawCategory"] == "IAXL:IBAI -- Asylum - LH Work Not Subject to the GFS (LH):Bail" }}>IAXL:IBAI -- Asylum - LH Work Not Subject to the GFS (LH):Bail</option>
+          <option value="IAXL:ICOA" {{ "selected" if data["lawCategory"] == "IAXL:ICOA -- Asylum - LH Work Not Subject to the GFS (LH):Application to AIT for Leave to Appeal to Court Of Appeal" }}>IAXL:ICOA -- Asylum - LH Work Not Subject to the GFS (LH):Application to AIT for Leave to Appeal to Court Of Appeal</option>
+          <option value="IAXL:IDAS" {{ "selected" if data["lawCategory"] == "IAXL:IDAS -- Asylum - LH Work Not Subject to the GFS (LH):Detention Duty Advice Surgery" }}>IAXL:IDAS -- Asylum - LH Work Not Subject to the GFS (LH):Detention Duty Advice Surgery</option>
+          <option value="IAXL:IEAP" {{ "selected" if data["lawCategory"] == "IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases" }}>IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases</option>
+          <option value="IAXL:IEAP" {{ "selected" if data["lawCategory"] == "IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases" }}>IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases</option>
+          <option value="IAXL:IFFL" {{ "selected" if data["lawCategory"] == "IAXL:IFFL -- Asylum - LH Work Not Subject to the GFS (LH):Form Filling" }}>IAXL:IFFL -- Asylum - LH Work Not Subject to the GFS (LH):Form Filling</option>
+          <option value="IAXL:IFRA" {{ "selected" if data["lawCategory"] == "IAXL:IFRA -- Asylum - LH Work Not Subject to the GFS (LH):Fresh Applications" }}>IAXL:IFRA -- Asylum - LH Work Not Subject to the GFS (LH):Fresh Applications</option>
+          <option value="IAXL:IFRB" {{ "selected" if data["lawCategory"] == "IAXL:IFRB -- Asylum - LH Work Not Subject to the GFS (LH):Advice on Merits of a Fresh Application" }}>IAXL:IFRB -- Asylum - LH Work Not Subject to the GFS (LH):Advice on Merits of a Fresh Application</option>
+          <option value="IAXL:IFST" {{ "selected" if data["lawCategory"] == "IAXL:IFST -- Asylum - LH Work Not Subject to the GFS (LH):Fast Track Case" }}>IAXL:IFST -- Asylum - LH Work Not Subject to the GFS (LH):Fast Track Case</option>
+          <option value="IAXL:IGOL" {{ "selected" if data["lawCategory"] == "IAXL:IGOL -- Asylum - LH Work Not Subject to the GFS (LH):Grant/Variation of Leave to Enter/Remain" }}>IAXL:IGOL -- Asylum - LH Work Not Subject to the GFS (LH):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IMLB:IDOM" {{ "selected" if data["lawCategory"] == "IMLB:IDOM -- Immigration - Stage 1 (LH):Application for leave relating to Domestic Violence" }}>IMLB:IDOM -- Immigration - Stage 1 (LH):Application for leave relating to Domestic Violence</option>
+          <option value="IMLB:IFVI" {{ "selected" if data["lawCategory"] == "IMLB:IFVI -- Immigration - Stage 1 (LH):Family visit application/appeal" }}>IMLB:IFVI -- Immigration - Stage 1 (LH):Family visit application/appeal</option>
+          <option value="IMLB:IFME" {{ "selected" if data["lawCategory"] == "IMLB:IFME -- Immigration - Stage 1 (LH):Family members application/appeal" }}>IMLB:IFME -- Immigration - Stage 1 (LH):Family members application/appeal</option>
+          <option value="IMLB:ISTU" {{ "selected" if data["lawCategory"] == "IMLB:ISTU -- Immigration - Stage 1 (LH):Student application/appeal" }}>IMLB:ISTU -- Immigration - Stage 1 (LH):Student application/appeal</option>
+          <option value="IMLB:ITWE" {{ "selected" if data["lawCategory"] == "IMLB:ITWE -- Immigration - Stage 1 (LH):Training or work experience application/appeal" }}>IMLB:ITWE -- Immigration - Stage 1 (LH):Training or work experience application/appeal</option>
+          <option value="IMLB:IEMP" {{ "selected" if data["lawCategory"] == "IMLB:IEMP -- Immigration - Stage 1 (LH):Employment application/appeal" }}>IMLB:IEMP -- Immigration - Stage 1 (LH):Employment application/appeal</option>
+          <option value="IMLB:ILEA" {{ "selected" if data["lawCategory"] == "IMLB:ILEA -- Immigration - Stage 1 (LH):Applications for leave to remain" }}>IMLB:ILEA -- Immigration - Stage 1 (LH):Applications for leave to remain</option>
+          <option value="IMLB:ICZN" {{ "selected" if data["lawCategory"] == "IMLB:ICZN -- Immigration - Stage 1 (LH):Obtaining Citizenship/Nationality" }}>IMLB:ICZN -- Immigration - Stage 1 (LH):Obtaining Citizenship/Nationality</option>
+          <option value="IMLB:IEUL" {{ "selected" if data["lawCategory"] == "IMLB:IEUL -- Immigration - Stage 1 (LH):European Union Law/EEA" }}>IMLB:IEUL -- Immigration - Stage 1 (LH):European Union Law/EEA</option>
+          <option value="IMLB:IGOL" {{ "selected" if data["lawCategory"] == "IMLB:IGOL -- Immigration - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain" }}>IMLB:IGOL -- Immigration - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IMXC:IOUT" {{ "selected" if data["lawCategory"] == "IMXC:IOUT -- Immigration - CLR Work Not Subject to the GFS (CLR):Concession/Policy Outside the Rules Applies" }}>IMXC:IOUT -- Immigration - CLR Work Not Subject to the GFS (CLR):Concession/Policy Outside the Rules Applies</option>
+          <option value="IMXC:IRAR" {{ "selected" if data["lawCategory"] == "IMXC:IRAR -- Immigration - CLR Work Not Subject to the GFS (CLR):Appeal before the Upper Tribunal" }}>IMXC:IRAR -- Immigration - CLR Work Not Subject to the GFS (CLR):Appeal before the Upper Tribunal</option>
+          <option value="IMXC:IRHO" {{ "selected" if data["lawCategory"] == "IMXC:IRHO -- Immigration - CLR Work Not Subject to the GFS (CLR):Review and Reconsideration Work - Not Subject to a Costs Order" }}>IMXC:IRHO -- Immigration - CLR Work Not Subject to the GFS (CLR):Review and Reconsideration Work - Not Subject to a Costs Order</option>
+          <option value="IMXC:IRVL" {{ "selected" if data["lawCategory"] == "IMXC:IRVL -- Immigration - CLR Work Not Subject to the GFS (CLR):Removal/Deportation" }}>IMXC:IRVL -- Immigration - CLR Work Not Subject to the GFS (CLR):Removal/Deportation</option>
+          <option value="IMXC:IREM" {{ "selected" if data["lawCategory"] == "IMXC:IREM  -- Immigration - CLR Work Not Subject to the GFS (CLR):Remittal" }}>IMXC:IREM -- Immigration - CLR Work Not Subject to the GFS (CLR):Remittal</option>
+          <option value="IMXC:ILEA" {{ "selected" if data["lawCategory"] == "IMXC:ILEA -- Immigration - CLR Work Not Subject to the GFS (CLR):Applications for leave to remain" }}>IMXC:ILEA -- Immigration - CLR Work Not Subject to the GFS (CLR):Applications for leave to remain</option>
+          <option value="IMXC:IBAI" {{ "selected" if data["lawCategory"] == "IMXC:IBAI -- Immigration - CLR Work Not Subject to the GFS (CLR):Bail" }}>IMXC:IBAI -- Immigration - CLR Work Not Subject to the GFS (CLR):Bail</option>
+          <option value="IMXC:IIRC" {{ "selected" if data["lawCategory"] == "IMXC:IIRC -- Immigration - CLR Work Not Subject to the GFS (CLR):Immigration Removal centre Work" }}>IMXC:IIRC -- Immigration - CLR Work Not Subject to the GFS (CLR):Immigration Removal centre Work</option>
+          <option value="IMXC:IOTH" {{ "selected" if data["lawCategory"] == "IMXC:IOTH -- Immigration - CLR Work Not Subject to the GFS (CLR):Other" }}>IMXC:IOTH -- Immigration - CLR Work Not Subject to the GFS (CLR):Other</option>
+        </select>
       </div>
-      <select class="govuk-select autocomplete-select" id="matterType" name="matterType" aria-describedby="matterType-hint">
-        <option></option>
-        <option value="IACF:IASY" {{ "selected" if data["lawCategory"] == "IACF:IASY -- Asylum - Stage 2e (CLR):First time asylum application" }}>IACF:IASY -- Asylum - Stage 2e (CLR):First time asylum application</option>
-        <option value="IACF:IFRA" {{ "selected" if data["lawCategory"] == "IACF:IFRA -- Asylum - Stage 2e (CLR):Fresh Applications" }}>IACF:IFRA -- Asylum - Stage 2e (CLR):Fresh Applications</option>
-        <option value="IACF:IFST" {{ "selected" if data["lawCategory"] == "IACF:IFST -- Asylum - Stage 2e (CLR):Fast Track Case" }}>IACF:IFST -- Asylum - Stage 2e (CLR):Fast Track Case</option>
-        <option value="IACF:IGOL" {{ "selected" if data["lawCategory"] == "IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain" }}>IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain</option>
-        <option value="IACF:IGOL" {{ "selected" if data["lawCategory"] == "IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain" }}>IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain</option>
-        <option value="IACF:IIRC" {{ "selected" if data["lawCategory"] == "IACF:IIRC -- Asylum - Stage 2e (CLR):Immigration Removal centre Work" }}>IACF:IIRC -- Asylum - Stage 2e (CLR):Immigration Removal centre Work</option>
-        <option value="IACF:ILEA" {{ "selected" if data["lawCategory"] == "IACF:ILEA -- Asylum - Stage 2e (CLR):Applications for leave to remain" }}>IACF:ILEA -- Asylum - Stage 2e (CLR):Applications for leave to remain</option>
-        <option value="IACF:IOTH" {{ "selected" if data["lawCategory"] == "IACF:IOTH -- Asylum - Stage 2e (CLR):Other"}}>IACF:IOTH -- Asylum - Stage 2e (CLR):Other</option>
-        <option value="IACF:IOUT" {{ "selected" if data["lawCategory"] == "IACF:IOUT -- Asylum - Stage 2e (CLR):Concession/Policy Outside the Rules Applies" }}>IACF:IOUT -- Asylum - Stage 2e (CLR):Concession/Policy Outside the Rules Applies</option>
-        <option value="IACF:IRVL" {{ "selected" if data["lawCategory"] == "IACF:IRVL -- Asylum - Stage 2e (CLR):Removal/Deportation" }}>IACF:IRVL -- Asylum - Stage 2e (CLR):Removal/Deportation</option>
-        <option value="IALB:IFRA" {{ "selected" if data["matterType"] == "IALB:IFRA -- Asylum - Stage 1 (LH):Fresh Applications" }}>IALB:IFRA -- Asylum - Stage 1 (LH):Fresh Applications</option>
-        <option value="IALB:IIRC" {{ "selected" if data["matterType"] == "IALB:IIRC -- Asylum - Stage 1 (LH):Immigration Removal centre Work" }}>IALB:IIRC -- Asylum - Stage 1 (LH):Immigration Removal centre Work</option>
-        <option value="IALB:IOTH" {{ "selected" if data["matterType"] == "IALB:IOTH -- Asylum - Stage 1 (LH):Other" }}>IALB:IOTH -- Asylum - Stage 1 (LH):Other</option>
-        <option value="IALB:IOUT" {{ "selected" if data["matterType"] == "IALB:IOUT -- Asylum - Stage 1 (LH):Concession/Policy Outside the Rules Applies" }}>IALB:IOUT -- Asylum - Stage 1 (LH):Concession/Policy Outside the Rules Applies</option>
-        <option value="IALB:IRVL" {{ "selected" if data["matterType"] == "IALB:IRVL -- Asylum - Stage 1 (LH):Removal/Deportation" }}>IALB:IRVL -- Asylum - Stage 1 (LH):Removal/Deportation</option>
-        <option value="IALB:ILEA" {{ "selected" if data["matterType"] == "IALB:ILEA -- Asylum - Stage 1 (LH):Applications for leave to remain" }}>IALB:ILEA -- Asylum - Stage 1 (LH):Applications for leave to remain</option>
-        <option value="IALB:IFST" {{ "selected" if data["matterType"] == "IALB:IFST -- Asylum - Stage 1 (LH):Fast Track Case" }}>IALB:IFST -- Asylum - Stage 1 (LH):Fast Track Case</option>
-        <option value="IALB:IFRB" {{ "selected" if data["matterType"] == "IALB:IFRB -- Asylum - Stage 1 (LH):Advice on Merits of a Fresh Application" }}>IALB:IFRB -- Asylum - Stage 1 (LH):Advice on Merits of a Fresh Application</option>
-        <option value="IAXL:IASU" {{ "selected" if data["lawCategory"] == "IAXL:IASU -- Asylum - LH Work Not Subject to the GFS (LH):Information and Representation at ASU" }}>IAXL:IASU -- Asylum - LH Work Not Subject to the GFS (LH):Information and Representation at ASU</option>
-        <option value="IAXL:IBAI" {{ "selected" if data["lawCategory"] == "IAXL:IBAI -- Asylum - LH Work Not Subject to the GFS (LH):Bail" }}>IAXL:IBAI -- Asylum - LH Work Not Subject to the GFS (LH):Bail</option>
-        <option value="IAXL:ICOA" {{ "selected" if data["lawCategory"] == "IAXL:ICOA -- Asylum - LH Work Not Subject to the GFS (LH):Application to AIT for Leave to Appeal to Court Of Appeal" }}>IAXL:ICOA -- Asylum - LH Work Not Subject to the GFS (LH):Application to AIT for Leave to Appeal to Court Of Appeal</option>
-        <option value="IAXL:IDAS" {{ "selected" if data["lawCategory"] == "IAXL:IDAS -- Asylum - LH Work Not Subject to the GFS (LH):Detention Duty Advice Surgery" }}>IAXL:IDAS -- Asylum - LH Work Not Subject to the GFS (LH):Detention Duty Advice Surgery</option>
-        <option value="IAXL:IEAP" {{ "selected" if data["lawCategory"] == "IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases" }}>IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases</option>
-        <option value="IAXL:IEAP" {{ "selected" if data["lawCategory"] == "IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases" }}>IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases</option>
-        <option value="IAXL:IFFL" {{ "selected" if data["lawCategory"] == "IAXL:IFFL -- Asylum - LH Work Not Subject to the GFS (LH):Form Filling" }}>IAXL:IFFL -- Asylum - LH Work Not Subject to the GFS (LH):Form Filling</option>
-        <option value="IAXL:IFRA" {{ "selected" if data["lawCategory"] == "IAXL:IFRA -- Asylum - LH Work Not Subject to the GFS (LH):Fresh Applications" }}>IAXL:IFRA -- Asylum - LH Work Not Subject to the GFS (LH):Fresh Applications</option>
-        <option value="IAXL:IFRB" {{ "selected" if data["lawCategory"] == "IAXL:IFRB -- Asylum - LH Work Not Subject to the GFS (LH):Advice on Merits of a Fresh Application" }}>IAXL:IFRB -- Asylum - LH Work Not Subject to the GFS (LH):Advice on Merits of a Fresh Application</option>
-        <option value="IAXL:IFST" {{ "selected" if data["lawCategory"] == "IAXL:IFST -- Asylum - LH Work Not Subject to the GFS (LH):Fast Track Case" }}>IAXL:IFST -- Asylum - LH Work Not Subject to the GFS (LH):Fast Track Case</option>
-        <option value="IAXL:IGOL" {{ "selected" if data["lawCategory"] == "IAXL:IGOL -- Asylum - LH Work Not Subject to the GFS (LH):Grant/Variation of Leave to Enter/Remain" }}>IAXL:IGOL -- Asylum - LH Work Not Subject to the GFS (LH):Grant/Variation of Leave to Enter/Remain</option>
-        <option value="IMLB:IDOM" {{ "selected" if data["lawCategory"] == "IMLB:IDOM -- Immigration - Stage 1 (LH):Application for leave relating to Domestic Violence" }}>IMLB:IDOM -- Immigration - Stage 1 (LH):Application for leave relating to Domestic Violence</option>
-        <option value="IMLB:IFVI" {{ "selected" if data["lawCategory"] == "IMLB:IFVI -- Immigration - Stage 1 (LH):Family visit application/appeal" }}>IMLB:IFVI -- Immigration - Stage 1 (LH):Family visit application/appeal</option>
-        <option value="IMLB:IFME" {{ "selected" if data["lawCategory"] == "IMLB:IFME -- Immigration - Stage 1 (LH):Family members application/appeal" }}>IMLB:IFME -- Immigration - Stage 1 (LH):Family members application/appeal</option>
-        <option value="IMLB:ISTU" {{ "selected" if data["lawCategory"] == "IMLB:ISTU -- Immigration - Stage 1 (LH):Student application/appeal" }}>IMLB:ISTU -- Immigration - Stage 1 (LH):Student application/appeal</option>
-        <option value="IMLB:ITWE" {{ "selected" if data["lawCategory"] == "IMLB:ITWE -- Immigration - Stage 1 (LH):Training or work experience application/appeal" }}>IMLB:ITWE -- Immigration - Stage 1 (LH):Training or work experience application/appeal</option>
-        <option value="IMLB:IEMP" {{ "selected" if data["lawCategory"] == "IMLB:IEMP -- Immigration - Stage 1 (LH):Employment application/appeal" }}>IMLB:IEMP -- Immigration - Stage 1 (LH):Employment application/appeal</option>
-        <option value="IMLB:ILEA" {{ "selected" if data["lawCategory"] == "IMLB:ILEA -- Immigration - Stage 1 (LH):Applications for leave to remain" }}>IMLB:ILEA -- Immigration - Stage 1 (LH):Applications for leave to remain</option>
-        <option value="IMLB:ICZN" {{ "selected" if data["lawCategory"] == "IMLB:ICZN -- Immigration - Stage 1 (LH):Obtaining Citizenship/Nationality" }}>IMLB:ICZN -- Immigration - Stage 1 (LH):Obtaining Citizenship/Nationality</option>
-        <option value="IMLB:IEUL" {{ "selected" if data["lawCategory"] == "IMLB:IEUL -- Immigration - Stage 1 (LH):European Union Law/EEA" }}>IMLB:IEUL -- Immigration - Stage 1 (LH):European Union Law/EEA</option>
-        <option value="IMLB:IGOL" {{ "selected" if data["lawCategory"] == "IMLB:IGOL -- Immigration - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain" }}>IMLB:IGOL -- Immigration - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain</option>
-        <option value="IMXC:IOUT" {{ "selected" if data["lawCategory"] == "IMXC:IOUT -- Immigration - CLR Work Not Subject to the GFS (CLR):Concession/Policy Outside the Rules Applies" }}>IMXC:IOUT -- Immigration - CLR Work Not Subject to the GFS (CLR):Concession/Policy Outside the Rules Applies</option>
-        <option value="IMXC:IRAR" {{ "selected" if data["lawCategory"] == "IMXC:IRAR -- Immigration - CLR Work Not Subject to the GFS (CLR):Appeal before the Upper Tribunal" }}>IMXC:IRAR -- Immigration - CLR Work Not Subject to the GFS (CLR):Appeal before the Upper Tribunal</option>
-        <option value="IMXC:IRHO" {{ "selected" if data["lawCategory"] == "IMXC:IRHO -- Immigration - CLR Work Not Subject to the GFS (CLR):Review and Reconsideration Work - Not Subject to a Costs Order" }}>IMXC:IRHO -- Immigration - CLR Work Not Subject to the GFS (CLR):Review and Reconsideration Work - Not Subject to a Costs Order</option>
-        <option value="IMXC:IRVL" {{ "selected" if data["lawCategory"] == "IMXC:IRVL -- Immigration - CLR Work Not Subject to the GFS (CLR):Removal/Deportation" }}>IMXC:IRVL -- Immigration - CLR Work Not Subject to the GFS (CLR):Removal/Deportation</option>
-        <option value="IMXC:IREM" {{ "selected" if data["lawCategory"] == "IMXC:IREM  -- Immigration - CLR Work Not Subject to the GFS (CLR):Remittal" }}>IMXC:IREM -- Immigration - CLR Work Not Subject to the GFS (CLR):Remittal</option>
-        <option value="IMXC:ILEA" {{ "selected" if data["lawCategory"] == "IMXC:ILEA -- Immigration - CLR Work Not Subject to the GFS (CLR):Applications for leave to remain" }}>IMXC:ILEA -- Immigration - CLR Work Not Subject to the GFS (CLR):Applications for leave to remain</option>
-        <option value="IMXC:IBAI" {{ "selected" if data["lawCategory"] == "IMXC:IBAI -- Immigration - CLR Work Not Subject to the GFS (CLR):Bail" }}>IMXC:IBAI -- Immigration - CLR Work Not Subject to the GFS (CLR):Bail</option>
-        <option value="IMXC:IIRC" {{ "selected" if data["lawCategory"] == "IMXC:IIRC -- Immigration - CLR Work Not Subject to the GFS (CLR):Immigration Removal centre Work" }}>IMXC:IIRC -- Immigration - CLR Work Not Subject to the GFS (CLR):Immigration Removal centre Work</option>
-        <option value="IMXC:IOTH" {{ "selected" if data["lawCategory"] == "IMXC:IOTH -- Immigration - CLR Work Not Subject to the GFS (CLR):Other" }}>IMXC:IOTH -- Immigration - CLR Work Not Subject to the GFS (CLR):Other</option>
-      </select>
-    </div>
+      {% else %}
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--xl" for="matterType">
+        <h1 class="govuk-fieldset__heading">Matter type
+        </h1>
+        </label>
+        <div id="matterType-hint" class="govuk-hint">
+          Start typing either the matter type description or code
+        </div>
+        <select class="govuk-select autocomplete-select" id="matterType" name="matterType" aria-describedby="matterType-hint">
+          <option></option>
+          <option value="IACF:IASY" {{ "selected" if data["lawCategory"] == "IACF:IASY -- Asylum - Stage 2e (CLR):First time asylum application" }}>IACF:IASY -- Asylum - Stage 2e (CLR):First time asylum application</option>
+          <option value="IACF:IFRA" {{ "selected" if data["lawCategory"] == "IACF:IFRA -- Asylum - Stage 2e (CLR):Fresh Applications" }}>IACF:IFRA -- Asylum - Stage 2e (CLR):Fresh Applications</option>
+          <option value="IACF:IFST" {{ "selected" if data["lawCategory"] == "IACF:IFST -- Asylum - Stage 2e (CLR):Fast Track Case" }}>IACF:IFST -- Asylum - Stage 2e (CLR):Fast Track Case</option>
+          <option value="IACF:IGOL" {{ "selected" if data["lawCategory"] == "IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain" }}>IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IACF:IGOL" {{ "selected" if data["lawCategory"] == "IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain" }}>IACF:IGOL -- Asylum - Stage 2e (CLR):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IACF:IIRC" {{ "selected" if data["lawCategory"] == "IACF:IIRC -- Asylum - Stage 2e (CLR):Immigration Removal centre Work" }}>IACF:IIRC -- Asylum - Stage 2e (CLR):Immigration Removal centre Work</option>
+          <option value="IACF:ILEA" {{ "selected" if data["lawCategory"] == "IACF:ILEA -- Asylum - Stage 2e (CLR):Applications for leave to remain" }}>IACF:ILEA -- Asylum - Stage 2e (CLR):Applications for leave to remain</option>
+          <option value="IACF:IOTH" {{ "selected" if data["lawCategory"] == "IACF:IOTH -- Asylum - Stage 2e (CLR):Other"}}>IACF:IOTH -- Asylum - Stage 2e (CLR):Other</option>
+          <option value="IACF:IOUT" {{ "selected" if data["lawCategory"] == "IACF:IOUT -- Asylum - Stage 2e (CLR):Concession/Policy Outside the Rules Applies" }}>IACF:IOUT -- Asylum - Stage 2e (CLR):Concession/Policy Outside the Rules Applies</option>
+          <option value="IACF:IRVL" {{ "selected" if data["lawCategory"] == "IACF:IRVL -- Asylum - Stage 2e (CLR):Removal/Deportation" }}>IACF:IRVL -- Asylum - Stage 2e (CLR):Removal/Deportation</option>
+          <option value="IALB:IFRA" {{ "selected" if data["matterType"] == "IALB:IFRA -- Asylum - Stage 1 (LH):Fresh Applications" }}>IALB:IFRA -- Asylum - Stage 1 (LH):Fresh Applications</option>
+          <option value="IALB:IGOL" {{ "selected" if data["matterType"] == "IALB:IGOL -- Asylum - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain" }}>IALB:IGOL -- Asylum - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IALB:IIRC" {{ "selected" if data["matterType"] == "IALB:IIRC -- Asylum - Stage 1 (LH):Immigration Removal centre Work" }}>IALB:IIRC -- Asylum - Stage 1 (LH):Immigration Removal centre Work</option>
+          <option value="IALB:IOTH" {{ "selected" if data["matterType"] == "IALB:IOTH -- Asylum - Stage 1 (LH):Other" }}>IALB:IOTH -- Asylum - Stage 1 (LH):Other</option>
+          <option value="IALB:IOUT" {{ "selected" if data["matterType"] == "IALB:IOUT -- Asylum - Stage 1 (LH):Concession/Policy Outside the Rules Applies" }}>IALB:IOUT -- Asylum - Stage 1 (LH):Concession/Policy Outside the Rules Applies</option>
+          <option value="IALB:IRVL" {{ "selected" if data["matterType"] == "IALB:IRVL -- Asylum - Stage 1 (LH):Removal/Deportation" }}>IALB:IRVL -- Asylum - Stage 1 (LH):Removal/Deportation</option>
+          <option value="IALB:IASY" {{ "selected" if data["matterType"] == "IALB:IASY -- Asylum - Stage 1 (LH):First time asylum application" }}>IALB:IASY -- Asylum - Stage 1 (LH):First time asylum application</option>
+          <option value="IALB:ILEA" {{ "selected" if data["matterType"] == "IALB:ILEA -- Asylum - Stage 1 (LH):Applications for leave to remain" }}>IALB:ILEA -- Asylum - Stage 1 (LH):Applications for leave to remain</option>
+          <option value="IALB:IFST" {{ "selected" if data["matterType"] == "IALB:IFST -- Asylum - Stage 1 (LH):Fast Track Case" }}>IALB:IFST -- Asylum - Stage 1 (LH):Fast Track Case</option>
+          <option value="IALB:IFRB" {{ "selected" if data["matterType"] == "IALB:IFRB -- Asylum - Stage 1 (LH):Advice on Merits of a Fresh Application" }}>IALB:IFRB -- Asylum - Stage 1 (LH):Advice on Merits of a Fresh Application</option>
+          <option value="IAXL:IASU" {{ "selected" if data["lawCategory"] == "IAXL:IASU -- Asylum - LH Work Not Subject to the GFS (LH):Information and Representation at ASU" }}>IAXL:IASU -- Asylum - LH Work Not Subject to the GFS (LH):Information and Representation at ASU</option>
+          <option value="IAXL:IBAI" {{ "selected" if data["lawCategory"] == "IAXL:IBAI -- Asylum - LH Work Not Subject to the GFS (LH):Bail" }}>IAXL:IBAI -- Asylum - LH Work Not Subject to the GFS (LH):Bail</option>
+          <option value="IAXL:ICOA" {{ "selected" if data["lawCategory"] == "IAXL:ICOA -- Asylum - LH Work Not Subject to the GFS (LH):Application to AIT for Leave to Appeal to Court Of Appeal" }}>IAXL:ICOA -- Asylum - LH Work Not Subject to the GFS (LH):Application to AIT for Leave to Appeal to Court Of Appeal</option>
+          <option value="IAXL:IDAS" {{ "selected" if data["lawCategory"] == "IAXL:IDAS -- Asylum - LH Work Not Subject to the GFS (LH):Detention Duty Advice Surgery" }}>IAXL:IDAS -- Asylum - LH Work Not Subject to the GFS (LH):Detention Duty Advice Surgery</option>
+          <option value="IAXL:IEAP" {{ "selected" if data["lawCategory"] == "IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases" }}>IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases</option>
+          <option value="IAXL:IEAP" {{ "selected" if data["lawCategory"] == "IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases" }}>IAXL:IEAP -- Asylum - LH Work Not Subject to the GFS (LH):Early Advice Pilot Cases</option>
+          <option value="IAXL:IFFL" {{ "selected" if data["lawCategory"] == "IAXL:IFFL -- Asylum - LH Work Not Subject to the GFS (LH):Form Filling" }}>IAXL:IFFL -- Asylum - LH Work Not Subject to the GFS (LH):Form Filling</option>
+          <option value="IAXL:IFRA" {{ "selected" if data["lawCategory"] == "IAXL:IFRA -- Asylum - LH Work Not Subject to the GFS (LH):Fresh Applications" }}>IAXL:IFRA -- Asylum - LH Work Not Subject to the GFS (LH):Fresh Applications</option>
+          <option value="IAXL:IFRB" {{ "selected" if data["lawCategory"] == "IAXL:IFRB -- Asylum - LH Work Not Subject to the GFS (LH):Advice on Merits of a Fresh Application" }}>IAXL:IFRB -- Asylum - LH Work Not Subject to the GFS (LH):Advice on Merits of a Fresh Application</option>
+          <option value="IAXL:IFST" {{ "selected" if data["lawCategory"] == "IAXL:IFST -- Asylum - LH Work Not Subject to the GFS (LH):Fast Track Case" }}>IAXL:IFST -- Asylum - LH Work Not Subject to the GFS (LH):Fast Track Case</option>
+          <option value="IAXL:IGOL" {{ "selected" if data["lawCategory"] == "IAXL:IGOL -- Asylum - LH Work Not Subject to the GFS (LH):Grant/Variation of Leave to Enter/Remain" }}>IAXL:IGOL -- Asylum - LH Work Not Subject to the GFS (LH):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IMLB:IDOM" {{ "selected" if data["lawCategory"] == "IMLB:IDOM -- Immigration - Stage 1 (LH):Application for leave relating to Domestic Violence" }}>IMLB:IDOM -- Immigration - Stage 1 (LH):Application for leave relating to Domestic Violence</option>
+          <option value="IMLB:IFVI" {{ "selected" if data["lawCategory"] == "IMLB:IFVI -- Immigration - Stage 1 (LH):Family visit application/appeal" }}>IMLB:IFVI -- Immigration - Stage 1 (LH):Family visit application/appeal</option>
+          <option value="IMLB:IFME" {{ "selected" if data["lawCategory"] == "IMLB:IFME -- Immigration - Stage 1 (LH):Family members application/appeal" }}>IMLB:IFME -- Immigration - Stage 1 (LH):Family members application/appeal</option>
+          <option value="IMLB:ISTU" {{ "selected" if data["lawCategory"] == "IMLB:ISTU -- Immigration - Stage 1 (LH):Student application/appeal" }}>IMLB:ISTU -- Immigration - Stage 1 (LH):Student application/appeal</option>
+          <option value="IMLB:ITWE" {{ "selected" if data["lawCategory"] == "IMLB:ITWE -- Immigration - Stage 1 (LH):Training or work experience application/appeal" }}>IMLB:ITWE -- Immigration - Stage 1 (LH):Training or work experience application/appeal</option>
+          <option value="IMLB:IEMP" {{ "selected" if data["lawCategory"] == "IMLB:IEMP -- Immigration - Stage 1 (LH):Employment application/appeal" }}>IMLB:IEMP -- Immigration - Stage 1 (LH):Employment application/appeal</option>
+          <option value="IMLB:ILEA" {{ "selected" if data["lawCategory"] == "IMLB:ILEA -- Immigration - Stage 1 (LH):Applications for leave to remain" }}>IMLB:ILEA -- Immigration - Stage 1 (LH):Applications for leave to remain</option>
+          <option value="IMLB:ICZN" {{ "selected" if data["lawCategory"] == "IMLB:ICZN -- Immigration - Stage 1 (LH):Obtaining Citizenship/Nationality" }}>IMLB:ICZN -- Immigration - Stage 1 (LH):Obtaining Citizenship/Nationality</option>
+          <option value="IMLB:IEUL" {{ "selected" if data["lawCategory"] == "IMLB:IEUL -- Immigration - Stage 1 (LH):European Union Law/EEA" }}>IMLB:IEUL -- Immigration - Stage 1 (LH):European Union Law/EEA</option>
+          <option value="IMLB:IGOL" {{ "selected" if data["lawCategory"] == "IMLB:IGOL -- Immigration - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain" }}>IMLB:IGOL -- Immigration - Stage 1 (LH):Grant/Variation of Leave to Enter/Remain</option>
+          <option value="IMXC:IOUT" {{ "selected" if data["lawCategory"] == "IMXC:IOUT -- Immigration - CLR Work Not Subject to the GFS (CLR):Concession/Policy Outside the Rules Applies" }}>IMXC:IOUT -- Immigration - CLR Work Not Subject to the GFS (CLR):Concession/Policy Outside the Rules Applies</option>
+          <option value="IMXC:IRAR" {{ "selected" if data["lawCategory"] == "IMXC:IRAR -- Immigration - CLR Work Not Subject to the GFS (CLR):Appeal before the Upper Tribunal" }}>IMXC:IRAR -- Immigration - CLR Work Not Subject to the GFS (CLR):Appeal before the Upper Tribunal</option>
+          <option value="IMXC:IRHO" {{ "selected" if data["lawCategory"] == "IMXC:IRHO -- Immigration - CLR Work Not Subject to the GFS (CLR):Review and Reconsideration Work - Not Subject to a Costs Order" }}>IMXC:IRHO -- Immigration - CLR Work Not Subject to the GFS (CLR):Review and Reconsideration Work - Not Subject to a Costs Order</option>
+          <option value="IMXC:IRVL" {{ "selected" if data["lawCategory"] == "IMXC:IRVL -- Immigration - CLR Work Not Subject to the GFS (CLR):Removal/Deportation" }}>IMXC:IRVL -- Immigration - CLR Work Not Subject to the GFS (CLR):Removal/Deportation</option>
+          <option value="IMXC:IREM" {{ "selected" if data["lawCategory"] == "IMXC:IREM  -- Immigration - CLR Work Not Subject to the GFS (CLR):Remittal" }}>IMXC:IREM -- Immigration - CLR Work Not Subject to the GFS (CLR):Remittal</option>
+          <option value="IMXC:ILEA" {{ "selected" if data["lawCategory"] == "IMXC:ILEA -- Immigration - CLR Work Not Subject to the GFS (CLR):Applications for leave to remain" }}>IMXC:ILEA -- Immigration - CLR Work Not Subject to the GFS (CLR):Applications for leave to remain</option>
+          <option value="IMXC:IBAI" {{ "selected" if data["lawCategory"] == "IMXC:IBAI -- Immigration - CLR Work Not Subject to the GFS (CLR):Bail" }}>IMXC:IBAI -- Immigration - CLR Work Not Subject to the GFS (CLR):Bail</option>
+          <option value="IMXC:IIRC" {{ "selected" if data["lawCategory"] == "IMXC:IIRC -- Immigration - CLR Work Not Subject to the GFS (CLR):Immigration Removal centre Work" }}>IMXC:IIRC -- Immigration - CLR Work Not Subject to the GFS (CLR):Immigration Removal centre Work</option>
+          <option value="IMXC:IOTH" {{ "selected" if data["lawCategory"] == "IMXC:IOTH -- Immigration - CLR Work Not Subject to the GFS (CLR):Other" }}>IMXC:IOTH -- Immigration - CLR Work Not Subject to the GFS (CLR):Other</option>
+        </select>
+      </div>
+    {% endif %}
   {% endif %}
 
   {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}

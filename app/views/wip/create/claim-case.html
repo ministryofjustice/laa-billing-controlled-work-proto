@@ -45,7 +45,7 @@
         }) }}
       {% endif %}
 
-      {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
       
         {% if data['claimTypeImmigration'] == "Stage claim" or data['claimTypeImmigration'] == "Stage disbursement claim" or data['lawCategory'] == "All"  %}
           <---IMM - Stage or Disbursement--->
@@ -85,7 +85,7 @@
 
       {% include "/includes/list-outcome.njk" %}
 
-      {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
       
         {% if data['claimTypeImmigration'] == "Completed matter claim" or data['claimTypeImmigration'] == "Stage claim" or data['lawCategory'] == "All" %}
           <---IMM - Completed or Stage not Disbursement--->
@@ -280,7 +280,7 @@
         ]
       }) }}
 
-      {% if data['lawCategory'] == "Immigration & Asylum" or data['lawCategory'] == "All" %}
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 
         <---IMM - Completed--->
         {% set ircHtml %}

@@ -1,0 +1,55 @@
+{% extends "layouts/main.html" %}
+{% set version = "wip" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Client details – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Check</h1>
+    
+    {% if data['claimError'] == "2" %}
+     <form class="form" action="../submission/submission-details?claimErrors=1" method="post">
+      {% else %}
+      <form class="form" action="../submission/submission-details?importStatus=success" method="post">
+    {% endif %}
+
+
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+        {{ govukButton({
+            text: "Save and come back later",
+            classes: "govuk-button--secondary",
+            href: "task-list"
+          }) }}
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
