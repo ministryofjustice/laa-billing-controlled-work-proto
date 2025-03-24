@@ -10,6 +10,11 @@
   @include govuk-font($size: 19);
 }
 
+//Search
+#resultsTable {
+  display: none;
+}
+
 
 .moj-header {
   padding-top: 10px;

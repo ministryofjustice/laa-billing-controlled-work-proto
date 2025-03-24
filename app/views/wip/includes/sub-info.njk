@@ -26,7 +26,7 @@
           dismissible: false,
           html: '<p class="govuk-body">2 claims need updating before you can submit: <a href="../create/task-list?question-claimType=error&question-client=complete&question-case=complete&question-costs=complete&question-check=&ufn=00323/234&caseStart=12/11/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled">claim 1</a>, <a href="">claim 2</a></p>'
         }) }}
-        {% else %}
+        {% elseif data['importStatus'] == "error" and data['claimErrors'] == "1" %}
         {{ mojAlert({
           variant: "warning",
           title: "Missing or incorrect information",

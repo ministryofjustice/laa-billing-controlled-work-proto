@@ -30,7 +30,7 @@
       <p>Enter all of the matters starts that occured in this period (March 2025).</p>
 
       {% if data['isImport'] == "yes" %}
-        <form class="form" action="/{{version}}/submission/submission-details" method="post">
+        <form class="form" action="/{{version}}/submission/submission-details-draft" method="post">
         {% else %}
         <form class="form" action="/{{version}}/create/claim-start" method="post">
       {% endif %}
