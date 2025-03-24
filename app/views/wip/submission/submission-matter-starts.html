@@ -31,11 +31,13 @@
   <div class="govuk-grid-column-full">
     {% include version + "/includes/nav-sub-submission.njk" %}
      <h2 class="govuk-heading-l" id="nav">Matter starts</h2>
+     {% if data ['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
       {{ govukButton({
         text: "Edit matter starts",
         href: "submission-matter-starts-edit",
         classes: "govuk-button--secondary"
       }) }}
+    {% endif %}
   </div>
   
 

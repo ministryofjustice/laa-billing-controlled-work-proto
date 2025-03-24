@@ -19,7 +19,7 @@
      {% if data['subStatus'] == "In progress" %}
       {% if data['importStatus'] == "error" and data['claimErrors'] == "2" %}
         {{ mojAlert({
-          variant: "error",
+          variant: "warning",
           title: "Missing or incorrect information",
           showTitleAsHeading: true,
           headingTag: "h3",
@@ -44,7 +44,7 @@
         showTitleAsHeading: false,
         headingTag: "h3",
         dismissible: true,
-        html: '<p class="govuk-body">1 claim was amended: <a href="claim-details?claimStatus=Paid">claim 2</a></p>'
+        html: '<p class="govuk-body">3 claims were amended by the LAA: <a href="">claim 1</a>, <a href="">claim 13</a>, <a href="">claim 17</a></p>'
       }) }}
 
       {% elseif data['subStatus'] == "Resubmitted" %}
@@ -54,7 +54,7 @@
         showTitleAsHeading: false,
         headingTag: "h3",
         dismissible: true,
-        html: '<p class="govuk-body">1 claim was amended : <a href="claim-details?claimStatus=Pending">claim 1</a></p>'
+        html: '<p class="govuk-body">1 claim was amended : <a href="">claim 2</a></p>'
       }) }}
     {% endif %}
 
