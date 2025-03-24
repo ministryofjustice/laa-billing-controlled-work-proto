@@ -25,14 +25,14 @@
     <h1 class="govuk-heading-xl">
       Search for a claim
     </h1>
-    <p>Enter details in at least one field to search for an claim</p>
+    <p>Enter details in at least one field to search for a claim</p>
 
     <div class="search-panel govuk-!-margin-bottom-6">
      
       <div class="govuk-form-group govuk-!-width-two-thirds" role="search">
         <h2 class="govuk-label-wrapper">
           <label class="govuk-label govuk-label--s" for="filterSearch">
-            Enter any combination of submission number, or schedule/ submission reference
+            Enter any combination of client name or UFN
           </label>
         </h2>
         <input class="govuk-input" id="filterSearch" name="filterSearch" type="search" onkeyup="tablefilterSearch()" aria-description="Search will filter the table of users">
@@ -81,10 +81,8 @@
               Claim status
             </label>
             <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
-              <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
+              <option value="Show all" selected onclick="filterSelection('all-status')">Show all</option>
               <option value="In progress" onclick="filterSelection('in-progress')">In progress</option>
-              <option value="Submitted" onclick="filterSelection('submitted')">Submitted</option>
-              <option value="Submitted" onclick="filterSelection('resubmitted')">Resubmitted</option>
               <option value="Escape" onclick="filterSelection('paid')">Paid</option>
               <option value="Escape" onclick="filterSelection('part-paid')">Part paid</option>
             </select>
@@ -97,7 +95,7 @@
               Account
             </label>
             <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
-              <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
+              <option value="Show all" selected onclick="filterSelection('all-account')">Show all</option>
               <option value="C1B1C1" onclick="filterSelection('C1B1C1')">C1B1C1</option>
               <option value="A1B1C1" onclick="filterSelection('A1B1C1')">A1B1C1</option>
               <option value="2M407Z" onclick="filterSelection('2M407Z')">2M407Z</option>
@@ -111,9 +109,9 @@
               Submission type
             </label>
             <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
-              <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
-              <option value="crime" onclick="filterSelection('crime')">Crime lower</option>
-              <option value="help" onclick="filterSelection('help')">Legal help</option>
+              <option value="Show all" selected onclick="filterSelection('all-cat')">Show all</option>
+              <option value="Family" onclick="filterSelection('family')">Family</option>
+              <option value="Immigration and Asylum" onclick="filterSelection('immigration')">Immigration and Asylum</option>
             </select>
           </div>
         </div>
@@ -129,73 +127,364 @@
             
     </div>
 
-    <div id="resultsTable2">
+    <div id="resultsTable">
       <h2 class="govuk-heading-m">
-        22 search results
+        x search results
       </h2>
-      <table class="govuk-table" data-module="moj-sortable-table">
+      <table class="govuk-table generic-filter" id="table-header" data-module="moj-sortable-table">
+        <caption class="govuk-table__caption govuk-visually-hidden">Search results</caption>
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Schedule</th>
-            <th scope="col" class="govuk-table__header" aria-sort="descending">Period</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">UFN</th>  
+            <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>   
+            <th scope="col" class="govuk-table__header" aria-sort="none">Category</th>         
+            <th scope="col" class="govuk-table__header" aria-sort="none" id="claimTitle">Account</th>
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Concluded claimed</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Costs</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Fee type</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Payment</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
           </tr>
         </thead>
-        <tbody class="govuk-table__body">    
-          <tr class="govuk-table__row hideTR all paid A1B1C1 crime">
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row hideTR all in-progress immigration C1B1C1">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state">LAA-345678</a>
+              <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/098</a>
             </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell">4W341Y/CIVIL</td>
-            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell">Amoto</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250314">14/03/25</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--grey">In progress</strong></td>
+          </tr>    
+          <tr class="govuk-table__row hideTR all-status paid family C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+                {% else %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">O'Connor</td>
+            <td class="govuk-table__cell">Family</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250301">01/03/25</td>
+            <td class="govuk-table__cell">£234.56</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£234.56</td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
           </tr>
-          <tr class="govuk-table__row hideTR all submitted C1B1C1 crime">
+          <tr class="govuk-table__row hideTR all paid immigration A1B1C1">
             <td class="govuk-table__cell">
-            <a href="submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state">LAA-746783</a>
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href=" " id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+                {% else %}
+                <a href="" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% endif %}
             </td>
-            <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell">CRM/2M408A/19.3</td>
-            <td class="govuk-table__cell" data-sort-value="2502">Feb 2025</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--purple">Submitted</strong></td>
+            <td class="govuk-table__cell">Hasbit</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250222">22/02/25</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell">Rate</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
           </tr>
-          <tr class="govuk-table__row hideTR all part-paid A1B1C1 help">
+          <tr class="govuk-table__row hideTR all paid immigration A1B1C1">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state">LAA-458343</a>
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/567</a>
+                {% else %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/567</a>
+              {% endif %}
             </td>
-            <td class="govuk-table__cell" >A1B1C1</td>
-            <td class="govuk-table__cell">Legal help</td>
-            <td class="govuk-table__cell">5T231Y/CIVIL</td>
-            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
+            <td class="govuk-table__cell">Tony</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250301">01/03/25</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>    
+          <tr class="govuk-table__row hideTR all pending family C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/634</a>
+                {% else %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/634</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Imtez</td>
+            <td class="govuk-table__cell">Family</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250221">21/02/25</td>
+            <td class="govuk-table__cell">£234.56</td>
+            <td class="govuk-table__cell">Escape</td>
+            <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Pending</strong></td>
           </tr>
-          <tr class="govuk-table__row hideTR all in-progress 2M407Z crime">
+          <tr class="govuk-table__row hideTR all paid immigration C1B1C1">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=In progress" class="govuk-link--no-visited-state">LAA-4765685</a>
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href=" " id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+                {% else %}
+                <a href="" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% endif %}
             </td>
-            <td class="govuk-table__cell" >2M407Z</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell">CRM/2M407Z/18.3</td>
-            <td class="govuk-table__cell" data-sort-value="2601"><span id="date"></span></td>
+            <td class="govuk-table__cell">Omar</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250312">12/03/25</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell">Rate</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row hideTR all pending immigration A1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
+                {% else %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/234</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Bianchi</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250301">01/03/25</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Pending</strong></td>
+          </tr>    
+          <tr class="govuk-table__row hideTR all paid family C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/765</a>
+                {% else %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/765</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Simpson</td>
+            <td class="govuk-table__cell">Family</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250307">07/03/25</td>
+            <td class="govuk-table__cell">£234.56</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£934.56</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row hideTR all pending immigration A1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href=" " id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+                {% else %}
+                <a href="" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">DeMello</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250313">13/03/25</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell">Rate</td>
+            <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Pending</strong></td>
+          </tr>
+          <tr class="govuk-table__row hideTR all paid immigration C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/876</a>
+                {% else %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/876</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Duffy</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250231">31/02/25</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>    
+          <tr class="govuk-table__row hideTR all pending family A1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/123</a>
+                {% else %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/123</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Cherub</td>
+            <td class="govuk-table__cell">Family</td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250225">25/02/25</td>
+            <td class="govuk-table__cell">£234.56</td>
+            <td class="govuk-table__cell">Escape</td>
+            <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Pending</strong></td>
+          </tr>
+          <tr class="govuk-table__row hideTR all paid immigration C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href=" " id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+                {% else %}
+                <a href="" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Hoffmann</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="25028">28/02/25</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell">Rate</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row hideTR all paid immigration A1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
+                {% else %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/234</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">McBars</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250101">01/01/25</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>    
+          <tr class="govuk-table__row hideTR all in-progress family C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/467</a>
+                {% else %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/467</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Giordano</td>
+            <td class="govuk-table__cell">Family</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250318">18/03/25</td>
+            <td class="govuk-table__cell">£234.56</td>
+            <td class="govuk-table__cell">Escape</td>
+            <td class="govuk-table__cell"></td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--grey">In progress</strong></td>
           </tr>
-          <tr class="govuk-table__row hideTR all resubmitted 2M407Z crime">
+          <tr class="govuk-table__row hideTR all paid immigration A1B1C1">
             <td class="govuk-table__cell">
-              <a href="submission/submission-details?subStatus=Resubmitted" class="govuk-link--no-visited-state">LAA-476565</a>
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href=" " id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+                {% else %}
+                <a href="" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% endif %}
             </td>
-            <td class="govuk-table__cell" >2M407Z</td>
-            <td class="govuk-table__cell">Crime lower</td>
-            <td class="govuk-table__cell">CRM/2M407Z/18.3</td>
-            <td class="govuk-table__cell" data-sort-value="2411">Nov 2024</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--purple">Resubmitted</strong></td>
+            <td class="govuk-table__cell">Abdallah</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250224">24/02/25</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell">Rate</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
           </tr>
-        </table>
+          <tr class="govuk-table__row hideTR all paid immigration C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/432</a>
+                {% else %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/432</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Sompereo</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250220">20/02/25</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>    
+          <tr class="govuk-table__row hideTR all paid family A1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+                {% else %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Abdelazim</td>
+            <td class="govuk-table__cell">Family</td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250311">11/03/25</td>
+            <td class="govuk-table__cell">£234.56</td>
+            <td class="govuk-table__cell">Rate</td>
+            <td class="govuk-table__cell">£934.56</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row hideTR all paid immigration C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href=" " id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+                {% else %}
+                <a href="" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Gruffalo</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250302">02/03/25</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell">Rate</td>
+            <td class="govuk-table__cell">£456.01</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row hideTR all paid immigration C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/765</a>
+                {% else %}
+                <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/765</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">McKenna</td>
+            <td class="govuk-table__cell">Immigration and Asylum</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250301">01/03/25</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£56.00</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>    
+          <tr class="govuk-table__row hideTR all paid family C1B1C1">
+            <td class="govuk-table__cell">
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+                {% else %}
+                <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">Rodriguez</td>
+            <td class="govuk-table__cell">Family</td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell" data-sort-value="250225">25/02/25</td>
+            <td class="govuk-table__cell">£234.56</td>
+            <td class="govuk-table__cell">Fixed</td>
+            <td class="govuk-table__cell">£934.56</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+        </body>
+      </table>
 
       {% include "includes/pagination-search.html"%} 
 
@@ -210,8 +499,9 @@
 
    https://www.w3schools.com/howto/howto_js_read_more.asp
 
+
   function mySearch() {
-    var searchResult = document.getElementById("resultsTable2");
+    var searchResult = document.getElementById("resultsTable");
     var searchButton = document.getElementById("searchButton");
 
     if (searchResult.style.display === "none") {
@@ -219,7 +509,7 @@
     } else {
       searchResult.style.display = "inline";
     }
-    window.location='#resultsTable2';
+    window.location='#resultsTable';
   } 
 
   //Search that filters rows in a table
