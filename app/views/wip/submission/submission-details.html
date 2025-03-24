@@ -35,7 +35,7 @@
       {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" %}
         {{ govukButton({
           text: "Add claim",
-          href: "../create/claim-start",
+          href: "../create/claim-start?question-claimType=&question-client=&question-case=&question-costs=&question-check=&scheduleRef=&ufn=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=",
           classes: "govuk-button--secondary"
         }) }}
       {% endif %}
@@ -808,7 +808,7 @@
       </body>
     </table>
 
-    {% include "/includes/pagination-small.njk" %}
+    {% include "/includes/pagination.njk" %}
     {% include version + "/includes/submission-buttons.njk" %}
   </div>
 </div>
