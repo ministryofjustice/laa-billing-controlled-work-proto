@@ -65,48 +65,93 @@
         </thead>
         <tbody class="govuk-table__body">
         {% if data['isImport'] == "yes" %}
-          <!--McBars import-->
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell" id="claim1">1</td>
-            <td class="govuk-table__cell" id="claim1">
-              {% if data['subStatus'] == "In progress" %}
-                <a href="../create/task-list?question-claimType=error&question-client=complete&question-case=complete&question-costs=error&question-check=&ufn=100323/234&caseStart=10/03/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled&vatEligible=No&counselCost=0&adviceNoHours-hours=2&adviceNoHours-mins=oo&profitCost=200&travelNoHours-hours=2&travelNoHours-mins=00&waitingNoHours-hours=2&waitingNoHours-mins=00&travelwaitingCost=50&detentionCost=0&disbursementCost=90&disbursementVATCost=10" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
-                {% else %}
-                <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/234</a>
-              {% endif %}
-            </td>
-            <td class="govuk-table__cell">McBars</td>
-            <td class="govuk-table__cell">Immigration and Asylum</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Incomplete</strong></td>
-            <td class="govuk-table__cell" data-sort-value="250318">18/03/25</td>
-            <td class="govuk-table__cell">£56.00</td>
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Incomplete</strong></td>
-            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
-              <td class="govuk-table__cell">
-                <ul class="govuk-summary-list__actions-list">
-                  {% if data['subStatus'] == "Submitted" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                      <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
-                    </li>
-                    {% elseif data['subStatus'] == "Resubmitted" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                      <a aria-labelledby="versions1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">View versions</a>
-                    </li>
-                    {% elseif data['subStatus'] == "In progress" %}
-                    <li class="govuk-summary-list__actions-list-item">
-                      <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
-                    </li>
-                  {% endif %}
-                </ul>
+          {% if data['claimErrors'] == "1" %}
+            <!--McBars import-->
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" id="claim1">1</td>
+              <td class="govuk-table__cell" id="claim1">
+                {% if data['subStatus'] == "In progress" %}
+                  <a href="../create/task-list?question-claimType=error&question-client=complete&question-case=complete&question-costs=error&question-check=&ufn=100323/234&caseStart=10/03/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled&vatEligible=No&counselCost=£0.00&adviceNoHours-hours=2&adviceNoHours-mins=oo&profitCost=£200.00&travelNoHours-hours=2&travelNoHours-mins=00&waitingNoHours-hours=2&waitingNoHours-mins=00&travelwaitingCost=£50.00&detentionCost=£0.00&disbursementCost=£90.00&disbursementVATCost=£10.00" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
+                  {% else %}
+                  <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/234</a>
+                {% endif %}
               </td>
-              {% elseif data['subStatus'] == "Part paid" %}
-                <td class="govuk-table__cell">£56.00</td>
-                <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-              {% elseif data['subStatus'] == "Paid" %}
-                <td class="govuk-table__cell">£56.00</td>
-                <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
-            {% endif %}
-          </tr>    
+              <td class="govuk-table__cell">McBars</td>
+              <td class="govuk-table__cell">Immigration and Asylum</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Incomplete</strong></td>
+              <td class="govuk-table__cell" data-sort-value="250318">18/03/25</td>
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Incomplete</strong></td>
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <td class="govuk-table__cell">
+                  <ul class="govuk-summary-list__actions-list">
+                    {% if data['subStatus'] == "Submitted" %}
+                      <li class="govuk-summary-list__actions-list-item">
+                        <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                      </li>
+                      {% elseif data['subStatus'] == "Resubmitted" %}
+                      <li class="govuk-summary-list__actions-list-item">
+                        <a aria-labelledby="versions1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">View versions</a>
+                      </li>
+                      {% elseif data['subStatus'] == "In progress" %}
+                      <li class="govuk-summary-list__actions-list-item">
+                        <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </td>
+                {% elseif data['subStatus'] == "Part paid" %}
+                  <td class="govuk-table__cell">£56.00</td>
+                  <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+                {% elseif data['subStatus'] == "Paid" %}
+                  <td class="govuk-table__cell">£56.00</td>
+                  <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+              {% endif %}
+            </tr> 
+            {% else %} 
+             <!--McBars import-->
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" id="claim1">1</td>
+              <td class="govuk-table__cell" id="claim1">
+              {% if data['subStatus'] == "In progress" %}
+                  <a href="../create/claim-check?question-claimType=complete&question-client=complete&question-case=complete&question-costs=complete&question-check=&ufn=100323/234&caseStart=10/03/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled&vatEligible=No&counselCost=0&adviceNoHours-hours=2&adviceNoHours-mins=oo&profitCost=200&travelNoHours-hours=2&travelNoHours-mins=00&waitingNoHours-hours=2&waitingNoHours-mins=00&travelwaitingCost=50&detentionCost=0&disbursementCost=90&disbursementVATCost=10" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
+                  {% else %}
+                  <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/234</a>
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell">McBars</td>
+              <td class="govuk-table__cell">Immigration and Asylum</td>
+              <td class="govuk-table__cell">{{data['matterType'] or ""}}</td>
+              <td class="govuk-table__cell" data-sort-value="250318">18/03/25</td>
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell">Fixed</td>
+              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                <td class="govuk-table__cell">
+                  <ul class="govuk-summary-list__actions-list">
+                    {% if data['subStatus'] == "Submitted" %}
+                      <li class="govuk-summary-list__actions-list-item">
+                        <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                      </li>
+                      {% elseif data['subStatus'] == "Resubmitted" %}
+                      <li class="govuk-summary-list__actions-list-item">
+                        <a aria-labelledby="versions1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">View versions</a>
+                      </li>
+                      {% elseif data['subStatus'] == "In progress" %}
+                      <li class="govuk-summary-list__actions-list-item">
+                        <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </td>
+                {% elseif data['subStatus'] == "Part paid" %}
+                  <td class="govuk-table__cell">£56.00</td>
+                  <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+                {% elseif data['subStatus'] == "Paid" %}
+                  <td class="govuk-table__cell">£56.00</td>
+                  <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+              {% endif %}
+            </tr>   
+          {% endif %}
           <!--Giordano import-->
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" id="claim2">3</td>

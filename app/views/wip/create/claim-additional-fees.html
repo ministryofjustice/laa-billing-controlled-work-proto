@@ -30,7 +30,7 @@
 
       {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
 
-        <---FAM --->
+        <!---FAM --->
         {{ govukInput({
           id: "damagesCost",
           name: "damagesCost",
@@ -47,7 +47,7 @@
           spellcheck: false
         }) }}
 
-        <---FAM --->
+        <!---FAM --->
         {{ govukRadios({
           name: "londonRate",
           fieldset: {
@@ -77,7 +77,7 @@
       {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 
        {% if data['claimTypeImmigration'] !== "Stage disbursement claim" or data['lawCategory'] == "All" %}
-          <---IMM - Stage or Completed not Disbursement - All Matter--->
+          <!---IMM - Stage or Completed not Disbursement - All Matter--->
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--s" for="hmoFee">
               Number of Home Office interviews
@@ -87,7 +87,7 @@
             </div>
           </div>
  
-          <---IMM - Stage or Completed not Disbursement - All Matter --->
+          <!---IMM - Stage or Completed not Disbursement - All Matter --->
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--s" for="oralFee">
               Number of oral CMR hearings
@@ -97,7 +97,7 @@
             </div>
           </div>
 
-          <---IMM - Stage or Completed not Disbursement - All Matter--->
+          <!---IMM - Stage or Completed not Disbursement - All Matter--->
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--s" for="telephoneFee">
             Number of telephone CMR hearings
@@ -107,7 +107,7 @@
             </div>
           </div>
 
-          <---IMM - Stage or Completed not Disbursement - all Matter --->
+          <!---IMM - Stage or Completed not Disbursement - all Matter --->
           {{ govukRadios({
             name: "substantiveFee",
             fieldset: {
@@ -131,7 +131,7 @@
             ]
           }) }} 
 
-          <---IMM - Stage or Completed not Disbursement - specific Matter--->
+          <!---IMM - Stage or Completed not Disbursement - specific Matter--->
           {{ govukRadios({
             name: "adjournedHearingFee",
             fieldset: {
@@ -155,7 +155,7 @@
             ]
           }) }}
 
-          <---IMM - Stage or Completed not Disbursement - specific Matter--->
+          <!---IMM - Stage or Completed not Disbursement - specific Matter--->
           {{ govukInput({
             id: "judicialreviewCost",
             name: "judicialreviewCost",
@@ -175,7 +175,7 @@
             }
           }) }}
 
-          <---IMM - Stage or Completed not Disbursement - specific Matter--->
+          <!---IMM - Stage or Completed not Disbursement - specific Matter--->
           {{ govukInput({
             id: "formfillingCost",
             name: "formfillingCost",
@@ -198,7 +198,7 @@
         {% endif %}
 
         {% if data['claimTypeImmigration'] == "Completed matter claim" or data['lawCategory'] == "All" %}
-          <---IMM - is Completed - specific Matter--->
+          <!---IMM - is Completed - specific Matter--->
           {{ govukRadios({
             name: "nrmFee",
             fieldset: {

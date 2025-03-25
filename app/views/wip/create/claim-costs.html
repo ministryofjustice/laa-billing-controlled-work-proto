@@ -41,7 +41,7 @@
 
       {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 
-        <---IMM - All - specific Matter--->
+        <!---IMM - All - specific Matter--->
         {{ govukRadios({
           name: "vatEligible",
           fieldset: {
@@ -74,7 +74,7 @@
         <!--- FOR EVERYONE ELSE --->
         {% else %}
 
-        <---ALL except IMM - Disbursement --->
+        <!---ALL except IMM - Disbursement --->
         {{ govukInput({
           id: "counselCost",
           name: "counselCost",
@@ -95,7 +95,7 @@
         }) }}
 
         <h2 class="govuk-heading-l">Profit costs</h2>
-        <---ALL except IMM - Disbursement --->
+        <!---ALL except IMM - Disbursement --->
 
         {% if data['lawCategory'] == "Immigration and Asylum" and data['importStatus'] == "error" and data['question-costs'] == "error" %}
           <div class="govuk-form-group govuk-form-group--error">
@@ -160,7 +160,7 @@
           </div>
         {% endif %}
 
-        <---ALL except IMM - Disbursement --->
+        <!---ALL except IMM - Disbursement --->
         {{ govukInput({
           id: "profitCost",
           name: "profitCost",
@@ -181,7 +181,7 @@
         }) }}
       
         <h2 class="govuk-heading-l">Travel and waiting</h2>
-        <---ALL except IMM - Disbursement --->
+        <!---ALL except IMM - Disbursement --->
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset" role="group" >
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -211,7 +211,7 @@
           </fieldset>
         </div>
 
-        <---ALL except IMM - Disbursement --->
+        <!---ALL except IMM - Disbursement --->
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset" role="group" >
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -241,7 +241,7 @@
           </fieldset>
         </div>
 
-        <---ALL except IMM - Disbursement --->
+        <!---ALL except IMM - Disbursement --->
         {{ govukInput({
           id: "travelwaitingCost",
           name: "travelwaitingCost",
@@ -263,7 +263,7 @@
 
         {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
           
-            <---IMM - Stage or Completed not Disbursement - specific Matter--->
+            <!---IMM - Stage or Completed not Disbursement - specific Matter--->
             {{ govukInput({
               id: "detentionCost",
               name: "detentionCost",
@@ -289,7 +289,7 @@
 
       <h2 class="govuk-heading-l">Disbursements</h2>
 
-      <---All--->
+      <!---All--->
       {{ govukInput({
         id: "disbursementCost",
         name: "disbursementCost",
@@ -309,7 +309,7 @@
         }
       }) }}
 
-      <---All--->
+      <!---All--->
       {{ govukInput({
         id: "disbursementVATCost",
         name: "disbursementVATCost",
@@ -328,7 +328,7 @@
 
       {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 
-        <---IMM - All - specific Matter--->
+        <!---IMM - All - specific Matter--->
         {{ govukInput({
           id: "priorAuth",
           name: "priorAuth",

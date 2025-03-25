@@ -43,7 +43,7 @@
                   <li>Matter type is needed to determine whether the claim is fixed fee or hourly rate</li>
                   <li>Matter type is needed to determine allowed additional fees</li>
                 </ul>
-                <li>Review primary costs as some use invalid formats</li>
+                <li>Review primary costs as some fields use invalid formats</li>
             </ul>'
           }) }}
           {% elseif data['question-costs'] == "error" %}
@@ -56,7 +56,7 @@
             dismissible: false,
             html: 'Review the highighted sections to resolve the following issues:<br><br>
              <ul class="govuk-list govuk-list--bullet">
-                <li>Review primary costs as some use invalid formats</li>
+                <li>Review primary costs as some fields use invalid formats</li>
             </ul>'
           }) }}
         {% endif %}
@@ -125,7 +125,7 @@
           {% endif %}
         </li> 
         <!--Details of case-->
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">{{data['question-case']}}
+        <li class="govuk-task-list__item govuk-task-list__item--with-link">
           {% if data['question-claimType'] == "error" or data['question-claimType'] !== "complete" %}
             <div class="govuk-task-list__name-and-hint">
               Case details
@@ -133,9 +133,9 @@
             <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="case-status">
               Cannot start yet
             </div>
-            {% elseif data['question-case'] == "" or data['question-case'] == null or data['question-case'] == "notStarted" %}
+            {% elseif data['question-case'] == nil or data['question-case'] == "" or data['question-case'] == "notStarted" %}
             <div class="govuk-task-list__name-and-hint">
-              <a href="claim-case?question-case=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="case-status">
+              <a href="claim-case" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="case-status">
                 Case details
               </a>
             </div>

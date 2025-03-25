@@ -30,7 +30,7 @@
     <form class="form" action="task-list?question-case=complete" method="post">
 
       {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
-        <---FAM--->
+        <!---FAM--->
         {{ mojDatePicker({
           id: "caseEnd",
           name: "caseEnd",
@@ -48,7 +48,7 @@
       {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
       
         {% if data['claimTypeImmigration'] == "Stage claim" or data['claimTypeImmigration'] == "Stage disbursement claim" or data['lawCategory'] == "All"  %}
-          <---IMM - Stage or Disbursement--->
+          <!---IMM - Stage or Disbursement--->
           {{ mojDatePicker({
             id: "caseClaimed",
             name: "caseClaimed",
@@ -64,7 +64,7 @@
         {% endif %}
 
         {% if data['claimTypeImmigration'] == "Completed matter claim" or data['lawCategory'] == "All" %}
-          <---IMM - Completed--->
+          <!---IMM - Completed--->
           {{ mojDatePicker({
             id: "caseEnd",
             name: "caseEnd",
@@ -88,7 +88,7 @@
       {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
       
         {% if data['claimTypeImmigration'] == "Completed matter claim" or data['claimTypeImmigration'] == "Stage claim" or data['lawCategory'] == "All" %}
-          <---IMM - Completed or Stage not Disbursement--->
+          <!---IMM - Completed or Stage not Disbursement--->
           {{ govukRadios({
             name: "legacyFee",
             fieldset: {
@@ -112,7 +112,7 @@
             ]
           }) }}
 
-          <---IMM - Completed or Stage not Disbursement--->
+          <!---IMM - Completed or Stage not Disbursement--->
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--s" for="aitLocation">
               Location of Asylum and Immigration Tribunal centre
@@ -140,7 +140,7 @@
       {% endif %}
 
        {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
-        <---FAM--->
+        <!---FAM--->
         {{ govukInput({
           label: {
             text: "Local authority case reference number (optional)",
@@ -154,7 +154,7 @@
         }) }}
       {% endif %}
 
-      <---ALL--->
+      <!---ALL--->
       <div class="govuk-form-group">
         <label class="govuk-label govuk-label--s" for="exemptionCriteria">
           Exemption criteria satisfied
@@ -211,7 +211,7 @@
         }) }}
       {% endset %}
 
-      <---ALL--->
+      <!---ALL--->
       {{ govukRadios({
         name: "exceptionalCase",
         fieldset: {
@@ -253,7 +253,7 @@
         }) }}      
       {% endset %}
 
-      <---ALL--->
+      <!---ALL--->
       {{ govukRadios({
         name: "caseTranfer",
         fieldset: {
@@ -282,7 +282,7 @@
 
       {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 
-        <---IMM - Completed--->
+        <!---IMM - Completed--->
         {% set ircHtml %}
           {{ govukInput({
             label: {
