@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block pageTitle %}
-  Check your claim – {{ serviceName }} – GOV.UK Prototype Kit
+  Check your submission – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
@@ -25,13 +25,13 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-xl">Check your claim</h1>
+    <h1 class="govuk-heading-xl">Check your submission</h1>
     
      <form class="form" action="submission-submitted" method="post">
 
       <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
-          <h3 class="govuk-summary-card__title">Claim details</h3>
+          <h3 class="govuk-summary-card__title">Submission details</h3>
           <ul class="govuk-summary-card__actions">
             <li class="govuk-summary-card__action">
             </li>
@@ -85,7 +85,7 @@
           </ul>
         </div>
         <div class="govuk-summary-card__content">
-          <p>The cost for this claim have escaped and will be reviewed by the LAA</p>
+          <p>This submission includes <span class="govuk-!-font-weight-bold">5 matter starts</span> and <span class="govuk-!-font-weight-bold">23 claims</span>, of which <span class="govuk-!-font-weight-bold">4 claims escaped</span>.</p>
 
           <table class="govuk-table">
             <caption class="govuk-visually-hidden">Your costs summary</caption>
@@ -128,12 +128,11 @@
 
       <div class="govuk-button-group">
         {{ govukButton({
-          text: "Save and continue",
-          href: "../submission/submission-details-draft?question-check=complete"
+          text: "Submit"
         }) }}
 
         {{ govukButton({
-            text: "Return to claim",
+            text: "Return to submission",
             classes: "govuk-button--secondary",
             href: "submission-details"
           }) }}

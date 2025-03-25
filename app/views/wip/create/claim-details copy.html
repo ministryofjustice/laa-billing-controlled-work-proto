@@ -32,57 +32,11 @@
   </div>
 
   <!--Status of claim-->
-  {% include version + "/includes/app-status-provider.html" %}
 
   <div class="govuk-grid-column-full" id="nav">
   
     <!--2nd nav-->
-    {% if data['app-task'] =="Part granted"%}
-      {{ mojSubNavigation({
-        label: 'Sub navigation',
-        items: [{
-          text: 'Overview',
-          href: 'claim-details#nav',
-          active: true
-        }, 
-        {
-          text: 'Claimed costs',
-          href: 'claim-details-all-costs#nav',
-          active: false
-        }, 
-        {
-          text: 'Adjusted costs',
-          href: 'claim-details-adjusted-costs#nav',
-          active: false
-        }, 
-        {
-          text: 'Claim history',
-          href: 'claim-details-history#nav',
-          active: false
-        }
-        ]
-      }) }}
-      {% else %}
-      {{ mojSubNavigation({
-        label: 'Sub navigation',
-        items: [{
-          text: 'Overview',
-          href: 'claim-details#nav',
-          active: true
-        }, 
-        {
-          text: 'Claimed costs',
-          href: 'claim-details-all-costs#nav',
-          active: false
-        }, 
-        {
-          text: 'Claim history',
-          href: 'claim-details-history#nav',
-          active: false
-        }
-        ]
-      }) }}
-    {% endif%}
+
 
     <h2 class="govuk-heading-l">Overview</h2>
     {% if data['app-task'] == "Returned" %}
@@ -691,7 +645,6 @@
       </div>
     </div>
 
-    {% include version + "/includes/further-info-provider.html" %}
 
   </div>
 

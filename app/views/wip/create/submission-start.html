@@ -43,35 +43,6 @@
 
         {% endif%}
 
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" role="group" aria-describedby="subPeriod-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-              Submission period
-            </legend>
-            <div id="subPeriod-hint" class="govuk-hint">
-              For example, 3 2025
-            </div>
-            <div class="govuk-date-input" id="subPeriod-issued">
-              <div class="govuk-date-input__item">
-                <div class="govuk-form-group">
-                  <label class="govuk-label govuk-date-input__label" for="subPeriod-month">
-                    Month
-                  </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month" name="subPeriod-month" type="text" inputmode="numeric" value="{{data['subPeriod-month']}}">
-                </div>
-              </div>
-              <div class="govuk-date-input__item">
-                <div class="govuk-form-group">
-                  <label class="govuk-label govuk-date-input__label" for="subPeriod-year">
-                    Year
-                  </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="subPeriod-year" name="subPeriod-year" type="text" inputmode="numeric" value="{{data['subPeriod-year']}}">
-                </div>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-
         {{ govukRadios({
           name: "firmAC",
           fieldset: {
