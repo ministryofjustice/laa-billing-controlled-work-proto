@@ -352,7 +352,7 @@
                   Profit costs
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ data['profitCost'] or "£234.00"}}
+                  £{{ data['profitCost'] or "234.00"}}
                 </dd>
               </div>
               <!---ALL except IMM - Disbursement --->
@@ -379,7 +379,7 @@
                   Travel and waiting costs
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ data['travelwaitingCost'] or "£234.00"}}
+                  £{{ data['travelwaitingCost'] or "234.00"}}
                 </dd>
               </div>
 
@@ -391,7 +391,7 @@
                       Detention travel and waiting costs
                     </dt>
                     <dd class="govuk-summary-list__value">
-                      {{ data['detentionCost'] or "£234.00"}}
+                      £{{ data['detentionCost'] or "234.00"}}
                     </dd>
                   </div>
 
@@ -404,7 +404,7 @@
                 Disbursement costs
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data['disbursementCost'] or "£234.00"}}
+                £{{ data['disbursementCost'] or "234.00"}}
               </dd>
             </div>
              <!---All--->
@@ -413,7 +413,7 @@
                 VAT on disbursements
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data['disbursementVATCost'] or "£23.00"}}
+                £{{ data['disbursementVATCost'] or "23.00"}}
               </dd>
             </div>
 
@@ -520,7 +520,7 @@
                     Hearing adjourned
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{data['judicialreviewCost'] or "£102.23"}} 
+                    £{{data['judicialreviewCost'] or "102.23"}} 
                   </dd>
                 </div>
 
@@ -530,7 +530,7 @@
                     Form filling costs
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{data['formfillingCost'] or "£0.00"}} 
+                    £{{data['formfillingCost'] or "0.00"}} 
                   </dd>
                 </div>
               {% endif %}
