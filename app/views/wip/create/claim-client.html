@@ -78,7 +78,7 @@
         value: data['client-postcode']
       }) }}  
 
-      <---Is this needed?--->
+      <---Is this needed?
       {{ govukInput({
         label: {
           text: "What is the unique client number (UCN)?",
@@ -93,6 +93,7 @@
         name: "UCN",
         value: data['UCN']
       }) }}
+      --->
 
       {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
         <---IMM - All - specific Matter--->

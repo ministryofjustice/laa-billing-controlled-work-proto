@@ -30,21 +30,22 @@
       <h1 class="govuk-heading-xl">Claim details</h1>
       <p>To set up your claim we need some initial information.</p>
 
-      <---is this needed?--->
-      {{ govukInput({
-        label: {
-          text: "What is the unique file number (UFN)?",
-          classes: "govuk-label--s",
-          isPageHeading: false
-        },
-        hint: {
-          text: "For example 310223/001"
-        },
-        classes: "govuk-input--width-10",
-        id: "ufn",
-        name: "ufn",
-        value: data['ufn']
-      }) }}
+      <!--is this needed?
+        {{ govukInput({
+          label: {
+            text: "What is the unique file number (UFN)?",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          hint: {
+            text: "For example 310223/001"
+          },
+          classes: "govuk-input--width-10",
+          id: "ufn",
+          name: "ufn",
+          value: data['ufn']
+        }) }}
+      -->
 
       {{ mojDatePicker({
         id: "caseStart",
@@ -126,12 +127,6 @@
           text: "Select one option"
         },
         items: [
-          {
-            value: "All",
-            text: "Show all fields for Mary testing!!!!!!!!!!!!!!",
-            checked: checked("lawCategory", "All")
-            
-          },
           {
             value: "Claims Against Public Authorities",
             text: "Claims Against Public Authorities",

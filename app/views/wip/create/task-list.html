@@ -9,7 +9,7 @@
 
 
 {% block pageTitle %}
-  Your applications – {{ serviceName }} - GOV.UK
+  Claim progress – {{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -28,7 +28,7 @@
       <h1 class="govuk-heading-xl">
         Claim progress
       </h1>
-      {% if data['importStatus'] == "error" %}
+      {% if data['isImport'] == "yes" and data['importStatus'] == "error" %}
         {% if data['matterType'] == "" %}
           {{ mojAlert({
             variant: "warning",
@@ -36,7 +36,8 @@
             showTitleAsHeading: true,
             headingTag: "h3",
             dismissible: false,
-            html: '<p>This claim has one or more errors that must be resolved. Review the highighted sections'
+            html: 'This claim has one or more errors that must be resolved. Review the highighted sections<br>
+            '
           }) }}
         {% endif %}
       {% endif %}

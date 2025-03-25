@@ -1,0 +1,161 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl">
+      {{ serviceName }}
+    </h1>
+
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    </h1>
+    <p>This is the prototype for Controlled Work covering the provider system. This prototype is <strong>NOT</strong> fully functional
+    </p>
+    
+    <p>Please <a href="/manage-prototype/clear-data" class="govuk-link--no-visited-state">clear data</a> to delete all stored data and re-set the prototype between journeys.</p>
+
+    <!--PA Provider-->
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">          
+        <ol class="app-task-list">
+          <li> 
+            <h2 class="app-task-list__section">
+              <span class="app-task-list__section-number">1. </span>
+              Alpha
+            </h2>            
+            <ul class="app-task-list__items">
+
+              <!--WIP-->
+              <li class="app-task-list__item">
+                <h3 class="govuk-heading-s">Work in progress</h3>
+                <span class="app-task-list__task-name">
+                  <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Submission home
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br><br>
+                <span class="app-task-list__task-name">
+                  <a href="/wip/create/submission-start?subStatus=In progress&isImport=no&subPeriod-month=&subPeriod-year=&submissionType=&scheduleRef=&firmAC=&Immigration_matterStart=&Family_matterStart=&question-claimType=" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Create a new submission
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br>
+                <span class="app-task-list__task-name">
+                  <a href="/wip/create/submission-import?subStatus=In progress&isImport=yes&importStatus=success" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Import a new submission - no errors
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br>
+                 <span class="app-task-list__task-name">
+                  <a href="/wip/create/submission-import?subStatus=In progress&isImport=yes&importStatus=error" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Import a new submission - with errors
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br> <br>
+                <span class="app-task-list__task-name">
+                  <a href="/wip/create/claim-start?subStatus=In progress&isImport=no
+                  &subPeriod-month=March&subPeriod-year=2025&firmAC=A1B2C3&submissionType=Legal help&Immigration_matterStart=4&Family_matterStart=2&question-claimType=&question-client=&question-case=&question-costs=&question-check=&scheduleRef=&ufn=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Add a claim to existing submission
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br> <br>
+                <span class="app-task-list__task-name">
+                  <a href="/wip/submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Submission: status - submitted
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br>
+                <span class="app-task-list__task-name">
+                  <a href="/wip/submission/submission-details?subStatus=Resubmitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Submission: status - resubmitted
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br>
+                <span class="app-task-list__task-name">
+                  <a href="/wip/submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Submission: status - paid
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br>
+                <span class="app-task-list__task-name">
+                  <a href="/wip/submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Submission: status - part paid
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                
+              </li>
+
+              <!--Old-->
+              <li class="app-task-list__item">                 
+                <h3 class="govuk-heading-s">Previous versions</h3>
+                <details class="govuk-details">
+                  <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                      Version no.
+                    </span>
+                  </summary>
+                  <div class="govuk-details__text">
+                    <ul class="app-task-list__items">
+                      <!--Section-->
+                      <li class="app-task-list__item">
+                        <span class="app-task-list__task-name">Section</span><br>
+                        <span class="app-task-list__task-name">
+                          <a href="" class="govuk-link--no-visited-state" aria-describedby="tasklist">
+                            Page/ flow
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="all-states">Live</span>
+                        <br>
+                        <span class="app-task-list__task-name">
+                          <a href="" class="govuk-link--no-visited-state" aria-describedby="tasklist">
+                            Page/ flow
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="all-states">Live</span>
+                      </li>
+                    </ul>
+                  </div>
+                </details>                  
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+
+  <!--Aside-->
+  <div class="govuk-grid-column-one-third">
+    <aside class="app-related-items" role="complementary">
+      
+      <h2 class="govuk-heading-m" id="subsection-title">Key pages</h2>
+      <nav role="navigation" aria-labelledby="subsection-title">
+
+        <h3 class="govuk-heading-s" id="subsection-title">Header</h3>
+        <ul class="govuk-list">
+          <li><a href="" class="govuk-link--no-visited-state" aria-describedby="start">Words</a></li> 
+        </ul>
+      </nav>
+    </aside>
+
+  </div>
+</div>
+
+{% endblock %}
