@@ -16,7 +16,7 @@
       <p><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></p>
                     
     {% endif %} 
-     {% if data['subStatus'] == "In progress" %}
+    {% if data['subStatus'] == "In progress" %}
       {% if data['importStatus'] == "error" and data['claimErrors'] == "2" %}
         {{ mojAlert({
           variant: "warning",
@@ -44,7 +44,7 @@
         showTitleAsHeading: false,
         headingTag: "h3",
         dismissible: true,
-        html: '<p class="govuk-body">3 claims were amended by the LAA: <a href="">claim 1</a>, <a href="">claim 13</a>, <a href="">claim 17</a></p>'
+        html: '<p class="govuk-body">3 claims were amended by the LAA: <a href="submission-claim-details">claim 1</a>, <a href="submission-claim-details">claim 13</a>, <a href="submission-claim-details">claim 17</a></p>'
       }) }}
 
       {% elseif data['subStatus'] == "Resubmitted" %}
@@ -54,7 +54,7 @@
         showTitleAsHeading: false,
         headingTag: "h3",
         dismissible: true,
-        html: '<p class="govuk-body">1 claim was amended : <a href="">claim 2</a></p>'
+        html: '<p class="govuk-body">1 claim was amended : <a href="submission-claim-details">claim 2</a></p>'
       }) }}
     {% endif %}
 

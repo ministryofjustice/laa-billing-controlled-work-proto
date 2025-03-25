@@ -1,0 +1,149 @@
+{% extends "layouts/main.html" %}
+{% set version = "wip" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Claim details – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Claim details</h1>
+    
+     <form class="form" action="submission-submitted" method="post">
+
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h3 class="govuk-summary-card__title">Claim details</h3>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                LAA reference
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['laa-ref'] or "LAA-5a7d3c"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Schedule reference
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['scheduleRef'] or "ABC123"}}
+              </dd>
+            </div>
+              <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['firmAC'] or "C1B1C1"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Submission type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['submissionType'] or "Legal help"}}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Cost summary-->
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h3 class="govuk-summary-card__title">Costs summary</h3>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <p>The cost for this claim have escaped and will be reviewed by the LAA</p>
+
+          <table class="govuk-table">
+            <caption class="govuk-visually-hidden">Your costs summary</caption>
+            <thead class="govuk-table__head">
+              <td class="govuk-table__header"></td>
+              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Claimed</th>
+              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Allowed</th>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Profit costs</th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£1285.00</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£742.00</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Travel & waiting (including VAT)</th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Disbursements (including VAT)</th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£890.00</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£890.00</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Additional fees</th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Total</th>
+                <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of net cost:</span><strong>£1135.00</strong></td>
+                <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of allowed costs:</span><strong>900.00</strong></td>
+              </tr>
+            </tbody>
+          </table> 
+        </div>
+      </div>
+
+
+      <div class="govuk-button-group">
+         {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+          {{ govukButton({
+            text: "Amend claim",
+            href: ""
+          }) }}
+        {% endif %}
+
+        {{ govukButton({
+            text: "Return to submission",
+            classes: "govuk-button--secondary",
+            href: "submission-details"
+          }) }}
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

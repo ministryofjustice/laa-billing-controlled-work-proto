@@ -29,10 +29,17 @@
 
         <h1 class="govuk-heading-xl">Submission details</h1>
 
-        {% if data['isImport'] == "yes" %}
 
-          {%- from "moj/components/alert/macro.njk" import mojAlert -%}
-
+        {% if data['isImport'] == "yes" and data['importStatus'] == "error" and data['claimErrors'] == "2" %}
+          {{ mojAlert({
+            variant: "warning",
+            title: "Problem with submission",
+            showTitleAsHeading: true,
+            headingTag: "h3",
+            dismissible: false,
+            html: 'There are issue with 2 of the claims in this submission. You can choose to fix the issues using your CMS or by using this application.<br>View an <a href"" class="govuk-link">error summary</a>'
+          }) }}
+          {% elseif data['importStatus'] == "error" and data['claimErrors'] == "1" %}
           {{ mojAlert({
             variant: "info",
             title: "Submission imported",
@@ -40,8 +47,7 @@
             dismissible: false,
             html: '<p class="govuk-body">You imported 3 claims. Review all claims before final submission.</p>'
           }) }}
-
-        {% endif%}
+        {% endif %}
 
         {{ govukRadios({
           name: "firmAC",
@@ -105,6 +111,12 @@
         <div class="govuk-button-group">
           {{ govukButton({
             text: "Save and continue"
+          }) }}
+
+          {{ govukButton({
+            text: "Cancel import",
+            classes: "govuk-button--secondary",
+            href: "../submissions-submitted"
           }) }}
 
         </div>
