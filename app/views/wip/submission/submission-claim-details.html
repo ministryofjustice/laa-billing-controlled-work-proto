@@ -38,16 +38,20 @@
     <form class="form" action="submission-submitted" method="post">
       <div class="moj-page-header-actions">
         <div class="moj-page-header-actions__title">
-          <h1 class="govuk-heading-xl">{{data['client-last-name'] or "McBars" }}</h1>
+          <h1 class="govuk-heading-xl">Claim - {{data['ufn'] or "100312007/234" }}</h1>
         </div>
         <div class="moj-page-header-actions__actions">
           <div class="moj-button-group">
-            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-              Amend
-            </button>
+            {{ govukButton({
+              text: "Amend",
+              classes: "govuk-button--secondary",
+              href: "../create-task-list"
+            }) }}
           </div>
         </div>
       </div>
+    
+      {% include version + "/includes/table-claimCost.html"%}
     
             <!--Claim-->
       <div class="govuk-summary-card">
@@ -103,63 +107,6 @@
           </dl>
         </div>
       </div>
-      <!-- Cost summary-->
-      <div class="govuk-summary-card">
-        <div class="govuk-summary-card__title-wrapper">
-          <h3 class="govuk-summary-card__title">Costs summary</h3>
-          <ul class="govuk-summary-card__actions">
-            <li class="govuk-summary-card__action">
-            </li>
-          </ul>
-        </div>
-        <div class="govuk-summary-card__content">
-          <table class="govuk-table">
-            <caption class="govuk-visually-hidden">Your costs summary</caption>
-            <thead class="govuk-table__head">
-              <td class="govuk-table__header"></td>
-              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Claimed</th>
-              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Allowed</th>
-            </thead>
-            <tbody class="govuk-table__body">
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Fixed fee</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£742.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£742.00</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Profit costs [*]</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£1285.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric"></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Travel & waiting (including VAT)</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Disbursements (including VAT)</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£890.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£890.00</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Additional fees</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Total</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of net cost:</span><strong>£1135.00</strong></td>
-                <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of allowed costs:</span><strong>900.00</strong></td>
-              </tr>
-            </tbody>
-          </table> 
-          <section class="govuk-!-margin-bottom-6">
-            <p class="govuk-body-s" id="fn*">[*] Your profit costs for this claim have escaped</p>
-          </section>
-        </div>
-      </div>
-
-
       <!--Client-->
       <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
@@ -231,7 +178,7 @@
       <!--Case-->
       <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
-          <h3 class="govuk-summary-card__title">Client details</h3>
+          <h3 class="govuk-summary-card__title">Case details</h3>
           <ul class="govuk-summary-card__actions">
             <li class="govuk-summary-card__action">
             </li>

@@ -29,10 +29,12 @@
       <h1 class="govuk-heading-xl">Matter starts</h1>
       <p>Enter any matters starts that occured during this submission.</p>
 
-      {% if data['isImport'] == "yes" %}
+      {% if data['isImport'] == "yes" and data['importStatus'] == "error"%}
         <form class="form" action="/{{version}}/submission/submission-details-draft?claims=3" method="post">
-        {% else %}
-        <form class="form" action="/{{version}}/submission/submission-details-draft?claims=0" method="post">
+        {% elseif data['isImport'] == "yes" and data['importStatus'] == "success" %}
+        <form class="form" action="/{{version}}/submission/submission-details" method="post">
+        {% elseif data['isImport'] == "manual" %}
+        <form class="form" action="/{{version}}/create/claim-start" method="post">
       {% endif %}
       
 

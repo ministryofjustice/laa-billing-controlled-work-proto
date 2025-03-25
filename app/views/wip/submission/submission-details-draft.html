@@ -36,6 +36,7 @@
       <p>You have not added any claims</p>
     {% endif %}
     
+    
     {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" %}
       {{ govukButton({
         text: "Add claim",
@@ -64,11 +65,12 @@
         </thead>
         <tbody class="govuk-table__body">
         {% if data['isImport'] == "yes" %}
+          <!--McBars import-->
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" id="claim1">1</td>
             <td class="govuk-table__cell" id="claim1">
-              {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
-                <a href="../create/task-list?question-claimType=error&question-client=complete&question-case=complete&question-costs=complete&question-check=&ufn=100323/234&caseStart=10/03/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
+              {% if data['subStatus'] == "In progress" %}
+                <a href="../create/task-list?question-claimType=error&question-client=complete&question-case=complete&question-costs=error&question-check=&ufn=100323/234&caseStart=10/03/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled&vatEligible=No&counselCost=0&adviceNoHours-hours=2&adviceNoHours-mins=oo&profitCost=200&travelNoHours-hours=2&travelNoHours-mins=00&waitingNoHours-hours=2&waitingNoHours-mins=00&travelwaitingCost=50&detentionCost=0&disbursementCost=90&disbursementVATCost=10" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
                 {% else %}
                 <a href="" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/234</a>
               {% endif %}
@@ -105,6 +107,7 @@
                 <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
             {% endif %}
           </tr>    
+          <!--Giordano import-->
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" id="claim2">3</td>
             <td class="govuk-table__cell" id="claim1">
@@ -142,6 +145,7 @@
                 <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
             {% endif %}
           </tr>
+          <!--Gruffalo import-->
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" id="claim3">2</td>
             <td class="govuk-table__cell" id="claim1">
@@ -179,7 +183,8 @@
                 <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
             {% endif %}
           </tr>
-          {% elseif data['isImport'] == "manual" %}
+          {% elseif data['isImport'] == "manual" and data['claims'] == "1" %}
+          <!--Gruffalo manual-->
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" id="claim3">1</td>
               <td class="govuk-table__cell" id="claim1">

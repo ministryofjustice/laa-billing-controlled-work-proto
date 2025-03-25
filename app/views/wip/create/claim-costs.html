@@ -25,6 +25,17 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+  {% if data['lawCategory'] == "Immigration and Asylum" and data['importStatus'] == "error" and data['question-costs'] == "error" %}
+    {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [
+          {
+            text: "Enter Advice minutes using numbers",
+            href: "#advice-error"
+          }
+        ]
+      }) }}
+    {% endif %}
     <h1 class="govuk-heading-xl">Primary claim costs</h1>
     <form class="form" action="/{{version}}/create/claim-additional-fees" method="post">
 
@@ -85,34 +96,69 @@
 
         <h2 class="govuk-heading-l">Profit costs</h2>
         <---ALL except IMM - Disbursement --->
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" role="group" >
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-              Advice
-            </legend>
-            <div id="adviceNoHours-hint" class="govuk-hint">
-              For example, 1 hour and 30 minutes
-            </div>
-            <div class="govuk-date-input" id="adviceNoHours">
-              <div class="govuk-date-input__item">
-                <div class="govuk-form-group">
-                  <label class="govuk-label govuk-date-input__label" for="adviceNoHours-hours">
-                    Hours
-                  </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-hours" name="adviceNoHours-hours" type="text" inputmode="numeric" value="{{data['adviceNoHours-hours']}}">
+
+        {% if data['lawCategory'] == "Immigration and Asylum" and data['importStatus'] == "error" and data['question-costs'] == "error" %}
+          <div class="govuk-form-group govuk-form-group--error">
+            <fieldset class="govuk-fieldset" role="group" >
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Advice
+              </legend>
+              <div id="adviceNoHours-hint" class="govuk-hint">
+                For example, 1 hour and 30 minutes
+              </div>
+              <p id="advice-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Enter Advice minutes using numbers
+              </p>
+              <div class="govuk-date-input" id="adviceNoHours">
+                <div class="govuk-date-input__item">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="adviceNoHours-hours">
+                      Hours
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-hours" name="adviceNoHours-hours" type="text" inputmode="numeric" value="{{data['adviceNoHours-hours']}}">
+                  </div>
+                </div>
+                <div class="govuk-date-input__item">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="adviceNoHours-mins">
+                      Minutes
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-mins" name="adviceNoHours-mins" type="text" inputmode="numeric" value="{{data['adviceNoHours-mins']}}">
+                  </div>
                 </div>
               </div>
-              <div class="govuk-date-input__item">
-                <div class="govuk-form-group">
-                  <label class="govuk-label govuk-date-input__label" for="adviceNoHours-mins">
-                    Minutes
-                  </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-mins" name="adviceNoHours-mins" type="text" inputmode="numeric" value="{{data['adviceNoHours-mins']}}">
+            </fieldset>
+          </div>
+          {% else %}
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset" role="group" >
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Advice
+              </legend>
+              <div id="adviceNoHours-hint" class="govuk-hint">
+                For example, 1 hour and 30 minutes
+              </div>
+              <div class="govuk-date-input" id="adviceNoHours">
+                <div class="govuk-date-input__item">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="adviceNoHours-hours">
+                      Hours
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-hours" name="adviceNoHours-hours" type="text" inputmode="numeric" value="{{data['adviceNoHours-hours']}}">
+                  </div>
+                </div>
+                <div class="govuk-date-input__item">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="adviceNoHours-mins">
+                      Minutes
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-mins" name="adviceNoHours-mins" type="text" inputmode="numeric" value="{{data['adviceNoHours-mins']}}">
+                  </div>
                 </div>
               </div>
-            </div>
-          </fieldset>
-        </div>
+            </fieldset>
+          </div>
+        {% endif %}
 
         <---ALL except IMM - Disbursement --->
         {{ govukInput({

@@ -1,5 +1,5 @@
-  {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
-    {%if data['importStatus'] == "error" and data['matterType'] == "" %}
+  {% if data['lawCategory'] == "Immigration and Asylum" %}
+    {% if data['importStatus'] == "error" and data['matterType'] == "" %}
 
     {{ govukErrorSummary({
         titleText: "There is a problem",
@@ -139,9 +139,9 @@
         </select>
       </div>
     {% endif %}
-  {% endif %}
 
-  {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+
+    {% else %}
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--xl" for="matterType">
       <h1 class="govuk-fieldset__heading">Matter type
