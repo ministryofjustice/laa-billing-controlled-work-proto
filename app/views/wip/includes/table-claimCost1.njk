@@ -26,11 +26,15 @@
       <td class="govuk-table__cell govuk-table__cell--numeric">£890.00</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">£890.00</td>
     </tr>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">Additional fees</th>
-      <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
-      <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
-    </tr>
+    {% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
+      {%else %}
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">Additional fees</th>
+        <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
+        <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
+        <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
+      </tr>
+    {% endif %}
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header">Total</th>
       <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of net cost:</span><strong>£1135.00</strong></td>

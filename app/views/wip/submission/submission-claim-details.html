@@ -40,15 +40,28 @@
         <div class="moj-page-header-actions__title">
           <h1 class="govuk-heading-xl">Claim - {{data['ufn'] or "100312007/234" }}</h1>
         </div>
-        <div class="moj-page-header-actions__actions">
-          <div class="moj-button-group">
-            {{ govukButton({
-              text: "Amend",
-              classes: "govuk-button--secondary",
-              href: "../create-task-list"
-            }) }}
+
+        {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+          <div class="moj-page-header-actions__actions">
+            <div class="moj-button-group">
+              {{ govukButton({
+                text: "Amend",
+                classes: "govuk-button--secondary",
+                href: "../create-task-list"
+              }) }}
+            </div>
           </div>
-        </div>
+          {% else %}
+          <div class="moj-page-header-actions__actions">
+            <div class="moj-button-group">
+              {{ govukButton({
+                text: "Request amendment",
+                classes: "govuk-button--secondary",
+                href: "../create-task-list"
+              }) }}
+            </div>
+          </div>
+        {% endif %}
       </div>
     
       {% include version + "/includes/table-claimCost.html"%}

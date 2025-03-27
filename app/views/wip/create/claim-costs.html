@@ -37,7 +37,11 @@
       }) }}
     {% endif %}
     <h1 class="govuk-heading-xl">Primary claim costs</h1>
-    <form class="form" action="/{{version}}/create/claim-additional-fees" method="post">
+    {% if data['claimTypeImmigration'] == "Stage disbursement claim" %}
+      <form class="form" action="/{{version}}/create/task-list?question-costs=complete" method="post">
+      {% else %}
+      <form class="form" action="/{{version}}/create/claim-additional-fees" method="post">
+    {% endif %}
 
       {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
 

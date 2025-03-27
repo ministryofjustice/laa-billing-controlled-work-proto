@@ -30,7 +30,9 @@
   
 <div class="govuk-grid-row"> 
   <div class="govuk-grid-column-full">
+    
     {% include version + "/includes/nav-sub-submission.njk" %}
+
     <h2 class="govuk-heading-l" id="nav">Claims</h2>
      {% if data['isImport'] == "manual" and data['claims'] == "0"%}
       <p>You have not added any claims</p>
@@ -44,6 +46,17 @@
         classes: "govuk-button--secondary"
       }) }}
     {% endif %}
+
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Summary of claim costs
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        {% include version + "/includes/table-submissionCost.html"%}
+      </div>
+    </details>
 
     {% if data['isImport'] == "manual" and data['claims'] == "0"%}
       {% else %}
@@ -275,7 +288,6 @@
 
     {% endif %}
 
-    {% include version + "/includes/submission-buttons.njk" %}
   </div>
 </div>
 
