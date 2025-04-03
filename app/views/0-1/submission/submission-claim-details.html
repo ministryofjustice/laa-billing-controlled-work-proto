@@ -1,0 +1,596 @@
+{% extends "layouts/main.html" %}
+{% set version = "0-1" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Claim details – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {% if data['subStatus'] == "In progress" %}
+      <p><strong class="govuk-tag govuk-tag--grey">In progress</strong></p>
+      
+      {% elseif data['subStatus'] == "Paid" %}
+      <p><strong class="govuk-tag govuk-tag--green">Paid</strong></p>
+
+      {% elseif data['subStatus'] == "Part paid" %}
+      <p><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></p>
+                    
+    {% endif %} 
+    <form class="form" action="submission-submitted" method="post">
+      <div class="moj-page-header-actions">
+        <div class="moj-page-header-actions__title">
+          <h1 class="govuk-heading-xl">Claim - {{data['ufn'] or "100312007/234" }}</h1>
+        </div>
+
+        {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+          <div class="moj-page-header-actions__actions">
+            <div class="moj-button-group">
+              {{ govukButton({
+                text: "Amend",
+                classes: "govuk-button--secondary",
+                href: "../create-task-list"
+              }) }}
+            </div>
+          </div>
+          {% else %}
+          <div class="moj-page-header-actions__actions">
+            <div class="moj-button-group">
+              {{ govukButton({
+                text: "Request amendment",
+                classes: "govuk-button--secondary",
+                href: "../create-task-list"
+              }) }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    
+      {% include version + "/includes/table-claimCost.html"%}
+    
+      <!--Claim-->
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h3 class="govuk-summary-card__title">Claim details</h3>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Unique file number (UFN)
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['ufn'] or "240325/123"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date case was opened
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['caseStart'] or "8/5/2024"}} 
+              </dd>
+            </div>
+              <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Category
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['lawCategory'] or "Immigration and Asylum"}}
+              </dd>
+            </div>
+             <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Claim type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['claimTypeImmigration'] or "Completed matter claim"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Matter type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['matterType'] or "IALB:IASY"}}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <!--Client-->
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h3 class="govuk-summary-card__title">Client details</h3>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Unique client number (UCN)
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['UCN'] or "10031999/MCB"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Client
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['client-first-name'] or "Jonanna" }} {{data['client-last-name'] or "McBars" }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date of birth
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['clientDOB'] or "10/03/1999" }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Postcode
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['clientpostcode'] or "E1 6EG" }}
+              </dd>
+            </div>
+            {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+              <!---IMM - All - specific Matter--->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Home Office UCN
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['homeUCN'] or "345678754"}} 
+                </dd>
+              </div>
+            {% endif %}
+            {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+              <!---FAM--->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Client type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['clientType'] or "C - Parent"}} 
+                </dd>
+              </div>
+            {% endif %}
+          </dl>
+        </div>
+      </div>
+      <!--Case-->
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h3 class="govuk-summary-card__title">Case details</h3>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+              <!---FAM--->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Date case concluded
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['caseEnd'] or "17/3/2025"}} 
+                </dd>
+              </div>
+            {% endif %}
+            {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+            
+              {% if data['claimTypeImmigration'] == "Stage claim" or data['claimTypeImmigration'] == "Stage disbursement claim" or data['lawCategory'] == "All"  %}
+                <!---IMM - Stage or Disbursement--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Case claimed date
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['caseClaimed'] or "17/3/2025"}} 
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if data['claimTypeImmigration'] == "Completed matter claim" or data['lawCategory'] == "All" %}
+                <!---IMM - Completed--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Date case concluded
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['caseEnd'] or "17/3/2025"}} 
+                  </dd>
+                </div>
+              {% endif %} 
+            {% endif %}
+            {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+              <!---FAM --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Case stage or level
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['caseLevels'] or "FPL10 - Div"}} 
+                </dd>
+              </div>
+              <!---FAM --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Claim stage
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['stageReachedFam'] or "FB - Further Work"}} 
+                </dd>
+              </div>
+            {% endif %}
+            {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+              <!---IMM --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Claim stage reached
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['stageReachedIMM'] or "IT - Standby Payment"}} 
+                </dd>
+              </div>
+            {% endif %}
+            {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+              <!---FAM --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Outcome for client
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['clientOutcomeFAM'] or "FC-Advice given - no further action required"}} 
+                </dd>
+              </div>
+            {% endif %}
+            {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+              {% if data['claimTypeImmigration'] == "Completed matter claim" or data['lawCategory'] == "All" %}
+                <!---IMM - Completed only--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Outcome for client
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['clientOutcomeIMM'] or "IE-Application refused"}} 
+                  </dd>
+                </div>
+              {% endif %}
+              {% if data['claimTypeImmigration'] == "Completed matter claim" or data['claimTypeImmigration'] == "Stage claim" or data['lawCategory'] == "All" %}
+                <!---IMM - Completed or Stage not Disbursement--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Home Office legacy case
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['legacyFee'] or "No"}} 
+                  </dd>
+                </div>
+                <!---IMM - Completed or Stage not Disbursement--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Location of AIT centre
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['aitLocation'] or "01 - Birmingham"}} 
+                  </dd>
+                </div>
+              {% endif %}
+            {% endif %}
+            {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+              <!---FAM--->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Location of AIT centre
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['localAuth'] or "1234567"}} 
+                </dd>
+              </div>
+            {% endif %}
+
+            <!---ALL--->
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Exemption criteria satisfied
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['exemptionCriteria'] or "CA001"}} 
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <!--Primary claim costs-->
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h3 class="govuk-summary-card__title">Primary claim costs</h3>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+              <!---IMM - All - specific Matter--->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Case VAT eligible
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['vatEligible'] or "Yes"}}
+                </dd>
+              </div>   
+            {% endif %}
+
+            {% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
+
+              <!--- FOR EVERYONE ELSE --->
+              {% else %}
+
+              <!---ALL except IMM - Disbursement --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Case VAT eligible
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['counselCost'] or "£120.12"}}
+                </dd>
+              </div>   
+
+              <!---ALL except IMM - Disbursement --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Advice time
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['adviceNoHours-hours'] or "1"}}:{{ data['adviceNoHours-mins'] or "45"}}
+                </dd>
+              </div>
+              <!---ALL except IMM - Disbursement --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Profit costs
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['profitCost'] or "£234.00"}}
+                </dd>
+              </div>
+              <!---ALL except IMM - Disbursement --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Travel time
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['travelNoHours-hours'] or "1"}}:{{ data['travelNoHours-mins'] or "45"}}
+                </dd>
+              </div>
+              <!---ALL except IMM - Disbursement --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Waiting time
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['waitingNoHours-hours'] or "1"}}:{{ data['waitingNoHours-mins'] or "45"}}
+                </dd>
+              </div>
+              <!---ALL except IMM - Disbursement --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Travel and waiting costs
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['travelwaitingCost'] or "£234.00"}}
+                </dd>
+              </div>
+
+              {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+                
+                  <!---IMM - Stage or Completed not Disbursement - specific Matter--->
+                  <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                      Detention travel and waiting costs
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                      {{ data['detentionCost'] or "£234.00"}}
+                    </dd>
+                  </div>
+
+              {% endif %}
+            {% endif %}
+
+            <!---All--->
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Disbursement costs
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['disbursementCost'] or "£234.00"}}
+              </dd>
+            </div>
+             <!---All--->
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                VAT on disbursements
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['disbursementVATCost'] or "£23.00"}}
+              </dd>
+            </div>
+
+            {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+              <!---IMM - All - specific Matter--->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Prior authority number (NIAT Disbursement)
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['priorAuth'] or "AB12345678"}}
+                </dd>
+              </div>
+            {% endif %}
+          </dl>
+        </div>
+      </div>
+       <!--Additioanl costs-->
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h3 class="govuk-summary-card__title">Additional fees</h3>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+              <!---FAM --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Recovered costs or damages
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['damagesCost'] or "None"}} 
+                </dd>
+              </div>
+              <!---FAM --->
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  London rates
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data['londonRate'] or "No"}} 
+                </dd>
+              </div>
+            {% endif %}
+
+            {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+              {% if data['claimTypeImmigration'] !== "Stage disbursement claim" or data['lawCategory'] == "All" %}
+                <!---IMM - Stage or Completed not Disbursement - All Matter--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Home Office interviews
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['hmoFee'] or "1"}} 
+                  </dd>
+                </div>
+              
+                <!---IMM - Stage or Completed not Disbursement - All Matter --->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Oral CMR hearings
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['oralFee'] or "1"}} 
+                  </dd>
+                </div>
+
+                <!---IMM - Stage or Completed not Disbursement - All Matter--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Telephone CMR hearings
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['telephoneFee'] or "3"}} 
+                  </dd>
+                </div>
+                <!---IMM - Stage or Completed not Disbursement - all Matter --->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Substantive hearing
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['substantiveFee'] or "No"}} 
+                  </dd>
+                </div>
+
+                <!---IMM - Stage or Completed not Disbursement - specific Matter--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Hearing adjourned
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['adjournedHearingFee'] or "No"}} 
+                  </dd>
+                </div>
+
+                <!---IMM - Stage or Completed not Disbursement - specific Matter--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Hearing adjourned
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['judicialreviewCost'] or "£102.23"}} 
+                  </dd>
+                </div>
+
+                <!---IMM - Stage or Completed not Disbursement - specific Matter--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Form filling costs
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['formfillingCost'] or "£0.00"}} 
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if data['claimTypeImmigration'] == "Completed matter claim" or data['lawCategory'] == "All" %}
+                <!---IMM - is Completed - specific Matter--->
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    NRM (National Referral Mechanism) advice
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{data['nrmFee'] or "No"}} 
+                  </dd>
+                </div>
+              {% endif %}
+
+            {% endif %}
+          </dl>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

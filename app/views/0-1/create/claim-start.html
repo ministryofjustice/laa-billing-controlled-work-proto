@@ -1,0 +1,225 @@
+{% extends "layouts/main.html" %}
+{% set version = "0-1" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Claim type – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form class="form" action="/{{version}}/create/claim-matter-type" method="post">
+
+      <h1 class="govuk-heading-xl">Claim details</h1>
+      <p>To set up your claim we need some initial information.</p>
+
+      <!--is this needed?
+        {{ govukInput({
+          label: {
+            text: "What is the unique file number (UFN)?",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          hint: {
+            text: "For example 310223/001"
+          },
+          classes: "govuk-input--width-10",
+          id: "ufn",
+          name: "ufn",
+          value: data['ufn']
+        }) }}
+      -->
+
+      {{ mojDatePicker({
+        id: "caseStart",
+        name: "caseStart",
+        value: data['caseStart'],
+        label: {
+          text: "Date case was opened",
+          classes: "govuk-label--s"
+        },
+        hint: {
+          text: "For example, 17/5/2024."
+        }
+      }) }}
+
+      {% set immigrationHtml %}
+        {{ govukRadios({
+          name: "claimTypeImmigration",
+          fieldset: {
+            legend: {
+              text: "Claim type",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Stage claim",
+              text: "Stage claim",
+              checked: checked("claimTypeImmigration", "Stage claim")
+            },
+            {
+              value: "Stage disbursement claim",
+              text: "Stage disbursement claim",
+              checked: checked("claimTypeImmigration", "Stage disbursement claim")
+            },
+            {
+              value: "Completed matter claim",
+              text: "Completed matter claim",
+              checked: checked("claimTypeImmigration", "Completed matter claim")
+            }
+          ]
+        }) }}
+      {% endset %}
+
+      {% set mentalHtml %}
+        {{ govukRadios({
+          name: "claimTypeMental",
+          fieldset: {
+            legend: {
+              text: "Claim type",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Stage disbursement claim",
+              text: "Stage disbursement claim",
+              checked: checked("claimTypeMental", "Stage disbursement claim")
+            },
+            {
+              value: "Completed matter claim",
+              text: "Completed matter claim",
+              checked: checked("claimTypeMental", "Completed matter claim")
+            }
+          ]
+        }) }}
+      {% endset %}
+
+
+      {{ govukRadios({
+        name: "lawCategory",
+        fieldset: {
+          legend: {
+            text: "Category of law",
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        hint: {
+          text: "Select one option"
+        },
+        items: [
+          {
+            value: "Claims Against Public Authorities",
+            text: "Claims Against Public Authorities",
+            checked: checked("lawCategory", "Claims Against Public Authorities")
+            
+          },
+          {
+            value: "Clinical Negligence",
+            text: "Clinical Negligence",
+            checked: checked("lawCategory", "Clinical Negligence")
+          },
+          {
+            value: "Community Care",
+            text: "Community Care",
+            checked: checked("lawCategory", "Community Care")
+          },
+          {
+            value: "Debt",
+            text: "Debt",
+            checked: checked("lawCategory", "Debt")
+          },
+          {
+            value: "Discrimination",
+            text: "Discrimination",
+            checked: checked("lawCategory", "Discrimination")
+          },
+          {
+            value: "Education",
+            text: "Education",
+            checked: checked("lawCategory", "Education")
+          },
+          {
+            value: "Family",
+            text: "Family",
+            checked: checked("lawCategory", "Family"),
+            conditional: {
+              html: textHtml
+            }
+          },
+          {
+            value: "Housing",
+            text: "Housing",
+            checked: checked("lawCategory", "Housing")
+          },
+          {
+            value: "Immigration and Asylum",
+            text: "Immigration and Asylum",
+            checked: checked("lawCategory", "Immigration and Asylum"),
+            conditional: {
+              html: immigrationHtml
+            }
+          },
+          {
+            value: "Mental Health",
+            text: "Mental Health",
+            checked: checked("lawCategory", "Mental Health"),
+            conditional: {
+              html: mentalHtml
+            }
+          },
+          {
+            value: "Miscellaneous",
+            text: "Miscellaneous",
+            checked: checked("lawCategory", "Miscellaneous"),
+            conditional: {
+              html: mentalHtml
+            }
+          },
+          {
+            value: "Public Law",
+            text: "Public Law",
+            checked: checked("lawCategory", "Public Law")
+          },
+          {
+            value: "Welfare Benefits",
+            text: "Welfare Benefits",
+            checked: checked("lawCategory", "Welfare Benefits"),
+            conditional: {
+              html: mentalHtml
+            }
+          }
+        ]
+      }) }}     
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

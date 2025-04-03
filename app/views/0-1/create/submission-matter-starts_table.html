@@ -1,0 +1,87 @@
+{% extends "layouts/main.html" %}
+{% set version = "0-1" %}
+{% set activePrimeNav = [true, false] %}
+{% set activeSubNav = [true, false, false] %}
+
+{% block header %}
+  {% include version + "/includes/header-provider.njk" %}
+{% endblock %}
+
+
+{% block pageTitle %}
+  Matter starts – {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Matter starts</h1>
+      <p>Enter the matter starts that occured in this period.</p>
+
+      {% if data['isImport'] == "yes" %}
+        <form class="form" action="/{{version}}/submission/submission-details" method="post">
+        {% else %}
+        <form class="form" action="/{{version}}/submission/claim-start" method="post">
+      {% endif %}
+
+        <table class="govuk-table" data-module="moj-sortable-table">
+          <caption class="govuk-table__caption govuk-visually-hidden">Matter types for the period March 2025</caption>
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header" aria-sort="none" id="matterType">Category</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Number of cases</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row all January A1B1C1 Family">
+              <td class="govuk-table__cell" id="claim1">Family</td>
+              <td class="govuk-table__cell">
+                <div class="govuk-form-group govuk-!-margin-bottom-0">
+                  <label class="govuk-label govuk-visually-hidden" for="Family_matterStart">
+                    Family
+                  </label>
+                  <div class="govuk-input__wrapper">
+                    <input class="govuk-input govuk-input--width-3" id="Family_matterStart" name="Family_matterStart" value="{{data['Family_matterStart'] or "0"}}" type="numeric" spellcheck="false">
+                  </div>
+                </div>
+              </td>
+            </tr> 
+            <tr class="govuk-table__row all January A1B1C1 Immigration">
+              <td class="govuk-table__cell" id="claim1">Immigration</td>
+              <td class="govuk-table__cell">
+                <div class="govuk-form-group govuk-!-margin-bottom-0">
+                  <label class="govuk-label govuk-visually-hidden" for="Immigration_matterStart">
+                    Immigration
+                  </label>
+                  <div class="govuk-input__wrapper">
+                    <input class="govuk-input govuk-input--width-3" id="Immigration_matterStart" name="Immigration_matterStart" value="{{data['Immigration_matterStart'] or "0"}}" type="numeric" spellcheck="false">
+                  </div>
+                </div>
+              </td>
+            </tr>  
+          </body>
+        </table>
+  
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

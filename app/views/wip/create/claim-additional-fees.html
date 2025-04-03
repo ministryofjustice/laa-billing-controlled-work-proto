@@ -4,7 +4,7 @@
 
 
 {% block header %}
-  {% include version + "/includes/header-provider.html"%}
+  {% include "/includes/header-provider.html"%}
 {% endblock %}
 
 {% block pageTitle %}
@@ -13,7 +13,6 @@
 
 {% block beforeContent %}
   {% include "includes/banner.html"%}
-  {% include version + "/includes/nav-prime-provider.njk" %}
   
   {{ govukBackLink({
     text: "Back",

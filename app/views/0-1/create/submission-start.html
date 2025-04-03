@@ -1,0 +1,140 @@
+{% extends "layouts/main.html" %}
+{% set version = "0-1" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Submission details – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" action="/{{version}}/create/submission-matter-starts-edit" method="post">
+
+        <h1 class="govuk-heading-xl">Submission details</h1>
+
+
+        {% if data['isImport'] == "yes" %}
+          {% if data['importStatus'] == "error" and data['claimErrors'] == "2" %}
+            {{ mojAlert({
+              variant: "warning",
+              title: "There is problem with 2 of the claims",
+              showTitleAsHeading: true,
+              headingTag: "h3",
+              dismissible: false,
+              html: 'You can choose continue with this import or fix the issues using your CMS and import the file again. View an <a href"" class="govuk-link">error summary</a>'
+            }) }}
+            {% elseif data['importStatus'] == "error" and data['claimErrors'] == "1" %}
+            {{ mojAlert({
+              variant: "warning",
+              title: "There is problem with 1 of the claims",
+              showTitleAsHeading: true,
+              dismissible: false,
+              html: 'You can choose continue with this import or fix the issues using your CMS and import the file again. View an <a href"" class="govuk-link">error summary</a>'
+            }) }}
+
+            {% elseif data['importStatus'] == "success" %}
+            {{ mojAlert({
+              variant: "info",
+              title: "Submission imported",
+              showTitleAsHeading: true,
+              dismissible: false,
+              html: '<p class="govuk-body">You successfully imported 23 claims. Review all details before final submission.</p>'
+            }) }}
+          {% endif %}
+        {% endif %}
+
+        {{ govukRadios({
+          name: "firmAC",
+          fieldset: {
+            legend: {
+              text: "Which firm office account number is this submission for?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "Your sign in details give you access to these firm office account numbers. To get access to a different firm office account number contact your firm's LAA account administrator."
+          },
+          items: [
+            {
+              value: "A1B2C3",
+              text: "A1B2C3",
+              checked: checked("firmAC", "A1B2C3")
+            },
+            {
+              value: "C1B1C1",
+              text: "C1B1C1",
+              checked: checked("firmAC", "C1B1C1")
+            },
+            {
+              value: "2M407Z",
+              text: "2M407Z",
+              checked: checked("firmAC", "2M407Z")
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "submissionType",
+          fieldset: {
+            legend: {
+              text: "What is the submission type?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Lower crime",
+              text: "Lower crime",
+              checked: checked("submissionType", "Lower crime")
+            },
+            {
+              value: " 	Legal help",
+              text: " 	Legal help",
+              checked: checked("submissionType", "Legal help")
+            },
+            {
+              value: "Mediation",
+              text: "Mediation",
+              checked: checked("submissionType", "Mediation")
+            }
+          ]
+        }) }}  
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Save and continue"
+          }) }}
+
+          {{ govukButton({
+            text: "Cancel import",
+            classes: "govuk-button--secondary",
+            href: "../submissions-submitted"
+          }) }}
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

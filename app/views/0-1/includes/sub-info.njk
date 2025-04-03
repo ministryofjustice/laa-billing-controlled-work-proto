@@ -1,0 +1,142 @@
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">
+    {% if data['subStatus'] == "In progress" %}
+      <p><strong class="govuk-tag govuk-tag--grey">In progress</strong></p>
+
+      {% elseif data['subStatus'] == "Submitted" %}
+      <p><strong class="govuk-tag govuk-tag--purple">Submitted</strong></p>
+
+      {% elseif data['subStatus'] == "Resubmitted" %}
+      <p><strong class="govuk-tag govuk-tag--purple">Resubmitted</strong></p>
+      
+      {% elseif data['subStatus'] == "Paid" %}
+      <p><strong class="govuk-tag govuk-tag--green">Paid</strong></p>
+
+      {% elseif data['subStatus'] == "Part paid" %}
+      <p><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></p>
+                    
+    {% endif %} 
+    <!--Import error-->
+    {% if data['subStatus'] == "In progress" %}
+      {% if data['importStatus'] == "error" and data['claimErrors'] == "2" %}
+        {{ mojAlert({
+          variant: "warning",
+          title: "Missing or incorrect information",
+          showTitleAsHeading: false,
+          headingTag: "h3",
+          dismissible: false,
+          html: '<p class="govuk-body">Review the following 2 claims: <a href="../create/task-list?question-claimType=error&question-client=complete&question-case=complete&question-costs=complete&question-check=&ufn=00323/234&caseStart=12/11/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled">claim 1</a>, <a href="">claim 3</a></p>'
+        }) }}
+        {% elseif data['importStatus'] == "error" and data['claimErrors'] == "1" %}
+        {{ mojAlert({
+          variant: "warning",
+          title: "Missing or incorrect information",
+          showTitleAsHeading: true,
+          headingTag: "h3",
+          dismissible: false,
+          html: '<p class="govuk-body">Review the following claim: <a href="../create/task-list?question-claimType=error&question-client=complete&question-case=complete&question-costs=error&question-check=&ufn=100323/234&caseStart=10/03/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled&vatEligible=No&counselCost=0.00&adviceNoHours-hours=2&adviceNoHours-mins=00&profitCost=200.00&travelNoHours-hours=2&travelNoHours-mins=00&waitingNoHours-hours=2&waitingNoHours-mins=00&travelwaitingCost=50.00&detentionCost=0.00&disbursementCost=90.oo&disbursementVATCost=10.00ß">claim 1</a>'
+        }) }}
+      {% endif %}
+
+      {% elseif data['subStatus'] == "Paid" %}
+      {{ mojAlert({
+        variant: "information",
+        title: "Claims amended",
+        showTitleAsHeading: false,
+        headingTag: "h3",
+        dismissible: true,
+        html: '<p class="govuk-body">3 claims were amended by the LAA: <a href="submission-claim-details">claim 1</a>, <a href="submission-claim-details">claim 13</a>, <a href="submission-claim-details">claim 17</a></p>'
+      }) }}
+
+      {% elseif data['subStatus'] == "Resubmitted" %}
+      {{ mojAlert({
+        variant: "information",
+        title: "Claims amended",
+        showTitleAsHeading: false,
+        headingTag: "h3",
+        dismissible: true,
+        html: '<p class="govuk-body">1 claim was amended : <a href="submission-claim-details">claim 2</a></p>'
+      }) }}
+    {% endif %}
+
+    <div class="moj-page-header-actions">
+      <div class="moj-page-header-actions__title">
+        <h1 class="govuk-heading-xl">{{data['laa-ref'] or "LAA-5a7d3c"}}</h1>
+      </div>
+      <div class="moj-page-header-actions__actions">
+        <div class="moj-button-group">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Export
+          </button> 
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Costs breakdown
+          </button>
+          {% if data['subStatus'] == "In progress" %}
+            {{ govukButton({
+              text: "Check and submit",
+              href: "submission-check"
+            }) }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-two-thirds">
+    
+    {% if data['subStatus'] == "In progress" %}
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Submission details
+          </h2>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+              <a class="govuk-link" href="../create/submission-start?isImport=No">Change<span class="govuk-visually-hidden"> submission details</span></a>
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['firmAC'] or "C1B1C1"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Submission type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['submissionType'] or "Lower crime"}}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      {% elseif data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['claimedCost'] or ('1362')}}.00</span></h2>
+      <h3 class="govuk-heading-s">Account: <span class="govuk-!-font-weight-regular">{{data['firmAC'] or "C1B1C1"}}</h3>
+      <h3 class="govuk-heading-s">Submission type: <span class="govuk-!-font-weight-regular">{{data['submissionType'] or "Legal help"}}</h3>
+      {% if data['subStatus'] == "Resubmitted" %}
+        <h3 class="govuk-heading-s">Last updated: <span class="govuk-!-font-weight-regular">20 March 2025</h3>
+        <h3 class="govuk-heading-s">Submitted: <span class="govuk-!-font-weight-regular">18 March 2025</h3>
+      {% endif %}
+      
+      {% elseif data['subStatus'] == "Paid" or data['subStatus'] == "Part paid" %}
+      <h2 class="govuk-heading-m"><span class="">Paid:</span> <span class="govuk-!-font-weight-regular">£{{data['paidCost'] or ('1362')}}.00</span></h2>
+      <h2 class="govuk-heading-m">Claimed: <span class="govuk-!-font-weight-regular">£{{data['claimedCost'] or ('1362')}}.00</span></h2>
+      <h3 class="govuk-heading-s">Account: <span class="govuk-!-font-weight-regular">{{data['firmAC'] or "C1B1C1"}}</h3>
+      <h3 class="govuk-heading-s">Submission type: <span class="govuk-!-font-weight-regular">{{data['submissionType'] or "Legal help"}}</h3>
+      <h3 class="govuk-heading-s">Last updated: <span class="govuk-!-font-weight-regular">22 March 2025</h3>
+      <h3 class="govuk-heading-s">Submitted: <span class="govuk-!-font-weight-regular">18 March 2025</h3>
+            
+    {% endif %} 
+  </div>
+</div>

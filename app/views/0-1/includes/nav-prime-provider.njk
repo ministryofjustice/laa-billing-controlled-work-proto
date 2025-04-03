@@ -1,0 +1,25 @@
+{{ mojPrimaryNavigation({
+  label: 'Primary navigation',
+  items: [
+    {
+      text: 'Your submissions',
+      href: '/' + version + '/submissions-submitted',
+      active: + activePrimeNav[0] | default('true')
+    },
+    {
+      text: 'Matter starts',
+      href: '/' + version + '/submissions-matter-starts',
+       active: + activePrimeNav[1]
+    },
+    {
+      text: 'Reporting',
+      href: '/' + version + '/reporting',
+       active: + activePrimeNav[1]
+    },
+    {
+      text: 'Search',
+      href: '/' + version + '/submissions-search',
+       active: + activePrimeNav[2]
+    }
+  ]
+}) }}

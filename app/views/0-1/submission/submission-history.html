@@ -1,0 +1,92 @@
+{% extends "layouts/main.html" %}
+{% set version = "0-1" %}
+{% set activePrimeNav = [true, false] %}
+{% set activeSubNav = [false, false, true] %}
+
+{% block header %}
+  {% include version + "/includes/header-provider.njk" %}
+{% endblock %}
+
+
+{% block pageTitle %}
+  Submission details - history – {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+{% include version + "/includes/sub-info.njk" %}
+
+  
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">
+    {% include version + "/includes/nav-sub-submission.njk" %}
+    <h2 class="govuk-heading-l" id="nav">Submission history</h2>
+
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Date</th>
+          <th scope="col" class="govuk-table__header">User</th>
+          <th scope="col" class="govuk-table__header">Update</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% if data['subStatus'] == "Paid" %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">20 Mar 2025<br>09:21am</td>
+            <td class="govuk-table__cell">LAA</td>
+            <td class="govuk-table__cell"><strong>Paid</strong><br>All claims paid</td>
+          </tr>
+        {% endif %}
+        {% if data['subStatus'] == "Part paid" or data['subStatus'] == "Paid" %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">18 Mar 2025<br>09:00am</td>
+            <td class="govuk-table__cell">LAA</td>
+            <td class="govuk-table__cell"><strong>Amended</strong><br>Escape claim costs amended</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">15 Mar 2025 <br>10:01am</td>
+            <td class="govuk-table__cell">LAA</td>
+            <td class="govuk-table__cell"><strong>Part paid</strong><br>All claims paid except for escape claims</td>
+          </tr>
+        {% endif %}
+        {% if data['subStatus'] == "Resubmitted" or data['subStatus'] == "Part paid" or data['subStatus'] == "Paid" %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">13 Mar 2025 <br>03:23</td>
+            <td class="govuk-table__cell">simon@law.com</td>
+            <td class="govuk-table__cell"><strong>Resubmitted</strong><br>Amended submission</td>
+          </tr>
+        {% endif %}
+        {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" or data['subStatus'] == "Part paid" or data['subStatus'] == "Paid" %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">7 Mar 2025 <br>11:02am</td>
+            <td class="govuk-table__cell">martha@law.com</td>
+            <td class="govuk-table__cell"><strong>Submitted</strong>
+            </td>
+          </tr>
+        {% endif %}
+        {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" or data['subStatus'] == "Part paid" or data['subStatus'] == "Paid" %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">5 Mar 2023 <br>09:00</td>
+            <td class="govuk-table__cell">martha@law.com</td>
+            <td class="govuk-table__cell"><strong>Submission created</strong></td>
+          </tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+{% endblock %}

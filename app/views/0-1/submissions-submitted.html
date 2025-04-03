@@ -1,0 +1,292 @@
+{% extends "layouts/main.html" %}
+{% set version = "0-1" %}
+{% set activePrimeNav = [true, false] %}
+{% set activeSecondNav = [true, false] %}
+
+{% block header %}
+  {% include version + "/includes/header-provider.njk" %}
+{% endblock %}
+
+
+{% block pageTitle %}
+  Submitted submissions – {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">
+   
+    <h1 class="govuk-heading-xl">
+      Your submissions
+    </h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Import submission",
+        href: "create/submission-import?subStatus=In progress&isImport=yes&importStatus=success"
+      }) }}
+
+      {{ govukButton({
+        text: "Create a new submission",
+        href: "create/submission-start?subStatus=In progress&isImport=manual&claims=0&importStatus=&submissionType=&scheduleRef=&firmAC=&Immigration_matterStart=&Family_matterStart=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&question-claimType=&question-client=&question-case=&question-costs=&question-check=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
+   
+
+    {% include version + "/includes/nav-second-provider.njk" %}
+
+
+    <h2 class="govuk-heading-m">Submitted</h2>
+    {% if data['app-state'] == "empty"  %}
+      <p>You do not have any claims that have been submitted.</p>
+      {% else %}
+      <table class="govuk-table" data-module="moj-sortable-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Claimed</th>
+             <th scope="col" class="govuk-table__header" aria-sort="none">Paid</th>
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Submitted</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">    
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+            <a href="submission/submission-details?subStatus=Submitted&laa-ref=LAA-834562&claimedCost=5432&paidCost=&firmAC=C1B1C1&submissionType=Legal help&subPeriod=March 2025" class="govuk-link--no-visited-state">LAA-834562</a>
+            </td>
+            <td class="govuk-table__cell" data-sort-value="C1B1C1">C1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£5432.22</td>
+            <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell" data-sort-value="260309"><span id="date"></span></td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--purple">Submitted</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="submission/submission-details?subStatus=Part paid&laa-ref=LAA-458343&claimedCost=746&paidCost=512&firmAC=C1B1C1&submissionType=Legal help&subPeriod=Feb 2025" class="govuk-link--no-visited-state">LAA-458343</a>
+            </td>
+            <td class="govuk-table__cell" >C1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£746.12</td>
+            <td class="govuk-table__cell">£512.45</td>
+            <td class="govuk-table__cell" data-sort-value="2502">Feb 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="submission/submission-details?subStatus=Part paid&laa-ref=LAA-376574&claimedCost=746&paidCost=512&firmAC=A1B1C1&submissionType=Legal help&subPeriod=Feb 2025" class="govuk-link--no-visited-state">LAA-376574</a>
+            </td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£746.57</td>
+            <td class="govuk-table__cell">£512.01</td>
+            <td class="govuk-table__cell" data-sort-value="2502">Feb 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="submission/submission-details?subStatus=Paid&laa-ref=LAA-456845&claimedCost=746&paidCost=1447&firmAC=A1B1C1&submissionType=Legal help&subPeriod=Jan 2025" class="govuk-link--no-visited-state">LAA-456845</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£746.57</td>
+            <td class="govuk-table__cell">£1447.13</td>
+            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="submission/submission-details?subStatus=Resubmitted&laa-ref=LAA-746783&claimedCost=4533&paidCost=&firmAC=A1B1C1&submissionType=Legal help&subPeriod=March 2025" class="govuk-link--no-visited-state">LAA-746783</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£4533.67</td>
+            <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell" data-sort-value="2503">Mar 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--purple">Resubmitted</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="" class="govuk-link--no-visited-state">LAA-356789</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£456.78</td>
+            <td class="govuk-table__cell">£456.78</td>
+            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-345678</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£5673.11</td>
+            <td class="govuk-table__cell">£5673.11</td>
+            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-457634</a>
+            </td>
+            <td class="govuk-table__cell">2M407Z</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">£834.56</td>
+            <td class="govuk-table__cell">£1034.87</td>
+            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-976534</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£890.21</td>
+            <td class="govuk-table__cell">£890.21</td>
+            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-123456</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£567.21</td>
+            <td class="govuk-table__cell">£761.38</td>
+            <td class="govuk-table__cell" data-sort-value="2407">Jul 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-230323</a>
+            </td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£6790.10</td>
+            <td class="govuk-table__cell">£6790.10</td>
+            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-364568</a>
+            </td>
+            <td class="govuk-table__cell">A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£456.33</td>
+            <td class="govuk-table__cell">£456.33</td>
+            <td class="govuk-table__cell" data-sort-value="2302">Feb 2023</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-926546</a>
+            </td>
+            <td class="govuk-table__cell" >2M407Z</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">£4566.11</td>
+            <td class="govuk-table__cell">£4566.11</td>
+            <td class="govuk-table__cell" data-sort-value="2409">Sep 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-374563</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£252.25</td>
+            <td class="govuk-table__cell">£252.25</td>
+             <td class="govuk-table__cell" data-sort-value="2410">Oct 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-374586</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£678.33</td>
+            <td class="govuk-table__cell">£678.33</td>
+            <td class="govuk-table__cell" data-sort-value="2412">Dec 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-495674</a>
+            </td>
+            <td class="govuk-table__cell" >2M407Z</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">£876.11</td>
+            <td class="govuk-table__cell">£876.11</td>
+            <td class="govuk-table__cell" data-sort-value="2403">Mar 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-475673</a>
+            </td>
+            <td class="govuk-table__cell" >2M407Z</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">£993.22</td>
+            <td class="govuk-table__cell">£993.22</td>
+            <td class="govuk-table__cell" data-sort-value="2406">Jun 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="" class="govuk-link--no-visited-state">LAA-254674</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">£234.21</td>
+            <td class="govuk-table__cell">£234.21</td>
+            <td class="govuk-table__cell" data-sort-value="2402">Feb 2024</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href=" " class="govuk-link--no-visited-state">LAA-476565</a>
+            </td>
+            <td class="govuk-table__cell" >2M407Z</td>
+            <td class="govuk-table__cell">Crime lower</td>
+            <td class="govuk-table__cell">£12.32</td>
+            <td class="govuk-table__cell">£12.32</td>
+            <td class="govuk-table__cell" data-sort-value="2501">Jan 2025</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          </tr>
+        </body>
+      </table>
+      {% include "includes/pagination.html"%}
+    {% endif %}
+  </div>
+
+</div>
+
+<script>
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString('en-GB', {
+    month: 'short', year: 'numeric'
+  }).replace(/ /g, ' ');
+  document.getElementById("date").innerHTML = formattedDate;
+</script>  
+
+{% endblock %}

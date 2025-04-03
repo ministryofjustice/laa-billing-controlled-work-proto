@@ -4,7 +4,7 @@
 {% set activeSubNav = [true, false, false] %}
 
 {% block header %}
-  {% include version + "/includes/header-provider.njk" %}
+  {% include "/includes/header-provider.njk" %}
 {% endblock %}
 
 
@@ -14,7 +14,6 @@
 
 {% block beforeContent %}
   {% include "includes/banner.html"%}
-  {% include version + "/includes/nav-prime-provider.njk" %}
     {{ govukBackLink({
     text: "Back",
     href: "javascript:window.history.back()"
