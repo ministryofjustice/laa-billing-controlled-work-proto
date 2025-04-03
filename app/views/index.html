@@ -1,5 +1,14 @@
 {% extends "layouts/main.html" %}
 
+{% block header %}
+  {{ mojHeader({
+    organisationLabel: {
+      text: "Legal Aid Agency",
+      href: "/"
+    }
+  }) }}
+{% endblock %}
+
 {% set pageName="Home" %}
 
 {% block content %}
@@ -37,82 +46,11 @@
                 <h3 class="govuk-heading-s">Work in progress</h3>
                 <span class="app-task-list__task-name">
                   <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Submission home
+                    Addition of new LAA header & navigation
                   </a>
                 </span>
                 <span class="app-task-list__tag" id="start">In design</span>
                 <br><br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/create/submission-start?subStatus=In progress&isImport=no&subPeriod-month=&subPeriod-year=&submissionType=&scheduleRef=&firmAC=&Immigration_matterStart=&Family_matterStart=&question-claimType=" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Create a new submission
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/create/submission-import?subStatus=In progress&isImport=yes&importStatus=success" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Import a new submission - no errors
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
-                 <span class="app-task-list__task-name">
-                  <a href="/wip/create/submission-import?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Import a new submission - with errors
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br> <br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/create/claim-start?subStatus=In progress&isImport=no
-                  &subPeriod-month=March&subPeriod-year=2025&firmAC=A1B2C3&submissionType=Legal help&Immigration_matterStart=4&Family_matterStart=2&question-claimType=&question-client=&question-case=&question-costs=&question-check=&scheduleRef=&ufn=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Add a claim to existing submission
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br> <br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Submission: status - submitted
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/submission/submission-details?subStatus=Resubmitted" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Submission: status - resubmitted
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Submission: status - paid
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Submission: status - part paid
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/submission/submission-details" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Submission: status - in progress
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
-                 <span class="app-task-list__task-name">
-                  <a href="/wip/submission/submission-details-draft?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Submission: status - in progress with import errors
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
                 
               </li>
 
@@ -122,27 +60,92 @@
                 <details class="govuk-details">
                   <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                      Version no.
+                      V0-1: Initial design before 1st round of user testing
                     </span>
                   </summary>
                   <div class="govuk-details__text">
                     <ul class="app-task-list__items">
                       <!--Section-->
                       <li class="app-task-list__item">
-                        <span class="app-task-list__task-name">Section</span><br>
                         <span class="app-task-list__task-name">
-                          <a href="" class="govuk-link--no-visited-state" aria-describedby="tasklist">
-                            Page/ flow
+                          <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Submission home
                           </a>
                         </span>
-                        <span class="app-task-list__tag" id="all-states">Live</span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br><br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/create/submission-start?subStatus=In progress&isImport=no&subPeriod-month=&subPeriod-year=&submissionType=&scheduleRef=&firmAC=&Immigration_matterStart=&Family_matterStart=&question-claimType=" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Create a new submission
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
                         <br>
                         <span class="app-task-list__task-name">
-                          <a href="" class="govuk-link--no-visited-state" aria-describedby="tasklist">
-                            Page/ flow
+                          <a href="/wip/create/submission-import?subStatus=In progress&isImport=yes&importStatus=success" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Import a new submission - no errors
                           </a>
                         </span>
-                        <span class="app-task-list__tag" id="all-states">Live</span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/create/submission-import?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Import a new submission - with errors
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br> <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/create/claim-start?subStatus=In progress&isImport=no
+                          &subPeriod-month=March&subPeriod-year=2025&firmAC=A1B2C3&submissionType=Legal help&Immigration_matterStart=4&Family_matterStart=2&question-claimType=&question-client=&question-case=&question-costs=&question-check=&scheduleRef=&ufn=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Add a claim to existing submission
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br> <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Submission: status - submitted
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/submission/submission-details?subStatus=Resubmitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Submission: status - resubmitted
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Submission: status - paid
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Submission: status - part paid
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/submission/submission-details" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Submission: status - in progress
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/submission/submission-details-draft?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Submission: status - in progress with import errors
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br>
+                        
                       </li>
                     </ul>
                   </div>
@@ -158,14 +161,27 @@
 
   <!--Aside-->
   <div class="govuk-grid-column-one-third">
-    <aside class="app-related-items" role="complementary">
-      
+    <aside class="app-related-items" role="complementary">      
       <h2 class="govuk-heading-m" id="subsection-title">Key pages</h2>
       <nav role="navigation" aria-labelledby="subsection-title">
-
-        <h3 class="govuk-heading-s" id="subsection-title">Header</h3>
         <ul class="govuk-list">
-          <li><a href="" class="govuk-link--no-visited-state" aria-describedby="start">Words</a></li> 
+          <li><a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">Home</a></li> 
+          <li><a href="/wip/submissions-matter-starts" class="govuk-link--no-visited-state" aria-describedby="start">Matter starts</a></li> 
+           <li><a href="/wip/submissions-search" class="govuk-link--no-visited-state" aria-describedby="start">Search</a></li> 
+        </ul>
+        <h3 class="govuk-heading-s" id="subsection-title">Submissions</h3>
+        <ul class="govuk-list">
+          <li><a href="/wip/submission/submission-details-draft?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">'In progress' submission + errors</a></li> 
+          <li><a href="/wip/submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state" aria-describedby="start">'Submitted' submission</a></li> 
+          <li><a href="/wip/submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state" aria-describedby="start">'Part paid' submission</a></li> 
+          <li><a href="/wip/submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state" aria-describedby="start">'Paid' submission</a></li> 
+        </ul>
+        <h3 class="govuk-heading-s" id="subsection-title">Claims</h3>
+        <ul class="govuk-list">
+          <li><a href="/wip/create/claim-start?subStatus=In progress&isImport=no&subPeriod-month=March&subPeriod-year=2025&firmAC=A1B2C3&submissionType=Legal help&Immigration_matterStart=4&Family_matterStart=2&question-claimType=&question-client=&question-case=&question-costs=&question-check=&scheduleRef=&ufn=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=" class="govuk-link--no-visited-state" aria-describedby="start">Add a claim to existing submission</a></li> 
+          <li><a href="/wip/create/task-list?subStatus=In progress&isImport=no&subPeriod-month=March&subPeriod-year=2025&firmAC=A1B2C3&submissionType=Legal help&Immigration_matterStart=4&Family_matterStart=2&question-claimType=complete&question-client=&question-case=&question-costs=&question-check=&scheduleRef=&ufn=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=" class="govuk-link--no-visited-state" aria-describedby="start">Claim in progress</a></li> 
+          <li><a href="/wip/create/task-list?question-claimType=error&question-client=complete&question-case=complete&question-costs=error&question-check=&ufn=100323/234&caseStart=10/03/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=&client-first-name=Joanna&client-last-name=McBars&clientDOB=2/3/2020&client-postcode=E1 6EG&UCN=10031999/J/MCB&homeUCN=10031999/MCB&clientGender=Female&clientEthnicity=04 - Black or Black British Caribbean&clientDisability=NCD - Not Considered Disabled&vatEligible=No&counselCost=0.00&adviceNoHours-hours=2&adviceNoHours-mins=00&profitCost=200.00&travelNoHours-hours=2&travelNoHours-mins=00&waitingNoHours-hours=2&waitingNoHours-mins=00&travelwaitingCost=50.00&detentionCost=0.00&disbursementCost=90.oo&disbursementVATCost=10.00" class="govuk-link--no-visited-state" aria-describedby="start">Claim progress with import errors</a></li> 
+
         </ul>
       </nav>
     </aside>
