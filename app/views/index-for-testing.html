@@ -1,0 +1,53 @@
+{% extends "layouts/main.html" %}
+
+{% block header %}
+  {{ mojHeader({
+    organisationLabel: {
+      text: "Leagal Aid Agency",
+      href: "/"
+    }
+  }) }}
+{% endblock %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl">
+      {{ serviceName }}
+    </h1>
+
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    </h1>
+   
+    
+    
+
+    <!--PA Provider-->
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">          
+        <ol class="app-task-list">
+          <li> 
+            <h2 class="app-task-list__section">
+              Alpha user testing
+            </h2>    
+            <p> <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                Start here</a></p>        
+            <p><a href="/manage-prototype/clear-data" class="govuk-link--no-visited-state">Reset proto</a></p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+
+  <!--Aside-->
+</div>
+
+{% endblock %}

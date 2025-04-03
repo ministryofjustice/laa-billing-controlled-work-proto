@@ -16,7 +16,29 @@
       <p><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></p>
                     
     {% endif %} 
-    <!--Import error-->
+
+    <div class="moj-page-header-actions">
+      <div class="moj-page-header-actions__title">
+        <h1 class="govuk-heading-xl">{{data['laa-ref'] or "LAA-5a7d3c"}}</h1>
+      </div>
+      <div class="moj-page-header-actions__actions">
+        <div class="moj-button-group">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Export
+          </button> 
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Costs breakdown
+          </button>
+          {% if data['subStatus'] == "In progress" %}
+            {{ govukButton({
+              text: "Check and submit",
+              href: "submission-check"
+            }) }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+        <!--Import error-->
     {% if data['subStatus'] == "In progress" %}
       {% if data['importStatus'] == "error" and data['claimErrors'] == "2" %}
         {{ mojAlert({
@@ -58,28 +80,6 @@
         html: '<p class="govuk-body">1 claim was amended : <a href="submission-claim-details">claim 2</a></p>'
       }) }}
     {% endif %}
-
-    <div class="moj-page-header-actions">
-      <div class="moj-page-header-actions__title">
-        <h1 class="govuk-heading-xl">{{data['laa-ref'] or "LAA-5a7d3c"}}</h1>
-      </div>
-      <div class="moj-page-header-actions__actions">
-        <div class="moj-button-group">
-          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-            Export
-          </button> 
-          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-            Costs breakdown
-          </button>
-          {% if data['subStatus'] == "In progress" %}
-            {{ govukButton({
-              text: "Check and submit",
-              href: "submission-check"
-            }) }}
-          {% endif %}
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
