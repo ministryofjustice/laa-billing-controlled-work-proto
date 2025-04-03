@@ -15,28 +15,12 @@
   display: none;
 }
 
-
-.moj-header {
-  padding-top: 10px;
-}
-
-.moj-header__content {
-  padding-bottom: 0px;
-}
-
-.moj-primary-navigation__container {
-  margin: 0 10px;
-}
-
 //Pagination
 .moj-pagination {
     margin: 0 0 30px 0;
   }
 
-.moj-header__navigation-item {
-    font-size: 1rem;
-    line-height: 1.8rem;
-  }
+
 
 //Search filter
 .search-panel {
@@ -74,30 +58,27 @@
     margin-right: 20px;
   }
 
-//Account menu taken from to be depreciated Gov nav
+//New LAA header and serice navigation 
 @media (min-width: 40.0625em) {
 
-
-  .switch-service-navigation_item {
-    margin-left: auto;
+  /* Making the account navigation smaller */
+  .moj-header__navigation-item {
     font-size: 1rem;
-    padding-top: 23px;
   }
 
-  .switch-service-navigation_item2 {
+  .header-navigation-link {
+    border-left: 1px solid #b1b4b6;
+    padding-left: 20px;
+    }
+
+  /* Service switch navigation */
+  .service-switch-navigation_flex-grow {
+    flex-grow: 2 ;
+  }
+
+  /* Service switch navigation */
+  .service-switch-navigation_item {
     margin-left: auto;
     font-size: 1rem;
-    padding-top: 16px;
-    float: right;
   }
 }
-
-.switch-service-navigation {
-  display: block;
-}
-
-
-.flex-grow2_item {
-  flex-grow: 2 ;
-}
-
