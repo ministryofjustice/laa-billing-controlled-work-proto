@@ -65,12 +65,12 @@
           <th scope="col" class="govuk-table__header" aria-sort="none">Category</th>         
           <th scope="col" class="govuk-table__header" aria-sort="none">Matter</th>
           <th scope="col" class="govuk-table__header" aria-sort="descending">Concluded/ claimed</th>
-          <th scope="col" class="govuk-table__header" aria-sort="none">Claimed</th>
           <th scope="col" class="govuk-table__header" aria-sort="none">Fee type</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Claimed</th>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
             <th scope="col" class="govuk-table__header">Action</th>
             {% else %}
-            <th scope="col" class="govuk-table__header" aria-sort="none">Payment</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Paid</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
           {% endif %}
         </tr>
@@ -82,13 +82,13 @@
             {% if data['subStatus'] == "In progress" %}
               <a href="../create/claim-check" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/098</a>
               {% else %}
-              <a href="submission-claim-details?ufn=100323/098&caseStart=10/03/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=IAXL:IUAS&client-last-name=Amoto" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/098</a>
+              <a href="submission-claim-details?ufn=100323/098&caseStart=10/3/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=IAXL:IUAS&client-last-name=Amoto" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/098</a>
             {% endif %}
           </td>
           <td class="govuk-table__cell">Amoto</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IAXL:IUAS</td>
-          <td class="govuk-table__cell" data-sort-value="250314">14/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250314">14/3/2025</td>
           <td class="govuk-table__cell">£56.00</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
@@ -129,7 +129,7 @@
           <td class="govuk-table__cell">O'Connor</td>
           <td class="govuk-table__cell">Family</td>
           <td class="govuk-table__cell">FAMD:FCHS</td>
-          <td class="govuk-table__cell" data-sort-value="250301">01/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250301">1/3/2025</td>
           <td class="govuk-table__cell">£234.56</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -166,7 +166,7 @@
           <td class="govuk-table__cell">Hasbit</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IACF:IOTH</td>
-          <td class="govuk-table__cell" data-sort-value="250222">22/02/25</td>
+          <td class="govuk-table__cell" data-sort-value="250222">22/2/2025</td>
           <td class="govuk-table__cell">£456.01</td>
           <td class="govuk-table__cell">Hourly</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -203,7 +203,7 @@
           <td class="govuk-table__cell">Tony</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IACF:IGOL</td>
-          <td class="govuk-table__cell" data-sort-value="250301">01/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250301">1/3/2025</td>
           <td class="govuk-table__cell">£56.00</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
@@ -240,7 +240,7 @@
           <td class="govuk-table__cell">Imtez</td>
           <td class="govuk-table__cell">Family</td>
           <td class="govuk-table__cell">FAMD:FADV</td>
-          <td class="govuk-table__cell" data-sort-value="250221">21/02/25</td>
+          <td class="govuk-table__cell" data-sort-value="250221">21/2/2025</td>
           <td class="govuk-table__cell">£234.56</td>
           <td class="govuk-table__cell">Escape</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -277,7 +277,7 @@
           <td class="govuk-table__cell">Omar</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IALB:IRVL</td>
-          <td class="govuk-table__cell" data-sort-value="250312">12/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250312">12/3/2025</td>
           <td class="govuk-table__cell">£456.01</td>
           <td class="govuk-table__cell">Hourly</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -314,7 +314,7 @@
           <td class="govuk-table__cell">Bianchi</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IACF:IFRA</td>
-          <td class="govuk-table__cell" data-sort-value="250301">01/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250301">1/3/2025</td>
           <td class="govuk-table__cell">£56.00</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
@@ -351,7 +351,7 @@
           <td class="govuk-table__cell">Simpson</td>
           <td class="govuk-table__cell">Family</td>
           <td class="govuk-table__cell">FAMD:FCHG</td>
-          <td class="govuk-table__cell" data-sort-value="250307">07/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250307">7/3/2025</td>
           <td class="govuk-table__cell">£234.56</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -388,7 +388,7 @@
           <td class="govuk-table__cell">DeMello</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IACF:IOTH</td>
-          <td class="govuk-table__cell" data-sort-value="250313">13/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250313">13/3/2025</td>
           <td class="govuk-table__cell">£456.01</td>
           <td class="govuk-table__cell">Hourly</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -425,7 +425,7 @@
           <td class="govuk-table__cell">Duffy</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IALB:IASY</td>
-          <td class="govuk-table__cell" data-sort-value="250231">31/02/25</td>
+          <td class="govuk-table__cell" data-sort-value="250231">31/2/2025</td>
           <td class="govuk-table__cell">£56.00</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
@@ -462,7 +462,7 @@
           <td class="govuk-table__cell">Cherub</td>
           <td class="govuk-table__cell">Family</td>
           <td class="govuk-table__cell">FAMA:FOTH</td>
-          <td class="govuk-table__cell" data-sort-value="250225">25/02/25</td>
+          <td class="govuk-table__cell" data-sort-value="250225">25/2/2025</td>
           <td class="govuk-table__cell">£234.56</td>
           <td class="govuk-table__cell">Escape</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -499,7 +499,7 @@
           <td class="govuk-table__cell">Hoffmann</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IAXL:IUAS</td>
-          <td class="govuk-table__cell" data-sort-value="25028">28/02/25</td>
+          <td class="govuk-table__cell" data-sort-value="25028">28/2/2025</td>
           <td class="govuk-table__cell">£456.01</td>
           <td class="govuk-table__cell">Hourly</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -536,7 +536,7 @@
           <td class="govuk-table__cell">McBars</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IALB:IRVL</td>
-          <td class="govuk-table__cell" data-sort-value="250101">01/01/25</td>
+          <td class="govuk-table__cell" data-sort-value="250101">1/1/2025</td>
           <td class="govuk-table__cell">£56.00</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
@@ -567,13 +567,13 @@
             {% if data['subStatus'] == "In progress" %}
               <a href="../create/claim-check" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/467</a>
               {% else %}
-              <a href="submission-claim-details?ufn=100323/098&caseStart=10/03/2023&lawCategory=Family&claimTypeImmigration=&matterType=FAMD:FRES&client-last-name=Giordano" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/467</a>
+              <a href="submission-claim-details?ufn=100323/098&caseStart=10/3/2023&lawCategory=Family&claimTypeImmigration=&matterType=FAMD:FRES&client-last-name=Giordano" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/467</a>
             {% endif %}
           </td>
           <td class="govuk-table__cell">Giordano</td>
           <td class="govuk-table__cell">Family</td>
           <td class="govuk-table__cell">FAMD:FRES</td>
-          <td class="govuk-table__cell" data-sort-value="250318">18/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250318">18/3/2025</td>
           <td class="govuk-table__cell">£234.56</td>
           <td class="govuk-table__cell">Escape</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -610,7 +610,7 @@
           <td class="govuk-table__cell">Abdallah</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IAXL:IUAS</td>
-          <td class="govuk-table__cell" data-sort-value="250224">24/02/25</td>
+          <td class="govuk-table__cell" data-sort-value="250224">24/2/2025</td>
           <td class="govuk-table__cell">£456.01</td>
           <td class="govuk-table__cell">Hourly</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -647,7 +647,7 @@
           <td class="govuk-table__cell">Sompereo</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IACF:IGOL 	</td>
-          <td class="govuk-table__cell" data-sort-value="250220">20/02/25</td>
+          <td class="govuk-table__cell" data-sort-value="250220">20/2/2025</td>
           <td class="govuk-table__cell">£56.00</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
@@ -684,7 +684,7 @@
           <td class="govuk-table__cell">Abdelazim</td>
           <td class="govuk-table__cell">Family</td>
           <td class="govuk-table__cell">FAMA:FAPP</td>
-          <td class="govuk-table__cell" data-sort-value="250311">11/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250311">11/3/2025</td>
           <td class="govuk-table__cell">£234.56</td>
           <td class="govuk-table__cell">Hourly</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -721,7 +721,7 @@
           <td class="govuk-table__cell">Gruffalo</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IAXL:IUAS</td>
-          <td class="govuk-table__cell" data-sort-value="250302">02/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250302">2/3/2025</td>
           <td class="govuk-table__cell">£456.01</td>
           <td class="govuk-table__cell">Hourly</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
@@ -758,7 +758,7 @@
           <td class="govuk-table__cell">McKenna</td>
           <td class="govuk-table__cell">Immigration and Asylum</td>
           <td class="govuk-table__cell">IAXL:IUAS</td>
-          <td class="govuk-table__cell" data-sort-value="250301">01/03/25</td>
+          <td class="govuk-table__cell" data-sort-value="250301">1/3/2025</td>
           <td class="govuk-table__cell">£56.00</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
@@ -795,7 +795,7 @@
           <td class="govuk-table__cell">Rodriguez</td>
           <td class="govuk-table__cell">Family</td>
           <td class="govuk-table__cell">FAMA:FOTH</td>
-          <td class="govuk-table__cell" data-sort-value="250225">25/02/25</td>
+          <td class="govuk-table__cell" data-sort-value="250225">25/2/2025</td>
           <td class="govuk-table__cell">£234.56</td>
           <td class="govuk-table__cell">Fixed</td>
           {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
