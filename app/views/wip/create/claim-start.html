@@ -112,6 +112,7 @@
       {% endset %}
 
 
+      <!-- If the provider has access to all categorgies of law they would see the full list
       {{ govukRadios({
         name: "lawCategory",
         fieldset: {
@@ -207,7 +208,40 @@
             }
           }
         ]
-      }) }}     
+      }) }}
+      -->
+      <!-- this propvider only has access to Family and Immigration law-->
+      {{ govukRadios({
+        name: "lawCategory",
+        fieldset: {
+          legend: {
+            text: "Category of law",
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        hint: {
+          text: "Select one option"
+        },
+        items: [
+          {
+            value: "Family",
+            text: "Family",
+            checked: checked("lawCategory", "Family"),
+            conditional: {
+              html: textHtml
+            }
+          },
+          {
+            value: "Immigration and Asylum",
+            text: "Immigration and Asylum",
+            checked: checked("lawCategory", "Immigration and Asylum"),
+            conditional: {
+              html: immigrationHtml
+            }
+          }
+        ]
+      }) }}        
 
       <div class="govuk-button-group">
         {{ govukButton({
