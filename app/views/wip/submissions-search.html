@@ -73,19 +73,6 @@
       {% endcall %}
 
       <div id="filters" class="govuk-date-input">
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-label--s" for="sort">
-              Claim status
-            </label>
-            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
-              <option value="Show all" selected onclick="filterSelection('all-status')">Show all</option>
-              <option value="In progress" onclick="filterSelection('in-progress')">In progress</option>
-              <option value="Escape" onclick="filterSelection('paid')">Paid</option>
-              <option value="Escape" onclick="filterSelection('part-paid')">Part paid</option>
-            </select>
-          </div>
-        </div>
 
         <div class="govuk-date-input__item">
           <div class="govuk-form-group">
@@ -104,12 +91,41 @@
         <div class="govuk-date-input__item">
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--s" for="sort">
-              Submission type
+              Law category
             </label>
             <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
               <option value="Show all" selected onclick="filterSelection('all-cat')">Show all</option>
               <option value="Family" onclick="filterSelection('family')">Family</option>
               <option value="Immigration and Asylum" onclick="filterSelection('immigration')">Immigration and Asylum</option>
+            </select>
+          </div>
+        </div>
+        <br>
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="sort">
+              Claim status
+            </label>
+            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
+              <option value="Show all" selected onclick="filterSelection('all-status')">Show all</option>
+              <option value="In progress" onclick="filterSelection('in-progress')">In progress</option>
+              <option value="Paid" onclick="filterSelection('paid')">Paid</option>
+              <option value="Part paid" onclick="filterSelection('part-paid')">Part paid</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="sort">
+              Fee type
+            </label>
+            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
+              <option value="Show all" selected onclick="filterSelection('all-status')">Show all</option>
+              <option value="Fixed" onclick="filterSelection('fixed')">Fixed</option>
+              <option value="Hourly" onclick="filterSelection('hourly')">Hourly</option>
+              <option value="Escape" onclick="filterSelection('escape')">Escape</option>
             </select>
           </div>
         </div>
@@ -137,10 +153,10 @@
             <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>   
             <th scope="col" class="govuk-table__header" aria-sort="none">Category</th>         
             <th scope="col" class="govuk-table__header" aria-sort="none" id="claimTitle">Account</th>
-            <th scope="col" class="govuk-table__header" aria-sort="descending">Concluded claimed</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Costs</th>
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Submitted</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Claimed</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Fee type</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Payment</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Paid</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
           </tr>
         </thead>
