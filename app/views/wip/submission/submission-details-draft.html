@@ -4,7 +4,7 @@
 {% set activeSubNav = [true, false, false] %}
 
 {% block header %}
-  {% include "/includes/header-provider.njk" %}
+  {% include version + "/includes/header-provider.njk" %}
 {% endblock %}
 
 
@@ -46,19 +46,19 @@
       }) }}
     {% endif %}
 
-    <details class="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Summary of claim costs
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-        {% include version + "/includes/table-submissionCost.html"%}
-      </div>
-    </details>
-
     {% if data['isImport'] == "manual" and data['claims'] == "0"%}
       {% else %}
+
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Summary of claim costs
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          {% include version + "/includes/table-submissionCost.html"%}
+        </div>
+      </details>
         
       <table class="govuk-table" data-module="moj-sortable-table">
         <caption class="govuk-table__caption govuk-visually-hidden">Claims for the period March 2025</caption>
@@ -92,8 +92,8 @@
               <td class="govuk-table__cell">Immigration and Asylum</td>
               <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Incomplete</strong></td>
               <td class="govuk-table__cell" data-sort-value="250318">18/3/2025</td>
-              <td class="govuk-table__cell">£56.00</td>
               <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">Incomplete</strong></td>
+              <td class="govuk-table__cell">£56.00</td>
               {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
                 <td class="govuk-table__cell">
                   <ul class="govuk-summary-list__actions-list">
@@ -135,8 +135,8 @@
               <td class="govuk-table__cell">Immigration and Asylum</td>
               <td class="govuk-table__cell">{{data['matterType'] or ""}}</td>
               <td class="govuk-table__cell" data-sort-value="250318">18/3/2025</td>
+               <td class="govuk-table__cell">Fixed</td>
               <td class="govuk-table__cell">£56.00</td>
-              <td class="govuk-table__cell">Fixed</td>
               {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
                 <td class="govuk-table__cell">
                   <ul class="govuk-summary-list__actions-list">
@@ -178,8 +178,8 @@
             <td class="govuk-table__cell">Family</td>
             <td class="govuk-table__cell">FAMA:FOTH</td>
             <td class="govuk-table__cell" data-sort-value="250312">12/3/2025</td>
-            <td class="govuk-table__cell">£234.56</td>
             <td class="govuk-table__cell">Escape</td>
+            <td class="govuk-table__cell">£234.56</td>
             {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
               <td class="govuk-table__cell">
                 <ul class="govuk-summary-list__actions-list">
@@ -216,8 +216,8 @@
             <td class="govuk-table__cell">Immigration and Asylum</td>
             <td class="govuk-table__cell">IAXL:IUAS</td>
             <td class="govuk-table__cell" data-sort-value="250314">14/3/2025</td>
-            <td class="govuk-table__cell">£456.01</td>
             <td class="govuk-table__cell">Hourly</td>
+            <td class="govuk-table__cell">£456.01</td>
             {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
               <td class="govuk-table__cell">
                 <ul class="govuk-summary-list__actions-list">
@@ -255,8 +255,8 @@
               <td class="govuk-table__cell">Immigration and Asylum</td>
               <td class="govuk-table__cell">IAXL:IUAS</td>
               <td class="govuk-table__cell" data-sort-value="250314">14/3/2025</td>
+               <td class="govuk-table__cell">Hourly</td>
               <td class="govuk-table__cell">£456.01</td>
-              <td class="govuk-table__cell">Hourly</td>
               {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
                 <td class="govuk-table__cell">
                   <ul class="govuk-summary-list__actions-list">
