@@ -4,7 +4,7 @@
 {% set activeSubNav = [true, false, false] %}
 
 {% block header %}
-  {% include version + "/includes/header-provider.html"%}
+  {% include "/includes/header-provider.njk" %}
 {% endblock %}
 
 
@@ -70,7 +70,7 @@
             <th scope="col" class="govuk-table__header" aria-sort="none">Category</th>         
             <th scope="col" class="govuk-table__header" aria-sort="none">Matter</th>
             <th scope="col" class="govuk-table__header" aria-sort="descending">Concluded/ claimed</th>
-            <th scope="col" class="govuk-table__header" aria-sort="none">Costs</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Claimed</th>
             <th scope="col" class="govuk-table__header" aria-sort="none">Fee type</th>
             <th scope="col" class="govuk-table__header">Action</th>
           </tr>
