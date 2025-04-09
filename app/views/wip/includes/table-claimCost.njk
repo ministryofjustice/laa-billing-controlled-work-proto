@@ -4,54 +4,87 @@
     <td class="govuk-table__header"></td>
     <th scope="col" class="govuk-table__header govuk-table__header--numeric">Case costs</th>
     <th scope="col" class="govuk-table__header govuk-table__header--numeric">Claimed</th>
-    <th scope="col" class="govuk-table__header govuk-table__header--numeric">Allowed</th>
+    {% if data['subStatus'] == "In progress"%}
+    {% else %}
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">Paid</th>
+    {% endif %}
   </thead>
   <tbody class="govuk-table__body">
     {% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
-      {%else %}
+      {% else %}
       <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header">Profit costs [*]</th>
-        <td class="govuk-table__cell govuk-table__cell--numeric">£200.00</td>
+        <th scope="row" class="govuk-table__header">Profit costs</th>
+        <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#escape" id="profit">[*]</a> £200.00</td>
         <td class="govuk-table__cell govuk-table__cell--numeric"></td>
-        <td class="govuk-table__cell govuk-table__cell--numeric"></td>
+        {% if data['subStatus'] == "In progress"%}
+          {% else %}
+          <td class="govuk-table__cell govuk-table__cell--numeric"></td>
+        {% endif %}
       </tr>
       
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Travel & waiting</th>
         <td class="govuk-table__cell govuk-table__cell--numeric">£50.00</td>
         <td class="govuk-table__cell govuk-table__cell--numeric">£50.00</td>
-        <td class="govuk-table__cell govuk-table__cell--numeric">£50.00</td>
+        {% if data['subStatus'] == "In progress"%}
+          {% else %}
+          <td class="govuk-table__cell govuk-table__cell--numeric">£50.00</td>
+        {% endif %}
       </tr>
     {% endif %}
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header">Disbursements (including VAT)</th>
       <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
-      <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
+      {% if data['subStatus'] == "In progress"%}
+        {% else %}
+        <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
+      {% endif %}
     </tr>
     {% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">Total</th>
+        <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of case cost:</span><strong>£100.00</strong></td>
+        <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of claimed costs:</span><strong>£100.00</strong></td>
+        {% if data['subStatus'] == "In progress"%}
+          {% else %}
+          <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of allowed costs:</span><strong>£100.00</strong></td>
+        {% endif %}
+      </tr>
       {% else %}
       <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header">Additional fees</th>
+        <th scope="row" class="govuk-table__header">Additional costs</th>
         <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
         <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
-        <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
+        {% if data['subStatus'] == "In progress"%}
+          {% else %}
+          <td class="govuk-table__cell govuk-table__cell--numeric">£230.00</td>
+        {% endif %}
       </tr>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Fixed fee</th>
         <td class="govuk-table__cell govuk-table__cell--numeric"></td>
         <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
-        <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
+        {% if data['subStatus'] == "In progress"%}
+          {% else %}
+          <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
+        {% endif %}
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">Total</th>
+        <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of case cost:</span><strong>£550.00</strong></td>
+        <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of claimed costs:</span><strong>£450.00</strong></td>
+        {% if data['subStatus'] == "In progress"%}
+          {% else %}
+           <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of allowed costs:</span><strong>£450.00</strong></td>
+        {% endif %}
       </tr>
     {% endif %}
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">Total</th>
-      <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of case cost:</span><strong>£550.00</strong></td>
-      <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of claimed costs:</span><strong>£450.00</strong></td>
-      <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of allowed costs:</span><strong>£450.00</strong></td>
-    </tr>
   </tbody>
 </table>
-<section class="govuk-!-margin-bottom-6">
-  <p class="govuk-body-s" id="fn*">[*] Your profit costs for this claim have escaped</p>
-</section>
+{% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
+{% else %}
+  <section class="govuk-!-margin-bottom-6" id="escape">
+    <p class="govuk-body-s"><a href="#profit" id="escape">[*]</a> The profit costs for this claim escaped</p>
+  </section>
+{% endif %}

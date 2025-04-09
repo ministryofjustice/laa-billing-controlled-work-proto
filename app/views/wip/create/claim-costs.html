@@ -35,7 +35,7 @@
       }) }}
     {% endif %}
     <h1 class="govuk-heading-xl">Primary claim costs</h1>
-    {% if data['claimTypeImmigration'] == "Stage disbursement claim" %}
+    {% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
       <form class="form" action="/{{version}}/create/task-list?question-costs=complete" method="post">
       {% else %}
       <form class="form" action="/{{version}}/create/claim-additional-fees" method="post">
@@ -71,33 +71,40 @@
         }) }}    
       {% endif %}
 
+      {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+
+        <!---FAM --->
+        {{ govukRadios({
+          name: "londonRate",
+          fieldset: {
+            legend: {
+              text: "Are you claiming the London rate?",
+              classes: "govuk-fieldset__legend--s",
+              isPageHeading: false            
+              }
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes",
+              checked: checked("londonRate", "Yes")
+            },
+            {
+              value: "No",
+              text: "No",
+              checked: checked("londonRate", "No")
+            }
+          ]
+        }) }}
+
+      {% endif %}
+
       {% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
 
-        <!--- FOR EVERYONE ELSE --->
         {% else %}
 
         <!---ALL except IMM - Disbursement --->
-        {{ govukInput({
-          id: "counselCost",
-          name: "counselCost",
-          value: data['counselCost'],
-          label: {
-            text: "Counsel costs",
-            classes: "govuk-label--s",
-            isPageHeading: false
-          },
-          prefix: {
-            text: "£"
-          },
-          classes: "govuk-input--width-5",
-          spellcheck: false,
-          hint: {
-            text: "Excluding VAT"
-          }
-        }) }}
-
         <h2 class="govuk-heading-l">Profit costs</h2>
-        <!---ALL except IMM - Disbursement --->
 
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset" role="group" >

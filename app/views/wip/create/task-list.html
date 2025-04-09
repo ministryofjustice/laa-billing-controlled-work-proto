@@ -160,7 +160,7 @@
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
           {% if data['question-claimType'] == "error" or data['question-claimType'] !== "complete" %}
             <div class="govuk-task-list__name-and-hint">
-                Costs and additional fees
+                Primary and additional costs
             </div>
             <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet" id="costs-status">
                 Cannot start yet
@@ -168,7 +168,7 @@
             {% elseif data['question-costs'] == "" or data['question-costs'] == null or data['question-costs'] == "notStarted" %}
             <div class="govuk-task-list__name-and-hint">
               <a href="claim-costs?question-costs=notStarted" class="govuk-link govuk-task-list__link govuk-link--no-visited-state"  aria-describedby="costs-status">
-                Costs and additional fees
+                Primary and additional costs
               </a>
             </div>
             <div class="govuk-task-list__status" id="costs-status">
@@ -179,7 +179,7 @@
             {% elseif data['question-costs'] == "error" %}
             <div class="govuk-task-list__name-and-hint">
               <a class="govuk-link govuk-task-list__link" href="claim-costs" aria-describedby="costs-status">
-                Costs and additional fees
+                Primary and additional costs
               </a>
             </div>
             <div class="govuk-task-list__status" id="costs-status">
@@ -190,7 +190,7 @@
             {% elseif data['question-costs'] == "complete" %}
             <div class="govuk-task-list__name-and-hint">
               <a class="govuk-link govuk-task-list__link" href="claim-costs" aria-describedby="costs-status">
-                Costs and additional fees
+                Primary and additional costs
               </a>
             </div>
             <div class="govuk-task-list__status" id="costs-status">
@@ -250,7 +250,7 @@
           </li>
           <li>                
             <span class="govuk-!-font-weight-bold">Case start</span>   
-            <br>{{data['caseStart'] or "12 June 2024" }} 
+            <br>{{data['caseStart'] or "12/6/2025" }} 
           </li>
           <li>
             <span class="govuk-!-font-weight-bold">Law Category</span>   
