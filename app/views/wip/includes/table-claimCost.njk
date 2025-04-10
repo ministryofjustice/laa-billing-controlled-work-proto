@@ -17,8 +17,10 @@
         <td class="govuk-table__cell govuk-table__cell--numeric"><a href="#escape" id="profit">[*]</a> £200.00</td>
         <td class="govuk-table__cell govuk-table__cell--numeric"></td>
         {% if data['subStatus'] == "In progress"%}
-          {% else %}
+          {% elseif data['subStatus'] == "Part paid" %}
           <td class="govuk-table__cell govuk-table__cell--numeric"></td>
+          {% elseif data['subStatus'] == "Paid" %}
+          <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
         {% endif %}
       </tr>
       
@@ -75,8 +77,10 @@
         <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of case cost:</span><strong>£550.00</strong></td>
         <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of claimed costs:</span><strong>£450.00</strong></td>
         {% if data['subStatus'] == "In progress"%}
-          {% else %}
+          {% elseif data['subStatus'] == "Part paid" %}
            <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of allowed costs:</span><strong>£450.00</strong></td>
+           {% elseif data['subStatus'] == "Paid" %}
+           <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of allowed costs:</span><strong>£510.00</strong></td>
         {% endif %}
       </tr>
     {% endif %}

@@ -33,10 +33,13 @@
             }) }}
           {% endif %}
           {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"  %}
-            {{ govukButton({
-              text: "Amend submission",
-              href: ""
-            }) }}
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              Amend submission
+            </button>
+          {% elseif data['subStatus'] == "Paid" or data['subStatus'] == "Part paid"  %}
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              Request amendment
+            </button>
           {% endif %}
         </div>
       </div>
