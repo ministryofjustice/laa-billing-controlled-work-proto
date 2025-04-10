@@ -26,7 +26,11 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="../create/submission-start?submissionType=Legal help&firmAC=C1B1C1&Immigration_matterStart=3&Family_matterStart=2" method="post">
+      {% if data['isImport'] == "yes" and data['importStatus'] == "error" %}
+        <form class="form" action="submission-import-error" method="post">
+        {% else %}
+        <form class="form" action="../create/submission-start?submissionType=Legal help&firmAC=C1B1C1&Immigration_matterStart=3&Family_matterStart=2" method="post">
+      {% endif %}
 
         {{ govukFileUpload({
           id: "file-upload-1",

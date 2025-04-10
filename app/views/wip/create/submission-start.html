@@ -29,22 +29,14 @@
 
 
         {% if data['isImport'] == "yes" %}
-          {% if data['importStatus'] == "error" and data['claimErrors'] == "2" %}
+          {% if data['importStatus'] == "error" %}
             {{ mojAlert({
               variant: "warning",
-              title: "There is problem with 2 of the claims",
+              title: "Submission imported",
               showTitleAsHeading: true,
               headingTag: "h3",
               dismissible: false,
-              html: 'You can choose continue with this import or fix the issues using your CMS and import the file again. View an <a href"" class="govuk-link">error summary</a>'
-            }) }}
-            {% elseif data['importStatus'] == "error" and data['claimErrors'] == "1" %}
-            {{ mojAlert({
-              variant: "warning",
-              title: "There is problem with 1 of the claims",
-              showTitleAsHeading: true,
-              dismissible: false,
-              html: 'You can choose continue with this import or fix the issues using your CMS and import the file again. View an <a href"" class="govuk-link">error summary</a>'
+              html: '<p class="govuk-body">You successfully imported 2 claims and 1 claim has errors. Carefully review all details before final submission.'
             }) }}
 
             {% elseif data['importStatus'] == "success" %}
@@ -53,7 +45,7 @@
               title: "Submission imported",
               showTitleAsHeading: true,
               dismissible: false,
-              html: '<p class="govuk-body">You successfully imported 23 claims. Review all details before final submission.</p>'
+              html: '<p class="govuk-body">You successfully imported 3 claims. Review all details before final submission.</p>'
             }) }}
           {% endif %}
         {% endif %}
