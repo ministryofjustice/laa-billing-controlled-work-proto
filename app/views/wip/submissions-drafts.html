@@ -61,7 +61,6 @@
           </tr>
         </thead>
         <tbody class="govuk-table__body">
-        {% if data['importStatus'] == "error" %}    
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
               <a href="submission/submission-details-draft?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1&laa-ref=LAA-254674&claimedCost=746&paidCost=&firmAC=A1B1C1&submissionType=Legal help" class="govuk-link--no-visited-state">LAA-254674</a>
@@ -74,10 +73,9 @@
             <td class="govuk-table__cell"><a href="" 
             class="govuk-link--no-visited-state">Delete <span class="govuk-visually-hidden">claim 254674</span></a></td>
           </tr>
-          {% endif %}
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-            <a href="submission/submission-details?subStatus=In progress&importStatus=success&laa-ref=LAA-467893&claimedCost=746&paidCost=&firmAC=C1B1C1&submissionType=Legal help" class="govuk-link--no-visited-state">LAA-467893</a>
+            <a href="submission/submission-details-draft?subStatus=In progress&isImport=manual&claims=3&importStatus=success&claimErrors=0&laa-ref=LAA-467893&claimedCost=746&paidCost=&firmAC=C1B1C1&submissionType=Legal help" class="govuk-link--no-visited-state">LAA-467893</a>
             </td>
             <td class="govuk-table__cell">C1B1C1</td>
             <td class="govuk-table__cell">Legal help</td>

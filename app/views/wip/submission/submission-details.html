@@ -36,7 +36,7 @@
     <h2 class="govuk-heading-l" id="nav">Claims</h2>
         
     <div class="govuk-button-group">
-      {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" %}
+      {% if data['subStatus'] == "In progress" %}
         {{ govukButton({
           text: "Add claim",
           href: "../create/claim-start?caseStart=&lawCategory=&claimTypeImmigration=&matterType=&question-claimType=&question-client=&question-case=&question-costs=&question-check=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=",
@@ -44,19 +44,10 @@
         }) }}
       {% endif %}
     </div>
-    <details class="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Summary of claim costs
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-        {% include version + "/includes/table-submissionCost.html"%}
-      </div>
-    </details>
+    {% include version + "/includes/table-submissionCost.html"%}
       
     <table class="govuk-table" data-module="moj-sortable-table">
-      <caption class="govuk-table__caption govuk-visually-hidden">Claims</caption>
+      <caption class="govuk-table__caption govuk-table__caption--m">All claims</caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header" aria-sort="none" id="claimTitle">No.</th>

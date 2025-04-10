@@ -26,12 +26,13 @@
     <h1 class="govuk-heading-xl">Check your submission</h1>
     
      <form class="form" action="submission-submitted" method="post">
-      {% include version + "/includes/table-submissionCost.njk"%}
+      
       <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
           <h3 class="govuk-summary-card__title">Submission details</h3>
           <ul class="govuk-summary-card__actions">
             <li class="govuk-summary-card__action">
+              <a class="govuk-link" href="../create/submission-start">Change<span class="govuk-visually-hidden"> submission details</span></a>
             </li>
           </ul>
         </div>
@@ -105,68 +106,7 @@
         </div>
       </div>
 
-      <!-- Cost summary
-      <div class="govuk-summary-card">
-        <div class="govuk-summary-card__title-wrapper">
-          <h3 class="govuk-summary-card__title">Costs summary</h3>
-          <ul class="govuk-summary-card__actions">
-            <li class="govuk-summary-card__action">
-            </li>
-          </ul>
-        </div>
-        <div class="govuk-summary-card__content">
-          <p>This submission includes <span class="govuk-!-font-weight-bold">23 claims</span>, of which <span class="govuk-!-font-weight-bold">4 claims escaped</span>.</p>
-
-          <table class="govuk-table">
-            <caption class="govuk-visually-hidden">Your costs summary</caption>
-            <thead class="govuk-table__head">
-              <td class="govuk-table__header"></td>
-              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Case costs</th>
-              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Claimed</th>
-              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Allowed</th>
-            </thead>
-            <tbody class="govuk-table__body">
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Profit costs</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£5000.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric"></td>
-                <td class="govuk-table__cell govuk-table__cell--numeric"></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Travel & waiting (including VAT)</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£100.00</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Disbursements (including VAT)</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£1000.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£1000.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£1000.00</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Additional costs</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£1000.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£1000.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£1000.00</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Fixed fee</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric"></td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£2000.00</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">£2000.00</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">Total</th>
-                <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of cost:</span><strong>£7100.00</strong></td>
-                <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of claimed costs:</span><strong>£4100.00</strong></td>
-                <td class="govuk-table__cell govuk-table__cell--numeric"><span class="govuk-visually-hidden">Sum of allowed costs:</span><strong>£4100.00</strong></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      -->
+     {% include version + "/includes/table-submissionCost.njk"%}
 
 
       <div class="govuk-button-group">
