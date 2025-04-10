@@ -26,6 +26,22 @@
      <div class="search-panel govuk-!-margin-bottom-6">
 
       <div id="filters" class="govuk-date-input">
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="sort">
+              Year
+            </label>
+            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
+               <option value="2025" onclick="filterSelection('2025')">2025</option>
+              <option value="2024" onclick="filterSelection('2024')">2024</option>
+              <option value="2023" onclick="filterSelection('2023')">2023</option>
+              <option value="2022" onclick="filterSelection('2022')">2022</option>
+              <option value="2021" onclick="filterSelection('2021')">2021</option>
+              <option value="2020" onclick="filterSelection('2020')">2020</option>
+            </select>
+          </div>
+        </div>
         
         <div class="govuk-date-input__item">
           <div class="govuk-form-group">
@@ -37,29 +53,6 @@
               <option value="C1B1C1" onclick="filterSelection('C1B1C1')">C1B1C1</option>
               <option value="A1B1C1" onclick="filterSelection('A1B1C1')">A1B1C1</option>
               <option value="2M407Z" onclick="filterSelection('2M407Z')">2M407Z</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-label--s" for="sort">
-              Period
-            </label>
-            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
-              <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
-              <option value="January" onclick="filterSelection('January')">January</option>
-              <option value="February" onclick="filterSelection('February')">February</option>
-              <option value="March" onclick="filterSelection('March')">March</option>
-              <option value="April" onclick="filterSelection('April')">April</option>
-              <option value="May" onclick="filterSelection('May')">May</option>
-              <option value="June" onclick="filterSelection('June')">June</option>
-              <option value="July" onclick="filterSelection('July')">July</option>
-              <option value="August" onclick="filterSelection('August')">August</option>
-              <option value="September" onclick="filterSelection('September')">September</option>
-              <option value="October" onclick="filterSelection('October')">October</option>
-              <option value="November" onclick="filterSelection('November')">November</option>
-              <option value="December" onclick="filterSelection('December')">December</option>
             </select>
           </div>
         </div>
