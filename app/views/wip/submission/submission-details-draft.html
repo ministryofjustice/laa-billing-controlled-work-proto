@@ -68,7 +68,7 @@
         </thead>
         <tbody class="govuk-table__body">
         {% if data['isImport'] == "yes" %}
-          {% if data['claimErrors'] == "1" %}
+          {% if data['importStatus'] =="error" and data['claimErrors'] == "1" %}
             <!--McBars import-->
             <tr class="govuk-table__row">
               <td class="govuk-table__cell" id="claim1">1</td>

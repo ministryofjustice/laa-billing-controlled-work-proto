@@ -31,12 +31,12 @@
         {% if data['isImport'] == "yes" %}
           {% if data['importStatus'] == "error" %}
             {{ mojAlert({
-              variant: "warning",
+              variant: "info",
               title: "Submission imported",
               showTitleAsHeading: true,
               headingTag: "h3",
               dismissible: false,
-              html: '<p class="govuk-body">You successfully imported 2 claims and 1 claim has errors. Carefully review all details before final submission.'
+              html: '<p class="govuk-body">You imported 3 claims. Review all details before final submission.</p>'
             }) }}
 
             {% elseif data['importStatus'] == "success" %}
@@ -45,7 +45,7 @@
               title: "Submission imported",
               showTitleAsHeading: true,
               dismissible: false,
-              html: '<p class="govuk-body">You successfully imported 3 claims. Review all details before final submission.</p>'
+              html: '<p class="govuk-body">You imported 3 claims. Review all details before final submission.</p>'
             }) }}
           {% endif %}
         {% endif %}
