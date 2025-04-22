@@ -32,9 +32,9 @@
     <div class="govuk-button-group">
       {{ govukButton({
         text: "Import submission",
-        href: "create/submission-import?subStatus=In progress&isImport=yes&importStatus=success"
+        href: "create/submission-import?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1"
       }) }}
-
+      
       {{ govukButton({
         text: "Create a new submission",
         href: "create/submission-start?subStatus=In progress&isImport=manual&claims=0&importStatus=&submissionType=&scheduleRef=&firmAC=&Immigration_matterStart=&Family_matterStart=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&question-claimType=&question-client=&question-case=&question-costs=&question-check=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=",

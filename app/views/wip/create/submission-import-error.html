@@ -26,7 +26,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="../create/submission-start?submissionType=Legal help&firmAC=C1B1C1&Immigration_matterStart=3&Family_matterStart=2" method="post">
+      <form class="form" action="/submission-import-error" method="post">
 
         <h1 class="govuk-heading-xl">Import submission</h1>
 
@@ -39,18 +39,19 @@
             dismissible: false,
             html: '2 of the claims have missing or incorrect information'
           }) }}
+
           {% elseif data['importStatus'] == "error" and data['claimErrors'] == "1" %}
           {{ mojAlert({
             variant: "warning",
             title: "There is a problem with your file",
             showTitleAsHeading: true,
             dismissible: false,
-            html: '2 of the claims have missing or incorrect information'
+            html: '1 of the claims has missing or incorrect information'
           }) }}
         {% endif %}
 
         {{ govukRadios({
-          name: "whereDoYouLive",
+          name: "keepImport",
           fieldset: {
             legend: {
               text: "Do you want to continue with this import?",
