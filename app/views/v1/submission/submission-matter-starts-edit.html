@@ -1,0 +1,69 @@
+{% extends "layouts/main.html" %}
+{% set version = "v1" %}
+{% set activePrimeNav = [true, false] %}
+{% set activeSubNav = [true, false, false] %}
+
+{% block header %}
+  {% include version + "/includes/header-provider.njk" %}
+{% endblock %}
+
+
+{% block pageTitle %}
+  Matter starts – {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Matter starts</h1>
+      <p>Enter any matters starts that occured during this submission.</p>
+s
+      <form class="form" action="/{{version}}/submission/submission-matter-starts#nav" method="post">
+
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="Family_matterStart">
+          Family matter starts
+        </label>
+        <div class="govuk-input__wrapper">
+          <input class="govuk-input govuk-input--width-3" id="Family_matterStart" name="Family_matterStart" value="{{data['Family_matterStart'] or "2"}}" type="numeric" spellcheck="false">
+        </div>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="Immigration_matterStart">
+          Immigration matter starts
+        </label>
+        <div class="govuk-input__wrapper"> 
+          <input class="govuk-input govuk-input--width-3" id="Immigration_matterStart" name="Immigration_matterStart" value="{{data['Immigration_matterStart'] or "3"}}" type="numeric" spellcheck="false">
+        </div>
+      </div>
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+        {{ govukButton({
+          text: "Save and come back later",
+          classes: "govuk-button--secondary",
+          href: "../submission-drafts"
+        }) }}
+      </div>
+
+    </form>
+
+    </div>
+  </div>
+
+{% endblock %}

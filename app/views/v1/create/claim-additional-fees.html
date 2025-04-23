@@ -1,0 +1,249 @@
+{% extends "layouts/main.html" %}
+{% set version = "v1" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Your costs – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Additional costs and fees</h1>
+    <form class="form" action="/{{version}}/create/task-list?question-costs=complete" method="post">
+    
+
+      {% if data['lawCategory'] == "Family" or data['lawCategory'] == "All" %}
+
+        <!---FAM --->
+        {{ govukInput({
+          id: "damagesCost",
+          name: "damagesCost",
+          value: data['damagesCost'],
+          label: {
+            text: "Recovered costs or damages (optional)",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+        <!---FAM --->
+        {{ govukRadios({
+          name: "londonRate",
+          fieldset: {
+            legend: {
+              text: "Are you claiming the London rate?",
+              classes: "govuk-fieldset__legend--s",
+              isPageHeading: false            
+              }
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes",
+              checked: checked("londonRate", "Yes")
+            },
+            {
+              value: "No",
+              text: "No",
+              checked: checked("londonRate", "No")
+            }
+          ]
+        }) }}
+      {% endif %}
+
+
+      <!---IMM--->
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+
+       {% if data['claimTypeImmigration'] !== "Stage disbursement claim" or data['lawCategory'] == "All" %}
+          <!---IMM - Stage or Completed not Disbursement - All Matter--->
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="hmoFee">
+              Number of Home Office interviews
+            </label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input govuk-input--width-3" id="hmoFee" name="hmoFee" value="{{data['hmoFee']}}" type="numeric" spellcheck="false">
+            </div>
+          </div>
+ 
+          <!---IMM - Stage or Completed not Disbursement - All Matter --->
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="oralFee">
+              Number of oral CMR hearings
+            </label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input govuk-input--width-3" id="oralFee" name="oralFee" value="{{data['oralFee']}}" type="numeric" spellcheck="false">
+            </div>
+          </div>
+
+          <!---IMM - Stage or Completed not Disbursement - All Matter--->
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="telephoneFee">
+            Number of telephone CMR hearings
+            </label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input govuk-input--width-3" id="telephoneFee" name="telephoneFee" value="{{data['telephoneFee']}}" type="numeric" spellcheck="false">
+            </div>
+          </div>
+
+          <!---IMM - Stage or Completed not Disbursement - all Matter --->
+          {{ govukRadios({
+            name: "substantiveFee",
+            fieldset: {
+              legend: {
+                text: "Was there a substantive hearing?",
+                classes: "govuk-fieldset__legend--s",
+                isPageHeading: false            
+                }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: checked("substantiveFee", "Yes")
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: checked("substantiveFee", "No")
+              }
+            ]
+          }) }} 
+
+          <!---IMM - Stage or Completed not Disbursement - specific Matter--->
+          {{ govukRadios({
+            name: "adjournedHearingFee",
+            fieldset: {
+              legend: {
+                text: "Was the hearing adjourned?",
+                classes: "govuk-fieldset__legend--s",
+                isPageHeading: false            
+                }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: checked("adjournedHearingFee", "Yes")
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: checked("adjournedHearingFee", "No")
+              }
+            ]
+          }) }}
+
+          <!---IMM - Stage or Completed not Disbursement - specific Matter--->
+          {{ govukInput({
+            id: "judicialreviewCost",
+            name: "judicialreviewCost",
+            value: data['judicialreviewCost'],
+            label: {
+              text: "Judicial Review costs (optional)",
+              classes: "govuk-label--s",
+              isPageHeading: false
+            },
+            prefix: {
+              text: "£"
+            },
+            classes: "govuk-input--width-5",
+            spellcheck: false,
+            hint: {
+              text: "Excluding VAT"
+            }
+          }) }}
+
+          <!---IMM - Stage or Completed not Disbursement - specific Matter--->
+          {{ govukInput({
+            id: "formfillingCost",
+            name: "formfillingCost",
+            value: data['formfillingCost'],
+            label: {
+              text: "Form filling costs (optional)",
+              classes: "govuk-label--s",
+              isPageHeading: false
+            },
+            prefix: {
+              text: "£"
+            },
+            classes: "govuk-input--width-5",
+            spellcheck: false,
+            hint: {
+              text: "Excluding VAT"
+            }
+          }) }}
+
+        {% endif %}
+
+        {% if data['claimTypeImmigration'] == "Completed matter claim" or data['lawCategory'] == "All" %}
+          <!---IMM - is Completed - specific Matter--->
+          {{ govukRadios({
+            name: "nrmFee",
+            fieldset: {
+              legend: {
+                text: "Did you get a NRM (National Referral Mechanism) advice?",
+                classes: "govuk-fieldset__legend--s",
+                isPageHeading: false            
+                }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: checked("nrmFee", "Yes")
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: checked("nrmFee", "No")
+              }
+            ]
+          }) }}
+        {% endif %}
+
+      {% endif %}
+     
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+        {{ govukButton({
+          text: "Save and come back later",
+          classes: "govuk-button--secondary",
+          href: "task-list"
+        }) }}
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+

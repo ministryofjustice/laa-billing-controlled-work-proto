@@ -1,0 +1,829 @@
+{% extends "layouts/main.html" %}
+{% set version = "v2" %}
+{% set activePrimeNav = [true, false] %}
+{% set activeSubNav = [true, false, false] %}
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+
+{% block pageTitle %}
+  Submission details - claims – {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+
+{% include version + "/includes/sub-info.njk" %}
+
+  
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">
+    
+    {% include version + "/includes/nav-sub-submission.njk" %}
+      
+
+    <h2 class="govuk-heading-l" id="nav">Claims</h2>
+        
+    <div class="govuk-button-group">
+      {% if data['subStatus'] == "In progress" %}
+        {{ govukButton({
+          text: "Add claim",
+          href: "../create/claim-start?caseStart=&lawCategory=&claimTypeImmigration=&matterType=&question-claimType=&question-client=&question-case=&question-costs=&question-check=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=",
+          classes: "govuk-button--secondary"
+        }) }}
+      {% endif %}
+    </div>
+    {% include version + "/includes/table-submissionCost.html"%}
+      
+    <table class="govuk-table" data-module="moj-sortable-table">
+      <caption class="govuk-table__caption govuk-table__caption--m">All claims</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" aria-sort="none" id="claimTitle">No.</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">UFN</th>  
+          <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>   
+          <th scope="col" class="govuk-table__header" aria-sort="none">Category</th>         
+          <th scope="col" class="govuk-table__header" aria-sort="none">Matter</th>
+          <th scope="col" class="govuk-table__header" aria-sort="descending">Concluded/ claimed</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Fee type</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Claimed</th>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <th scope="col" class="govuk-table__header">Action</th>
+            {% else %}
+            <th scope="col" class="govuk-table__header" aria-sort="none">Paid</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">2</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/098</a>
+              {% else %}
+              <a href="submission-claim-details?ufn=100323/098&caseStart=10/3/2023&lawCategory=Immigration and Asylum&claimTypeImmigration=Completed matter claim&matterType=IAXL:IUAS&client-last-name=Amoto" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/098</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Amoto</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IAXL:IUAS</td>
+          <td class="govuk-table__cell" data-sort-value="250314">14/3/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£56.00</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "Resubmitted" %}
+                   <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="versions1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">View amends</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>    
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim2">8</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">O'Connor</td>
+          <td class="govuk-table__cell">Family</td>
+          <td class="govuk-table__cell">FAMD:FCHS</td>
+          <td class="govuk-table__cell" data-sort-value="250301">1/3/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£234.56</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£234.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£934.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim3">16</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Hasbit</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IACF:IOTH</td>
+          <td class="govuk-table__cell" data-sort-value="250222">22/2/2025</td>
+           <td class="govuk-table__cell">Hourly</td>
+          <td class="govuk-table__cell">£456.01</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend3 claimTitle claim2 clientName2" id="amend3" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete3 claimTitle claim3 clientName3" id="delete3" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+         <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">9</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/567</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/567</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Tony</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IACF:IGOL</td>
+          <td class="govuk-table__cell" data-sort-value="250301">1/3/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£56.00</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+               {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>    
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim2">17</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/634</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/634</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Imtez</td>
+          <td class="govuk-table__cell">Family</td>
+          <td class="govuk-table__cell">FAMD:FADV</td>
+          <td class="govuk-table__cell" data-sort-value="250221">21/2/2025</td>
+          <td class="govuk-table__cell">Escape</td>
+          <td class="govuk-table__cell">£234.56</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£934.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim3">4</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Omar</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IALB:IRVL</td>
+          <td class="govuk-table__cell" data-sort-value="250312">12/3/2025</td>
+           <td class="govuk-table__cell">Hourly</td>
+          <td class="govuk-table__cell">£456.01</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend3 claimTitle claim2 clientName2" id="amend3" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete3 claimTitle claim3 clientName3" id="delete3" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+         <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">10</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/234</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Bianchi</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IACF:IFRA</td>
+          <td class="govuk-table__cell" data-sort-value="250301">1/3/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£56.00</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>    
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim2">6</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/765</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/765</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Simpson</td>
+          <td class="govuk-table__cell">Family</td>
+          <td class="govuk-table__cell">FAMD:FCHG</td>
+          <td class="govuk-table__cell" data-sort-value="250307">7/3/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£234.56</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£234.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£934.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim3">3</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">DeMello</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IACF:IOTH</td>
+          <td class="govuk-table__cell" data-sort-value="250313">13/3/2025</td>
+           <td class="govuk-table__cell">Hourly</td>
+          <td class="govuk-table__cell">£456.01</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend3 claimTitle claim2 clientName2" id="amend3" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete3 claimTitle claim3 clientName3" id="delete3" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+         <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">12</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/876</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/876</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Duffy</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IALB:IASY</td>
+          <td class="govuk-table__cell" data-sort-value="250231">31/2/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£56.00</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>    
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim2">13</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/123</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/123</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Cherub</td>
+          <td class="govuk-table__cell">Family</td>
+          <td class="govuk-table__cell">FAMA:FOTH</td>
+          <td class="govuk-table__cell" data-sort-value="250225">25/2/2025</td>
+          <td class="govuk-table__cell">Escape</td>
+          <td class="govuk-table__cell">£234.56</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£934.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim3">20</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Hoffmann</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IAXL:IUAS</td>
+          <td class="govuk-table__cell" data-sort-value="25028">28/2/2025</td>
+           <td class="govuk-table__cell">Hourly</td>
+          <td class="govuk-table__cell">£456.01</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend3 claimTitle claim2 clientName2" id="amend3" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete3 claimTitle claim3 clientName3" id="delete3" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+         <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">19</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/234</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/234</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">McBars</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IALB:IRVL</td>
+          <td class="govuk-table__cell" data-sort-value="250101">1/1/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£56.00</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>    
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim2">1</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/467</a>
+              {% else %}
+              <a href="submission-claim-details?ufn=100323/098&caseStart=10/3/2023&lawCategory=Family&claimTypeImmigration=&matterType=FAMD:FRES&client-last-name=Giordano" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/467</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Giordano</td>
+          <td class="govuk-table__cell">Family</td>
+          <td class="govuk-table__cell">FAMD:FRES</td>
+          <td class="govuk-table__cell" data-sort-value="250318">18/3/2025</td>
+          <td class="govuk-table__cell">Escape</td>
+          <td class="govuk-table__cell">£234.56</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--yellow">Part paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£934.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim3">15</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Abdallah</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IAXL:IUAS</td>
+          <td class="govuk-table__cell" data-sort-value="250224">24/2/2025</td>
+           <td class="govuk-table__cell">Hourly</td>
+          <td class="govuk-table__cell">£456.01</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend3 claimTitle claim2 clientName2" id="amend3" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete3 claimTitle claim3 clientName3" id="delete3" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+         <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">18</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/432</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/432</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Sompereo</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IACF:IGOL 	</td>
+          <td class="govuk-table__cell" data-sort-value="250220">20/2/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£56.00</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>    
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim2">5</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Abdelazim</td>
+          <td class="govuk-table__cell">Family</td>
+          <td class="govuk-table__cell">FAMA:FAPP</td>
+          <td class="govuk-table__cell" data-sort-value="250311">11/3/2025</td>
+           <td class="govuk-table__cell">Hourly</td>
+          <td class="govuk-table__cell">£234.56</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£234.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£934.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim3">7</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" %}
+              <a href="../create/claim-check" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn3" aria-labelledby="claimTitle claim3 ufn3">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Gruffalo</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IAXL:IUAS</td>
+          <td class="govuk-table__cell" data-sort-value="250302">2/3/2025</td>
+           <td class="govuk-table__cell">Hourly</td>
+          <td class="govuk-table__cell">£456.01</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend3 claimTitle claim2 clientName2" id="amend3" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete3 claimTitle claim3 clientName3" id="delete3" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£456.01</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+         <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim1">11</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn1" aria-labelledby="claimTitle claim2 ufn1">100323/765</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn1" aria-labelledby="claimTitle claim1 ufn1">100323/765</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">McKenna</td>
+          <td class="govuk-table__cell">Immigration and Asylum</td>
+          <td class="govuk-table__cell">IAXL:IUAS</td>
+          <td class="govuk-table__cell" data-sort-value="250301">1/3/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£56.00</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend1 claimTitle claim1 clientName1" id="amend1" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="delete1 claimTitle claim1 clientName1" id="delete1" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£56.00</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>    
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" id="claim2">14</td>
+          <td class="govuk-table__cell" id="claim1">
+            {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+              <a href="" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+              {% else %}
+              <a href="submission-claim-details" id="ufn2" aria-labelledby="claimTitle claim2 ufn2">121120/678</a>
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">Rodriguez</td>
+          <td class="govuk-table__cell">Family</td>
+          <td class="govuk-table__cell">FAMA:FOTH</td>
+          <td class="govuk-table__cell" data-sort-value="250225">25/2/2025</td>
+          <td class="govuk-table__cell">Fixed</td>
+          <td class="govuk-table__cell">£234.56</td>
+          {% if data['subStatus'] == "In progress" or data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted"%}
+            <td class="govuk-table__cell">
+              <ul class="govuk-summary-list__actions-list">
+                {% if data['subStatus'] == "Submitted" or data['subStatus'] == "Resubmitted" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a aria-labelledby="amend2 claimTitle claim2 clientName2" id="amend2" class="govuk-link" href="">Amend</a>
+                  </li>
+                  {% elseif data['subStatus'] == "In progress" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                  <a aria-labelledby="delete2 claimTitle claim2 clientName2" id="delete2" class="govuk-link" href="">Delete</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            {% elseif data['subStatus'] == "Part paid" %}
+              <td class="govuk-table__cell">£234.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+            {% elseif data['subStatus'] == "Paid" %}
+              <td class="govuk-table__cell">£934.56</td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Paid</strong></td>
+          {% endif %}
+        </tr>
+      </body>
+    </table>
+
+    {% include "/includes/pagination.njk" %}
+  </div>
+</div>
+
+<script>
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString('en-GB', {
+    month: 'short', year: 'numeric'
+  }).replace(/ /g, ' ');
+  document.getElementById("date").innerHTML = formattedDate;
+</script>  
+
+{% endblock %}

@@ -1,0 +1,43 @@
+<!--Submission nav-->
+{% if data['subStatus'] == "In progress" %}
+  {{ mojSubNavigation({
+    label: 'Sub navigation',
+    items: [{
+      text: 'Claims',
+      href: 'submission-details-draft#nav',
+        active: + activeSubNav[0] | default('true')
+    }, 
+    {
+      text: 'Matter starts',
+      href: 'submission-matter-starts#nav',
+      active: + activeSubNav[1]
+    },
+    {
+      text: 'Submission history',
+      href: 'submission-history#nav',
+      active: + activeSubNav[2]
+    }
+    ]
+  }) }}
+  {% else %}
+  {{ mojSubNavigation({
+    label: 'Sub navigation',
+    items: [{
+      text: 'Claims',
+      href: 'submission-details#nav',
+        active: + activeSubNav[0] | default('true')
+    }, 
+    {
+      text: 'Matter starts',
+      href: 'submission-matter-starts#nav',
+      active: + activeSubNav[1]
+    },
+    {
+      text: 'Submission history',
+      href: 'submission-history#nav',
+      active: + activeSubNav[2]
+    }
+    ]
+  }) }}
+
+  {% endif %}

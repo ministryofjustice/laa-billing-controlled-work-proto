@@ -1,0 +1,216 @@
+{% extends "layouts/main.html" %}
+{% set version = "v2" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}{% endblock %}
+
+{% block pageTitle %}
+  Check your submission – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="moj-page-header-actions">
+      <div class="moj-page-header-actions__title">
+        <h1 class="govuk-heading-xl">Check your submission</h1>
+      </div>
+      <div class="moj-page-header-actions__actions">
+        <div class="moj-button-group">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Print submission
+          </button>
+        </div>
+      </div>
+    </div>
+    
+     <form class="form" action="submission-submitted" method="post">
+      {% include version + "/includes/table-submissionCost.njk"%}
+      
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h3 class="govuk-summary-card__title">Submission details</h3>
+
+          
+          {% if data ['subStatus'] == "In progress" %}
+            <ul class="govuk-summary-card__actions">
+              <li class="govuk-summary-card__action">
+                <a class="govuk-link" href="../create/submission-start">Change<span class="govuk-visually-hidden"> submission details</span></a>
+              </li>
+            </ul>
+          {% endif %}
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                LAA reference
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['laa-ref'] or "LAA-5a7d3c"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['firmAC'] or "C1B1C1"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Submission type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['submissionType'] or "Legal help"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Schedule reference
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['scheduleRef'] or "ABC123/CIVIL"}}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Matter starts
+          </h2>
+          {% if data ['subStatus'] == "In progress" %}
+            <ul class="govuk-summary-card__actions">
+              <li class="govuk-summary-card__action">
+                <a class="govuk-link" href="../create/submission-start">Change<span class="govuk-visually-hidden"> submission details</span></a>
+              </li>
+            </ul>
+          {% endif %}
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Family
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['Family_matterStart'] or "2"}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Immigration and asylum
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['Immigration_matterStart'] or "3"}}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+       <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Claims
+          </h2>
+          {% if data ['subStatus'] == "In progress" %}
+            <ul class="govuk-summary-card__actions">
+              <li class="govuk-summary-card__action">
+                <a class="govuk-link" href="../create/submission-start">Change<span class="govuk-visually-hidden"> submission details</span></a>
+              </li>
+            </ul>
+          {% endif %}
+        </div>
+        <div class="govuk-summary-card__content">
+          <table class="govuk-table" data-module="moj-sortable-table">
+            <caption class="govuk-table__caption govuk-table__caption--m">All claims</caption>
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header" aria-sort="none" id="claimTitle">No.</th>
+                <th scope="col" class="govuk-table__header" aria-sort="none">UFN</th>  
+                <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>   
+                <th scope="col" class="govuk-table__header" aria-sort="none">Category</th>         
+                <th scope="col" class="govuk-table__header" aria-sort="none">Matter</th>
+                <th scope="col" class="govuk-table__header" aria-sort="descending">Concluded/ claimed</th>
+                <th scope="col" class="govuk-table__header" aria-sort="none">Fee type</th>
+                <th scope="col" class="govuk-table__header" aria-sort="none">Claimed</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell" id="claim1">1</td>
+                <td class="govuk-table__cell" id="claim1">100323/234</td>
+                <td class="govuk-table__cell">McBars</td>
+                <td class="govuk-table__cell">Immigration and Asylum</td>
+                <td class="govuk-table__cell">IACF:IGOL</td>
+                <td class="govuk-table__cell" data-sort-value="250318">18/3/2025</td>
+                <td class="govuk-table__cell">Fixed</td>
+                <td class="govuk-table__cell">£56.00</td>
+              </tr>                 
+              <!--Giordano import-->
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell" id="claim2">3</td>
+                <td class="govuk-table__cell" id="claim1">121120/678</td>
+                <td class="govuk-table__cell">Giordano</td>
+                <td class="govuk-table__cell">Family</td>
+                <td class="govuk-table__cell">FAMA:FOTH</td>
+                <td class="govuk-table__cell" data-sort-value="250312">12/3/2025</td>
+                <td class="govuk-table__cell">Escape</td>
+                <td class="govuk-table__cell">£234.56</td>
+              </tr>
+              <!--Gruffalo manual-->
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell" id="claim3">2</td>
+                <td class="govuk-table__cell" id="claim1">121120/678</td>
+                <td class="govuk-table__cell">Gruffalo</td>
+                <td class="govuk-table__cell">Immigration and Asylum</td>
+                <td class="govuk-table__cell">IAXL:IUAS</td>
+                <td class="govuk-table__cell" data-sort-value="250314">14/3/2025</td>
+                <td class="govuk-table__cell">Hourly</td>
+                <td class="govuk-table__cell">£456.01</td>
+              </tr>
+            </body>
+          </table>
+        </div>
+      </div>
+
+
+
+
+     
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Submit"
+        }) }}
+
+        {{ govukButton({
+            text: "Return to submission",
+            classes: "govuk-button--secondary",
+            href: "submission-details"
+          }) }}
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

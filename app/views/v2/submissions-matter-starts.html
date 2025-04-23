@@ -1,0 +1,275 @@
+{% extends "layouts/main.html" %}
+{% set version = "v2" %}
+{% set activePrimeNav = [false, true, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}{% endblock %}
+
+
+{% block pageTitle %}
+  Matter types – {{data['serviceName1'] }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">
+    
+    <h1 class="govuk-heading-xl">
+      Matter starts
+    </h1>
+     <div class="search-panel govuk-!-margin-bottom-6">
+
+      <div id="filters" class="govuk-date-input">
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="sort">
+              Year
+            </label>
+            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
+              <option value="2025" onclick="filterSelection('2025')">2025</option>
+              <option value="2024" onclick="filterSelection('2024')">2024</option>
+              <option value="2023" onclick="filterSelection('2023')">2023</option>
+              <option value="2022" onclick="filterSelection('2022')">2022</option>
+              <option value="2021" onclick="filterSelection('2021')">2021</option>
+              <option value="2020" onclick="filterSelection('2020')">2020</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="sort">
+              Account
+            </label>
+            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
+              <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
+              <option value="C1B1C1" onclick="filterSelection('C1B1C1')">C1B1C1</option>
+              <option value="A1B1C1" onclick="filterSelection('A1B1C1')">A1B1C1</option>
+              <option value="2M407Z" onclick="filterSelection('2M407Z')">2M407Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="sort">
+              Category
+            </label>
+            <select class="govuk-select" id="filterbuttonContainer" name="filterbuttonContainer">
+              <option value="Show all" selected onclick="filterSelection('all')">Show all</option>
+              <option value="Family" onclick="filterSelection('Family')">Family</option>
+              <option value="Immigration" onclick="filterSelection('Immigration')">Immigration and Asylum</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button" onclick="mySearch()" id="searchButton">
+          Filter
+        </button>
+
+        <a class="govuk-link" href="submission-matter-types">Clear all</a>
+      </div>
+            
+    </div>
+
+    <table class="govuk-table" data-module="moj-sortable-table">
+      <caption class="govuk-table__caption govuk-visually-hidden">Matter starts for the period 2025</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" aria-sort="ascending" id="account">Account</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none" id="period">Period</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none" id="matterType">Category</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Number of cases</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row hideTR all January A1B1C1 Immigration">
+          <td class="govuk-table__cell" id="claim1">A1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2501">January</td>
+          <td class="govuk-table__cell" id="claim1">Immigration and Asylum</td>
+          <td class="govuk-table__cell">1</td>
+        </tr>  
+        <tr class="govuk-table__row hideTR all January A1B1C1 Family">
+          <td class="govuk-table__cell" id="claim1">A1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2501">January</td>
+          <td class="govuk-table__cell" id="claim1">Family</td>
+          <td class="govuk-table__cell">3</td>
+        </tr> 
+        <tr class="govuk-table__row hideTR all February A1B1C1 Immigration">
+          <td class="govuk-table__cell" id="claim1">A1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2502">February</td>
+          <td class="govuk-table__cell" id="claim1">Immigration and Asylum</td>
+          <td class="govuk-table__cell">0</td>
+        </tr>  
+        <tr class="govuk-table__row hideTR all February A1B1C1 Family">
+          <td class="govuk-table__cell" id="claim1">A1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2502">February</td>
+          <td class="govuk-table__cell" id="claim1">Family</td>
+          <td class="govuk-table__cell">2</td>
+        </tr>   
+        <tr class="govuk-table__row hideTR all March A1B1C1 Immigration">
+          <td class="govuk-table__cell" id="claim1">A1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2503">March</td>
+          <td class="govuk-table__cell" id="claim1">Immigration and Asylum</td>
+          <td class="govuk-table__cell">4</td>
+        </tr>  
+        <tr class="govuk-table__row hideTR all March A1B1C1 Family">
+          <td class="govuk-table__cell" id="claim1">A1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2503">March</td>
+          <td class="govuk-table__cell" id="claim1">Family</td>
+          <td class="govuk-table__cell">6</td>
+        </tr>   
+        <tr class="govuk-table__row hideTR all January C1B1C1 Family">
+          <td class="govuk-table__cell" id="claim1">C1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2501">January</td>
+          <td class="govuk-table__cell" id="claim1">Family</td>
+          <td class="govuk-table__cell">6</td>
+        </tr>     
+        <tr class="govuk-table__row hideTR all January C1B1C1 Immigration">
+          <td class="govuk-table__cell" id="claim1">C1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2501">January</td>
+          <td class="govuk-table__cell" id="claim1">Immigration and Asylum</td>
+          <td class="govuk-table__cell">3</td>
+        </tr>   
+        <tr class="govuk-table__row hideTR all February C1B1C1 Family">
+          <td class="govuk-table__cell" id="claim1">C1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2502">February</td>
+          <td class="govuk-table__cell" id="claim1">Family</td>
+          <td class="govuk-table__cell">1</td>
+        </tr>     
+        <tr class="govuk-table__row hideTR all February C1B1C1 Immigration">
+          <td class="govuk-table__cell" id="claim1">C1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2502">Feburary</td>
+          <td class="govuk-table__cell" id="claim1">Immigration and Asylum</td>
+          <td class="govuk-table__cell">2</td>
+        </tr>  
+        <tr class="govuk-table__row hideTR all March C1B1C1 Immigration">
+          <td class="govuk-table__cell" id="claim1">C1B1C1</td>
+          <td class="govuk-table__cell" id="claim1" data-sort-value="2503">March</td>
+          <td class="govuk-table__cell" id="claim1">Immigration and Asylum</td>
+          <td class="govuk-table__cell">1</td>
+        </tr>     
+        <tr class="govuk-table__row hideTR all March C1B1C1 Immigration">
+          <th scope="row" class="govuk-table__header">Total</th>
+          <td class="govuk-table__cell" id="claim1"></td>
+          <td class="govuk-table__cell" id="claim1"></td>
+          <td class="govuk-table__cell"><strong>12</strong></td>
+        </tr>       
+      </body>
+    </table>
+
+  </div>
+
+</div>
+
+
+<script>
+
+   https://www.w3schools.com/howto/howto_js_read_more.asp
+
+  function mySearch() {
+    var searchResult = document.getElementById("resultsTable2");
+    var searchButton = document.getElementById("searchButton");
+
+    if (searchResult.style.display === "none") {
+      searchResult.style.display = "none";
+    } else {
+      searchResult.style.display = "inline";
+    }
+    window.location='#resultsTable2';
+  } 
+
+  //Search that filters rows in a table
+  // https://www.w3schools.com/howto/howto_js_filter_table.asp
+
+  function tablefilterSearch() {
+    // Declare variables
+    var input, filter, table, tr, td, i ;
+    input = document.getElementById("filterSearch");
+    filter = input.value.toUpperCase();
+    table = document.getElementsByClassName("generic-filter")[0];
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query  
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td");
+  
+      if(td.length > 0){ // to avoid th
+  
+        // which columns to work on https://www.codeproject.com/Questions/1166596/Search-columns-instead-of-in-HTML-using-javascript
+         if (td[0].innerHTML.toUpperCase().indexOf(filter) > -1 || td[1].innerHTML.toUpperCase().indexOf(filter) > -1 || td[2].innerHTML.toUpperCase().indexOf(filter) > -1) {
+           tr[i].style.display = "";
+         } else {
+           tr[i].style.display = "none";
+         }
+  
+      }
+   }
+  }
+
+
+  //Filters the table based on specific properties that are not in the table data.
+  // https://www.w3schools.com/howto/howto_js_filter_elements.asp
+
+  filterSelection("all")
+  function filterSelection(c) {
+    var x, i;
+    x = document.getElementsByClassName("hideTR");
+    if (c == "all") c = "";
+    for (i = 0; i < x.length; i++) {
+      w3RemoveClass(x[i], "showTR");
+      if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "showTR");
+    }
+  }
+
+  function w3AddClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+    }
+  }
+
+  function w3RemoveClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      while (arr1.indexOf(arr2[i]) > -1) {
+        arr1.splice(arr1.indexOf(arr2[i]), 1);     
+      }
+    }
+    element.className = arr1.join(" ");
+  }
+
+  // Add active class to the current button (highlight it)
+  var btnContainer = document.getElementById("filterbuttonContainer");
+  var btns = btnContainer.getElementsByClassName("govuk-button--secondary");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function(){
+      var current = document.getElementsByClassName("active");
+      current[0].className = current[0].className.replace(" active", "");
+      this.className += " active";
+    });
+  }
+
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString('en-GB', {
+    month: 'short', year: 'numeric'
+  }).replace(/ /g, ' ');
+  document.getElementById("date").innerHTML = formattedDate;
+</script>  
+
+{% endblock %}
+

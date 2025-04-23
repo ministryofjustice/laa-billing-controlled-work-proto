@@ -29,6 +29,7 @@
     </p>
     
     <p>Please <a href="/manage-prototype/clear-data" class="govuk-link--no-visited-state">clear data</a> to delete all stored data and re-set the prototype between journeys.</p>
+    <p> <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">Start here</a></p>  
 
     <!--PA Provider-->
     <div class="govuk-grid-row">
@@ -38,31 +39,23 @@
             <h2 class="app-task-list__section">
               <span class="app-task-list__section-number">1. </span>
               Alpha
-            </h2>            
+            </h2>
+                       
             <ul class="app-task-list__items">
-
               <!--WIP-->
-              <li class="app-task-list__item">
-                <p> <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
-                Start here</a></p>     
-                <br>   
+              <!--
+              <li class="app-task-list__item">    
                 <h3 class="govuk-heading-s">Work in progress</h3>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Addition of new LAA header & navigation
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
-                <span class="app-task-list__task-name">
-                  <a href="/wip/create/submission-import-error?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
-                    Import error - continue or cancel
-                  </a>
-                </span>
-                <span class="app-task-list__tag" id="start">In design</span>
-                <br>
                 
+                 <span class="app-task-list__task-name">
+                  <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                    Section name
+                  </a>
+                </span>
+                <span class="app-task-list__tag" id="start">In design</span>
+                <br>
               </li>
+              -->
 
               <!--Old-->
               <li class="app-task-list__item">                 
@@ -70,7 +63,7 @@
                 <details class="govuk-details">
                   <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                      V0-1: Initial design before 1st round of user testing
+                      v2: Post user testing amendments
                     </span>
                   </summary>
                   <div class="govuk-details__text">
@@ -78,35 +71,62 @@
                       <!--Section-->
                       <li class="app-task-list__item">
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/wip/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Addition of new LAA header & navigation
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                        <br>
+                        <span class="app-task-list__task-name">
+                          <a href="/wip/create/submission-import-error?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
+                            Import error - continue or cancel
+                          </a>
+                        </span>
+                        <span class="app-task-list__tag" id="start">In design</span>
+                      </li>
+                    </ul>
+                  </div>
+                </details>   
+                <details class="govuk-details">
+                  <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                      v1: Original design before 1st round of user testing
+                    </span>
+                  </summary>
+                  <div class="govuk-details__text">
+                    <ul class="app-task-list__items">
+                      <!--Section-->
+                      <li class="app-task-list__item">
+                        <span class="app-task-list__task-name">
+                          <a href="/v1/submissions-submitted" class="govuk-link--no-visited-state" aria-describedby="start">
                             Submission home
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br><br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/create/submission-start?subStatus=In progress&isImport=no&subPeriod-month=&subPeriod-year=&submissionType=&scheduleRef=&firmAC=&Immigration_matterStart=&Family_matterStart=&question-claimType=" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/create/submission-start?subStatus=In progress&isImport=no&subPeriod-month=&subPeriod-year=&submissionType=&scheduleRef=&firmAC=&Immigration_matterStart=&Family_matterStart=&question-claimType=" class="govuk-link--no-visited-state" aria-describedby="start">
                             Create a new submission
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/create/submission-import?subStatus=In progress&isImport=yes&importStatus=success" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/create/submission-import?subStatus=In progress&isImport=yes&importStatus=success" class="govuk-link--no-visited-state" aria-describedby="start">
                             Import a new submission - no errors
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/create/submission-import?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/create/submission-import?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
                             Import a new submission - with errors
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br> <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/create/claim-start?subStatus=In progress&isImport=no
+                          <a href="/v1/create/claim-start?subStatus=In progress&isImport=no
                           &subPeriod-month=March&subPeriod-year=2025&firmAC=A1B2C3&submissionType=Legal help&Immigration_matterStart=4&Family_matterStart=2&question-claimType=&question-client=&question-case=&question-costs=&question-check=&scheduleRef=&ufn=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=" class="govuk-link--no-visited-state" aria-describedby="start">
                             Add a claim to existing submission
                           </a>
@@ -114,42 +134,42 @@
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br> <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/submission/submission-details?subStatus=Submitted" class="govuk-link--no-visited-state" aria-describedby="start">
                             Submission: status - submitted
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/submission/submission-details?subStatus=Resubmitted" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/submission/submission-details?subStatus=Resubmitted" class="govuk-link--no-visited-state" aria-describedby="start">
                             Submission: status - resubmitted
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/submission/submission-details?subStatus=Paid" class="govuk-link--no-visited-state" aria-describedby="start">
                             Submission: status - paid
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/submission/submission-details?subStatus=Part paid" class="govuk-link--no-visited-state" aria-describedby="start">
                             Submission: status - part paid
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/submission/submission-details" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/submission/submission-details" class="govuk-link--no-visited-state" aria-describedby="start">
                             Submission: status - in progress
                           </a>
                         </span>
                         <span class="app-task-list__tag" id="start">In design</span>
                         <br>
                         <span class="app-task-list__task-name">
-                          <a href="/0-1/submission/submission-details-draft?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
+                          <a href="/v1/submission/submission-details-draft?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1" class="govuk-link--no-visited-state" aria-describedby="start">
                             Submission: status - in progress with import errors
                           </a>
                         </span>
@@ -159,7 +179,7 @@
                       </li>
                     </ul>
                   </div>
-                </details>                  
+                </details>               
               </li>
             </ul>
           </li>

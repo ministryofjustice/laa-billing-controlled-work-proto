@@ -1,0 +1,107 @@
+{% extends "layouts/main.html" %}
+{% set version = "v1" %}
+{% set activePrimeNav = [true, false] %}
+{% set activeSecondNav = [false, true] %}
+
+{% block header %}
+  {% include version + "/includes/header-provider.njk" %}
+{% endblock %}
+
+
+{% block pageTitle %}
+  In progress submissions – {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row"> 
+  <div class="govuk-grid-column-full">
+   
+    <h1 class="govuk-heading-xl">
+      Your submissions
+    </h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Import submission",
+        href: "create/submission-import?subStatus=In progress&isImport=yes&importStatus=error&claimErrors=1"
+      }) }}
+
+      {{ govukButton({
+        text: "Create a new submission",
+        href: "create/submission-start?subStatus=In progress&isImport=manual&claims=0&importStatus=&submissionType=&scheduleRef=&firmAC=&Immigration_matterStart=&Family_matterStart=&caseStart=&lawCategory=&claimTypeImmigration=&matterType=&question-claimType=&question-client=&question-case=&question-costs=&question-check=&client-first-name=&client-last-name=&clientDOB=&client-postcode=&UCN=&homeUCN=",
+        classes: "govuk-button--secondary"
+      }) }}
+    </div>
+   
+    {% include version + "/includes/nav-second-provider.njk" %}
+
+    <h2 class="govuk-heading-m">In progress</h2>
+    {% if data['app-state'] == "empty"  %}
+      <p>You do not have any draft claims.</p>
+      {% else %}
+      <table class="govuk-table" data-module="moj-sortable-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header" aria-sort="none">LAA reference</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Account</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none">Claimed</th>  
+            <th scope="col" class="govuk-table__header" aria-sort="none">Claims</th>          
+            <th scope="col" class="govuk-table__header" aria-sort="descending">Last updated</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+        {% if data['importStatus'] == "error" %}    
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="submission/submission-details-draft?subStatus=In progress&importStatus=error&claimErrors=2&&laa-ref=LAA-254674&claimedCost=746&paidCost=&firmAC=A1B1C1&submissionType=Legal help&subPeriod=March 2025" class="govuk-link--no-visited-state">LAA-254674</a>
+            </td>
+            <td class="govuk-table__cell" >A1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£746.56</td>
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell" data-sort-value="2504"><span id="date"></span></td>
+            <td class="govuk-table__cell"><a href="" 
+            class="govuk-link--no-visited-state">Delete <span class="govuk-visually-hidden">claim 254674</span></a></td>
+          </tr>
+          {% endif %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+            <a href="submission/submission-details?subStatus=In progress&importStatus=success&laa-ref=LAA-467893&claimedCost=746&paidCost=&firmAC=C1B1C1&submissionType=Legal help&subPeriod=March 2025"class="govuk-link--no-visited-state">LAA-467893</a>
+            </td>
+            <td class="govuk-table__cell">C1B1C1</td>
+            <td class="govuk-table__cell">Legal help</td>
+            <td class="govuk-table__cell">£746.56</td>
+            <td class="govuk-table__cell">46</td>
+            <td class="govuk-table__cell" data-sort-value="2503">Mar 2025</td>
+            <td class="govuk-table__cell"><a href="" 
+            class="govuk-link--no-visited-state">Delete <span class="govuk-visually-hidden">claim 834562</span></a></td>
+          </tr>
+          
+        </body>
+      </table>
+    {% endif %}
+  </div>
+
+</div>
+
+<script>
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString('en-GB', {
+    month: 'short', year: 'numeric'
+  }).replace(/ /g, ' ');
+  document.getElementById("date").innerHTML = formattedDate;
+</script>  
+
+{% endblock %}

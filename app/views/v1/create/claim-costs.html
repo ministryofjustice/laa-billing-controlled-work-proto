@@ -1,0 +1,362 @@
+{% extends "layouts/main.html" %}
+{% set version = "v1" %}
+{% set activePrimeNav = [true, false, false, false] %}
+
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+{% block pageTitle %}
+  Your costs – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  {% include version + "/includes/nav-prime-provider.njk" %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+  {% if data['lawCategory'] == "Immigration and Asylum" and data['importStatus'] == "error" and data['question-costs'] == "error" %}
+    {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [
+          {
+            text: "Enter disbursement costs using numbers",
+            href: "#disbursementCost"
+          }
+        ]
+      }) }}
+    {% endif %}
+    <h1 class="govuk-heading-xl">Primary claim costs</h1>
+    {% if data['claimTypeImmigration'] == "Stage disbursement claim" %}
+      <form class="form" action="/{{version}}/create/task-list?question-costs=complete" method="post">
+      {% else %}
+      <form class="form" action="/{{version}}/create/claim-additional-fees" method="post">
+    {% endif %}
+
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+
+        <!---IMM - All - specific Matter--->
+        {{ govukRadios({
+          name: "vatEligible",
+          fieldset: {
+            legend: {
+              text: "Is this case eligible to claim VAT?",
+              classes: "govuk-fieldset__legend--s",
+              isPageHeading: false            
+              }
+          },
+          hint: {
+            text: "VAT is not payable in respect of asylum cases where the client does not have status to remain in the UK at the start of the stage of the matter being reported."
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes",
+              checked: checked("vatEligible", "Yes")
+            },
+            {
+              value: "No",
+              text: "No",
+              checked: checked("vatEligible", "No")
+            }
+          ]
+        }) }}    
+      {% endif %}
+
+      {% if data['lawCategory'] == "Immigration and Asylum" and data['claimTypeImmigration'] == "Stage disbursement claim" %}
+
+        <!--- FOR EVERYONE ELSE --->
+        {% else %}
+
+        <!---ALL except IMM - Disbursement --->
+        {{ govukInput({
+          id: "counselCost",
+          name: "counselCost",
+          value: data['counselCost'],
+          label: {
+            text: "Counsel costs",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false,
+          hint: {
+            text: "Excluding VAT"
+          }
+        }) }}
+
+        <h2 class="govuk-heading-l">Profit costs</h2>
+        <!---ALL except IMM - Disbursement --->
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" >
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Advice
+            </legend>
+            <div id="adviceNoHours-hint" class="govuk-hint">
+              For example, 1 hour and 30 minutes
+            </div>
+            <div class="govuk-date-input" id="adviceNoHours">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="adviceNoHours-hours">
+                    Hours
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-hours" name="adviceNoHours-hours" type="text" inputmode="numeric" value="{{data['adviceNoHours-hours']}}">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="adviceNoHours-mins">
+                    Minutes
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="adviceNoHours-mins" name="adviceNoHours-mins" type="text" inputmode="numeric" value="{{data['adviceNoHours-mins']}}">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <!---ALL except IMM - Disbursement --->
+        {{ govukInput({
+          id: "profitCost",
+          name: "profitCost",
+          value: data['profitCost'],
+          label: {
+            text: "Profit costs",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false,
+          hint: {
+            text: "Excluding travel and waiting costs, and VAT"
+          }
+        }) }}
+      
+        <h2 class="govuk-heading-l">Travel and waiting</h2>
+        <!---ALL except IMM - Disbursement --->
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" >
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Travel time
+            </legend>
+            <div id="travelNoHours-hint" class="govuk-hint">
+              For example, 1 hour and 30 minutes
+            </div>
+            <div class="govuk-date-input" id="travelNoHours">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="travelNoHours-hours">
+                    Hours
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="travelNoHours-hours" name="travelNoHours-hours" type="text" inputmode="numeric" value="{{data['travelNoHours-hours']}}">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="travelNoHours-mins">
+                    Minutes
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="travelNoHours-mins" name="travelNoHours-mins" type="text" inputmode="numeric" value="{{data['travelNoHours-mins']}}">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <!---ALL except IMM - Disbursement --->
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" >
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Waiting time
+            </legend>
+            <div id="waitingNoHours-hint" class="govuk-hint">
+              For example, 1 hour and 30 minutes
+            </div>
+            <div class="govuk-date-input" id="waitingNoHours">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="waitingNoHours-hours">
+                    Hours
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="waitingNoHours-hours" name="waitingNoHours-hours" type="text" inputmode="numeric" value="{{data['waitingNoHours-hours']}}">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="waitingNoHours-mins">
+                    Minutes
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="waitingNoHours-mins" name="waitingNoHours-mins" type="text" inputmode="numeric" value="{{data['waitingNoHours-mins']}}">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <!---ALL except IMM - Disbursement --->
+        {{ govukInput({
+          id: "travelwaitingCost",
+          name: "travelwaitingCost",
+          value: data['travelwaitingCost'],
+          label: {
+            text: "Travel and waiting costs",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false,
+          hint: {
+            text: "Excluding VAT"
+          }
+        }) }}
+
+        {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+          
+            <!---IMM - Stage or Completed not Disbursement - specific Matter--->
+            {{ govukInput({
+              id: "detentionCost",
+              name: "detentionCost",
+              value: data['detentionCost'],
+              label: {
+                text: "Detention travel and waiting costs",
+                classes: "govuk-label--s",
+                isPageHeading: false
+              },
+              prefix: {
+                text: "£"
+              },
+              classes: "govuk-input--width-5",
+              spellcheck: false,
+              hint: {
+                text: "Excluding VAT"
+              }
+            }) }}
+
+        {% endif %}
+      {% endif %}
+
+
+      <h2 class="govuk-heading-l">Disbursements</h2>
+
+      <!---All--->
+      {% if data['importStatus'] == "error" and data['question-costs'] == "error" %}
+        {{ govukInput({
+          id: "disbursementCost",
+          name: "disbursementCost",
+          value: data['disbursementCost'],
+          label: {
+            text: "Disbursement costs",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          errorMessage: {
+            text: "Enter disbursement costs using numbers"
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false,
+          hint: {
+            text: "Excluding VAT"
+          }
+        }) }}
+      {% else %}
+      {{ govukInput({
+          id: "disbursementCost",
+          name: "disbursementCost",
+          value: data['disbursementCost'],
+          label: {
+            text: "Disbursement costs",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false,
+          hint: {
+            text: "Excluding VAT"
+          }
+        }) }}
+      {% endif %}
+
+      <!---All--->
+      {{ govukInput({
+        id: "disbursementVATCost",
+        name: "disbursementVATCost",
+        value: data['disbursementVATCost'],
+        label: {
+          text: "VAT on disbursements",
+          classes: "govuk-label--s",
+          isPageHeading: false
+        },
+        prefix: {
+          text: "£"
+        },
+        classes: "govuk-input--width-5",
+        spellcheck: false
+      }) }}
+
+      {% if data['lawCategory'] == "Immigration and Asylum" or data['lawCategory'] == "All" %}
+
+        <!---IMM - All - specific Matter--->
+        {{ govukInput({
+          id: "priorAuth",
+          name: "priorAuth",
+          value: data['priorAuth'],
+          label: {
+            text: "Prior authority number (NIAT Disbursement)",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          },
+          hint: {
+            text: "Required if costs exceed the applicable initial Disbursement Limit"
+          },
+          classes: "govuk-input--width-10"
+        }) }}
+
+      {% endif %}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+
+        {{ govukButton({
+          text: "Save and come back later",
+          classes: "govuk-button--secondary",
+          href: "task-list"
+        }) }}
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+
