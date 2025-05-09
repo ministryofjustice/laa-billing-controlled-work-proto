@@ -35,40 +35,7 @@
       </svg>
       <a class="moj-header__link moj-header__link--organisation-name" href="/">Legal Aid Agency</a>
     </div>
-      <div class="moj-header__content">
-        <nav class="moj-header__navigation" aria-label="Account navigation">
-          <ul class="moj-header__navigation-list">
-            <li class="moj-header__navigation-item">
-              {{data['providerEmail1']}}
-            </li>
-            <li class="moj-header__navigation-item header-navigation-link">
-              <a class="moj-header__navigation-link govuk-!-font-weight-bold" href="#">Sign out</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
     </div>
   </div>
 </header>
 
-{{ govukServiceNavigation({
-  serviceName: "Claim for Controlled Work",
-  serviceUrl: '/' + version + "/submissions-submitted",
-  navigation: [
-    {
-     text: 'Your submissions',
-      href: '/' + version + '/submissions-submitted',
-      active: + activePrimeNav[0] | default('true')
-    },
-    {
-      text: 'Matter starts',
-      href: '/' + version + '/submissions-matter-starts',
-       active: + activePrimeNav[1]
-    },
-    {
-      text: 'Search',
-      href: '/' + version + '/submissions-search',
-       active: + activePrimeNav[2]
-    }
-  ]
-}) }}

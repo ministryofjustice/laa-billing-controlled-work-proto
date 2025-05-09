@@ -1,12 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% block header %}
-  {{ mojHeader({
-    organisationLabel: {
-      text: "Legal Aid Agency",
-      href: "/"
-    }
-  }) }}
+  {% include "/includes/header-provider.html"%}
 {% endblock %}
 
 {% set pageName="Home" %}
