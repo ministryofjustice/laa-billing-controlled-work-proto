@@ -1,0 +1,101 @@
+{% extends "layouts/main.html" %}
+{% set version = "wip-cwa" %}
+{% set activePrimeNav = [true, false] %}
+
+{% block header %}
+  {% include version + "/includes/header-provider.html"%}
+{% endblock %}
+
+
+{% block pageTitle %}
+  Your applications – {{ serviceName }} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/banner.html"%}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="/submission-import-error" method="post">
+
+        <h1 class="govuk-heading-xl">Import submission</h1>
+
+
+        {% if data['importStatus'] == "error" and data['claimErrors'] == "2" %}
+          {{ mojAlert({
+            variant: "warning",
+            title: "There is a problem with your file",
+            showTitleAsHeading: true,
+            dismissible: false,
+            html: '2 of the claims have missing or incorrect information'
+          }) }}
+
+          {% elseif data['importStatus'] == "error" and data['claimErrors'] == "1" %}
+          {{ mojAlert({
+            variant: "warning",
+            title: "There is a problem with your file",
+            showTitleAsHeading: true,
+            dismissible: false,
+            html: '1 of the claims has missing or incorrect information'
+          }) }}
+        {% endif %}
+
+        {{ govukRadios({
+          name: "keepImport",
+          fieldset: {
+            legend: {
+              text: "Do you want to continue with this import?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+              text: "You can resolve the errors in this system or amend the original file and import again"
+            },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes - I will fix the errors using this system"
+            },
+            {
+              value: "No",
+              text: "No - I will fix the errors in my original file and import it again"
+            }
+          ]
+        }) }}
+
+        <details class="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              File error summary
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            There is problem with 1 of the claims.<br>
+            This is a list of technical errors
+
+          </div>
+        </details>
+
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
