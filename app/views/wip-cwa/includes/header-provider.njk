@@ -50,12 +50,12 @@
 </header>
 
 {{ govukServiceNavigation({
-  serviceName: "CWA claim import",
-  serviceUrl: '/' + version + "/submission-import",
+  serviceName: "CWA",
+  serviceUrl: '/' + version + "/submission-outstanding",
   navigation: [
     {
-     text: 'Bulk import',
-      href: '/' + version + '/submission-import',
+     text: 'Import claims',
+      href: '/' + version + '/submission-outstanding',
       active: + activePrimeNav[0] | default('true')
     },
     {

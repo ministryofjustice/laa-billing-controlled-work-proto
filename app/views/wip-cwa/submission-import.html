@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 {% set version = "wip-cwa" %}
-{% set activePrimeNav = [true, false] %}
+{% set activePrimeNav = [false, true, false] %}
 
 {% block header %}
   {% include version + "/includes/header-provider.html"%}
@@ -22,33 +22,53 @@
 
       <form class="form" action="submission-upload-ready" method="post">
 
-        <h1 class="govuk-heading-xl">Bulk import your claims</h1>
-        <p>To bulk import your claims, use the Controlled Work spreadsheet or your case management system to create an XML or CVS file.</p>
+        {% call govukFieldset({
+          legend: {
+            text: "Bulk import",
+            classes: "govuk-fieldset__legend--xl",
+            isPageHeading: true
+          }
+        }) %}
+          <p>To bulk import your claims, use the Controlled Work spreadsheet or your case management system to create an XML or CVS file.</p>
 
-        {{ govukRadios({
-          name: "firmAccount",
-          fieldset: {
-            legend: {
-              text: "Which firm account number is this import for?",
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--s"
-            }
+        {{ govukSelect({
+          id: "provider",
+          name: "provider",
+          label: {
+            text: "Provider"
           },
           items: [
             {
-              value: "A1B2C3",
-              text: "A1B2C3"
+              value: "choose",
+              text: "Choose provider",
+              selected: true
             },
             {
-              value: "B1B2C3",
-              text: "B1B2C3"
+              value: "Legal Eagles",
+              text: "Legal Eagles"
             },
             {
-              value: "2Q282Z",
-              text: "2Q282Z"
+              value: "LA Law",
+              text: "LA Law"
             }
           ]
         }) }}
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-visually-hidden">
+              Is this a null submission
+            </legend>
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="travel" name="null" type="checkbox" value="null">
+                <label class="govuk-label govuk-checkboxes__label" for="null">
+                 Null submission
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
 
         {{ govukFileUpload({
           id: "file-upload-1",
@@ -67,9 +87,11 @@
           }) }}
         </div>
 
-      </form>
+        {% endcall%}
 
+      </form>
     </div>
   </div>
+
 
 {% endblock %}
