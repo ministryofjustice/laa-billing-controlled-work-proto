@@ -37,32 +37,10 @@
           title: "Submission reference",
           showTitleAsHeading: false,
           dismissible: false,
-          html: 'Submission reference: 3444979 '
+          html: 'Submission reference: 010124105 <br>Upload: 25 July 2025 '
         }) }}
 
         <p>Validating your claims may take a while. Return at any time by using search and the reference number to see progress.</p>
-
-
-        <!--
-        <dl class="govuk-summary-list govuk-summary-list--no-border">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-               Firm account number 
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{data['firmAccount'] or "2Q282Z"}}
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              File name
-            </dt>
-            <dd class="govuk-summary-list__value">
-              myfilename.txt
-            </dd>
-          </div>
-        </dl>
-        -->
 
         <div class="govuk-button-group">
           <a class="govuk-link" href="submission-import">Upload new submission</a>
@@ -71,7 +49,9 @@
         <br>
         <br>
         <br>
-         <a class="govuk-link" href="submission-upload-complete">Cheat link for prototype</a>
+         <a class="govuk-link" href="submission-upload-complete?importError=Yes">Cheat link for prototype: submission with errors</a>   <br>      
+         <a class="govuk-link" href="submission-upload-complete?importError=No">Cheat link for prototype: submission no errors</a>
+
 
       </form>
 

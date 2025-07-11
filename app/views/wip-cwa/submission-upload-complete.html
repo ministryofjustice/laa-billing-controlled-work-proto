@@ -8,7 +8,7 @@
 
 
 {% block pageTitle %}
-  Your applications – {{ serviceName }} - GOV.UK
+  Submission reference: 3444979  – {{ serviceName }} - GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -22,7 +22,6 @@
 
       <form class="form" action="/submission-import-error" method="post">
 
-        
         {% if data['importError'] == "Yes" %}
           <h1 class="govuk-heading-l">Import failed</h1>
           {{ mojAlert({
@@ -39,124 +38,130 @@
          
         {% endif %}
 
-         {{ mojAlert({
-            variant: "important",
-            title: "Submission reference",
-            showTitleAsHeading: false,
-            dismissible: false,
-            html: 'Submission reference: 3444979 '
-          }) }}
+        {{ mojAlert({
+          variant: "important",
+          title: "Submission reference",
+          showTitleAsHeading: false,
+          dismissible: false,
+          html: 'Submission reference: 010124105 <br>Upload: 25 July 2025 '
+        }) }}
 
-        <dl class="govuk-summary-list govuk-summary-list--no-border">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-               Firm account number 
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{data['firmAccount'] or "2Q282Z"}}
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Summary ID
-            </dt>
-            <dd class="govuk-summary-list__value">
-              1634221
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Date
-            </dt>
-            <dd class="govuk-summary-list__value">
-              25 August 2025
-            </dd>
-          </div>
-          {% if data['importError'] == "Yes" %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Claims with errors
-              </dt>
-              <dd class="govuk-summary-list__value">
-                10/17
-              </dd>
-            </div>
-            {% elseif data['importError'] == "No" %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Claims
-              </dt>
-              <dd class="govuk-summary-list__value">
-                17
-              </dd>
-            </div>
-          {% endif %}
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Duplicate claims
-            </dt>
-            <dd class="govuk-summary-list__value">
-              0
-            </dd>
-          </div>
-        </dl>
-      </div>
+    </div>
+  </div>
 
-      <div class="govuk-grid-column-full">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
 
-        <table class="govuk-table" data-module="moj-sortable-table">
+        <table class="govuk-table generic-filter" id="table-header" data-module="moj-sortable-table">
+          <caption class="govuk-table__caption govuk-table__caption--m">Upload summary</caption>
           <thead class="govuk-table__head">
             <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header" aria-sort="none">UFN</th>
-              <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>
-              <th scope="col" class="govuk-table__header" aria-sort="descending">Type of error</th>
-              <th scope="col" class="govuk-table__header" aria-sort="none">Error description</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Firm office account</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Claim errors</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Duplicate claims</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">    
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">010124/101</td>
-              <td class="govuk-table__cell">Dawson</td>
-              <td class="govuk-table__cell">VALIDATION4</td>
-              <td class="govuk-table__cell">CP19 is not a valid OUTCOME_CODE</td>
+              <td class="govuk-table__cell">A1B2C3</td>
+              <td class="govuk-table__cell">Crime lower</td>
+              <td class="govuk-table__cell">
+                {% if data['importError'] =="No" %}
+                  0/123
+                  {% else %}
+                  6/123
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell">1</td>
             </tr>
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">010124/102</td>
-              <td class="govuk-table__cell">Trumble</td>
-             <td class="govuk-table__cell">LAR Validation8</td>
-              <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">010124/103</td>
-              <td class="govuk-table__cell">Stimpon</td>
-              <td class="govuk-table__cell">LAR Validation8</td>
-              <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">010124/104</td>
-              <td class="govuk-table__cell">Bumston</td>
-              <td class="govuk-table__cell">LAR Validation8</td>
-              <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">010124/105</td>
-              <td class="govuk-table__cell" >Producer</td>
-              <td class="govuk-table__cell">LAR Validation8</td>
-              <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">010124/106</td>
-              <td class="govuk-table__cell" >Humpty</td>
-              <td class="govuk-table__cell">LAR Validation8</td>
-              <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
+              <td class="govuk-table__cell">A1B2C3</td>
+              <td class="govuk-table__cell">Legal help</td>
+              <td class="govuk-table__cell">
+                {% if data['importError'] =="No" %}
+                  0/12
+                  {% else %}
+                  4/12
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell">0</td>
             </tr>
           </body>
         </table>
-        {% include "includes/pagination.html"%}
+
+
+
+        {% if data['importError'] == "Yes" %}
+          <table class="govuk-table" data-module="moj-sortable-table">
+            <caption class="govuk-table__caption govuk-table__caption--m">Claim errors</caption>
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header" aria-sort="none">Office account</th>
+                <th scope="col" class="govuk-table__header" aria-sort="none">Submission type</th>
+                <th scope="col" class="govuk-table__header" aria-sort="ascending">UFN</th>
+                <th scope="col" class="govuk-table__header" aria-sort="none">Client</th>
+                <th scope="col" class="govuk-table__header" aria-sort="none">Type of error</th>
+                <th scope="col" class="govuk-table__header" aria-sort="none">Error description</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">    
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">A1B2C3</td>
+                <td class="govuk-table__cell">Legal help</td>
+                <td class="govuk-table__cell">010124/102</td>
+                <td class="govuk-table__cell">Dawson</td>
+                <td class="govuk-table__cell">Validation4</td>
+                <td class="govuk-table__cell">CP19 is not a valid OUTCOME_CODE</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">A1B2C3</td>
+                <td class="govuk-table__cell">Legal help</td>
+                <td class="govuk-table__cell">010124/101</td>
+                <td class="govuk-table__cell">Trumble</td>
+              <td class="govuk-table__cell">LAR Validation8</td>
+                <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">A1B2C3</td>
+                <td class="govuk-table__cell">Crime lower</td>
+                <td class="govuk-table__cell">010124/101</td>
+                <td class="govuk-table__cell">Trumble</td>
+                <td class="govuk-table__cell">LAR Validation2</td>
+                <td class="govuk-table__cell">This is another type of error</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">A1B2C3</td>
+                <td class="govuk-table__cell">Legal help</td>
+                <td class="govuk-table__cell">010124/104</td>
+                <td class="govuk-table__cell">Bumston</td>
+                <td class="govuk-table__cell">LAR Validation8</td>
+                <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">A1B2C3</td>
+                <td class="govuk-table__cell">Legal help</td>
+                <td class="govuk-table__cell">010124/105</td>
+                <td class="govuk-table__cell" >Producer</td>
+                <td class="govuk-table__cell">LAR Validation8</td>
+                <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">A1B2C3</td>
+                <td class="govuk-table__cell">Crime lower</td>
+                <td class="govuk-table__cell">010124/106</td>
+                <td class="govuk-table__cell" >Humpty</td>
+                <td class="govuk-table__cell">LAR Validation8</td>
+                <td class="govuk-table__cell">The fee you have entered is not valid for Category 1A / YOUE matters. Please enter a valid fee in the profit costs field.</td>
+              </tr>
+            </body>
+          </table>
+          {% include "includes/pagination.html"%}
+        {% endif %}
         <div class="govuk-button-group">
           {{ govukButton({
             text: "Upload new submission",
-            href: "sumbission-import"
+            href: "submission-import"
           }) }}
 
           <a class="govuk-link" href="submission-search">Search for submission</a>
