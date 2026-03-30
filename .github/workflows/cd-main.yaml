@@ -17,11 +17,11 @@ jobs:
       contents: read # This is required for actions/checkout
     steps:
       - uses: actions/checkout@v4
-      - uses: aws-actions/configure-aws-credentials@v2
+      - uses: aws-actions/configure-aws-credentials@<commit-sha>
         with:
           role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
           aws-region: ${{ vars.ECR_REGION }}
-      - uses: aws-actions/amazon-ecr-login@v2
+      - uses: aws-actions/amazon-ecr-login@<commit-sha>
         id: login-ecr
       - run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
